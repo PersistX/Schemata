@@ -18,6 +18,7 @@
 		BE64E7731EA3DDEE0047D035 /* Curry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE64E7721EA3DDEE0047D035 /* Curry.framework */; };
 		BE64E7781EA3F3110047D035 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE64E7761EA3F3110047D035 /* Result.framework */; };
 		BE64E7791EA3F3110047D035 /* Runes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE64E7771EA3F3110047D035 /* Runes.framework */; };
+		BE89D5871EB101C700CEC4D1 /* Fixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE89D5861EB101C700CEC4D1 /* Fixtures.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,7 @@
 		BE64E7721EA3DDEE0047D035 /* Curry.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Curry.framework; path = Carthage/Checkouts/Curry/build/Debug/Curry.framework; sourceTree = "<group>"; };
 		BE64E7761EA3F3110047D035 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = "../../../Library/Developer/Xcode/DerivedData/Schemata-fleiyfwzrgbgvscfywvtqflpyevd/Build/Products/Debug/Result.framework"; sourceTree = "<group>"; };
 		BE64E7771EA3F3110047D035 /* Runes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Runes.framework; path = "../../../Library/Developer/Xcode/DerivedData/Schemata-fleiyfwzrgbgvscfywvtqflpyevd/Build/Products/Debug/Runes.framework"; sourceTree = "<group>"; };
+		BE89D5861EB101C700CEC4D1 /* Fixtures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fixtures.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 			children = (
 				BE64E7701EA3CCD40047D035 /* JSONTests.swift */,
 				BE64E72A1EA3AF4D0047D035 /* Info.plist */,
+				BE89D5861EB101C700CEC4D1 /* Fixtures.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -245,6 +248,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE64E7711EA3CCD40047D035 /* JSONTests.swift in Sources */,
+				BE89D5871EB101C700CEC4D1 /* Fixtures.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
