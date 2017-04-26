@@ -122,18 +122,16 @@ public func ~ <Model: KeyPathCompliant, Value: JSONMapped>(
 }
 
 extension String: JSONMapped {
-    public static var json: Schema<String, JSON> {
-        return Schema(
-            decode: { json in
-                if case let .string(value) = json {
-                    return .success(value)
-                } else {
-                    fatalError()
-                }
-            },
-            encode: { JSON.string($0) }
-        )
-    }
+    public static let json = Schema<String, JSON>(
+        decode: { json in
+            if case let .string(value) = json {
+                return .success(value)
+            } else {
+                fatalError()
+            }
+        },
+        encode: { JSON.string($0) }
+    )
     
     public func value<Leaf>(of keyPath: KeyPath<String, Leaf>) -> Leaf {
         fatalError()

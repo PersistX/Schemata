@@ -48,9 +48,10 @@ extension Author: KeyPathCompliant {
 
 private struct Author: Equatable, JSONMapped {
     struct ID: Equatable, JSONMapped {
-        static var json: Schema<Author.ID, JSON> {
-            return String.json.bimap(decode: Author.ID.init, encode: { $0.string })
-        }
+        static let json = String.json.bimap(
+            decode: Author.ID.init,
+            encode: { $0.string }
+        )
         
         let string: String
         
@@ -67,13 +68,11 @@ private struct Author: Equatable, JSONMapped {
         }
     }
     
-    static var json: Schema<Author, JSON> {
-        return Schema<Author, JSON>(
-            self.init,
-            Author.id ~ "id",
-            Author.name ~ "name"
-        )
-    }
+    static let json = Schema<Author, JSON>(
+        Author.init,
+        Author.id ~ "id",
+        Author.name ~ "name"
+    )
     
     let id: ID
     var name: String
