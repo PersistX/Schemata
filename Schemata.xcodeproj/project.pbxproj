@@ -8,12 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		BE64E7241EA3AF4D0047D035 /* Schemata.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE64E71A1EA3AF4D0047D035 /* Schemata.framework */; };
-		BE64E7291EA3AF4D0047D035 /* SchemataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE64E7281EA3AF4D0047D035 /* SchemataTests.swift */; };
 		BE64E72B1EA3AF4D0047D035 /* Schemata.h in Headers */ = {isa = PBXBuildFile; fileRef = BE64E71D1EA3AF4D0047D035 /* Schemata.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BE64E7351EA3B23B0047D035 /* Schema.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE64E7341EA3B23B0047D035 /* Schema.swift */; };
 		BE64E7501EA3B4660047D035 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE64E74F1EA3B4660047D035 /* Result.framework */; };
 		BE64E76B1EA3B54A0047D035 /* Runes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE64E76A1EA3B54A0047D035 /* Runes.framework */; };
+		BE64E76D1EA3CBB90047D035 /* KeyPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE64E76C1EA3CBB90047D035 /* KeyPath.swift */; };
+		BE64E76F1EA3CC800047D035 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE64E76E1EA3CC800047D035 /* JSON.swift */; };
+		BE64E7711EA3CCD40047D035 /* JSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE64E7701EA3CCD40047D035 /* JSONTests.swift */; };
 		BE64E7731EA3DDEE0047D035 /* Curry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE64E7721EA3DDEE0047D035 /* Curry.framework */; };
+		BE64E7781EA3F3110047D035 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE64E7761EA3F3110047D035 /* Result.framework */; };
+		BE64E7791EA3F3110047D035 /* Runes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE64E7771EA3F3110047D035 /* Runes.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,12 +35,16 @@
 		BE64E71D1EA3AF4D0047D035 /* Schemata.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Schemata.h; sourceTree = "<group>"; };
 		BE64E71E1EA3AF4D0047D035 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BE64E7231EA3AF4D0047D035 /* SchemataTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SchemataTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		BE64E7281EA3AF4D0047D035 /* SchemataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchemataTests.swift; sourceTree = "<group>"; };
 		BE64E72A1EA3AF4D0047D035 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BE64E7341EA3B23B0047D035 /* Schema.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Schema.swift; sourceTree = "<group>"; };
 		BE64E74F1EA3B4660047D035 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Checkouts/Result/build/Debug/Result.framework; sourceTree = "<group>"; };
 		BE64E76A1EA3B54A0047D035 /* Runes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Runes.framework; path = Carthage/Checkouts/Runes/build/Debug/Runes.framework; sourceTree = "<group>"; };
+		BE64E76C1EA3CBB90047D035 /* KeyPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyPath.swift; sourceTree = "<group>"; };
+		BE64E76E1EA3CC800047D035 /* JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
+		BE64E7701EA3CCD40047D035 /* JSONTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONTests.swift; sourceTree = "<group>"; };
 		BE64E7721EA3DDEE0047D035 /* Curry.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Curry.framework; path = Carthage/Checkouts/Curry/build/Debug/Curry.framework; sourceTree = "<group>"; };
+		BE64E7761EA3F3110047D035 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = "../../../Library/Developer/Xcode/DerivedData/Schemata-fleiyfwzrgbgvscfywvtqflpyevd/Build/Products/Debug/Result.framework"; sourceTree = "<group>"; };
+		BE64E7771EA3F3110047D035 /* Runes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Runes.framework; path = "../../../Library/Developer/Xcode/DerivedData/Schemata-fleiyfwzrgbgvscfywvtqflpyevd/Build/Products/Debug/Runes.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +61,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE64E7781EA3F3110047D035 /* Result.framework in Frameworks */,
+				BE64E7791EA3F3110047D035 /* Runes.framework in Frameworks */,
 				BE64E7731EA3DDEE0047D035 /* Curry.framework in Frameworks */,
 				BE64E7241EA3AF4D0047D035 /* Schemata.framework in Frameworks */,
 			);
@@ -83,6 +93,8 @@
 		BE64E71C1EA3AF4D0047D035 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				BE64E76E1EA3CC800047D035 /* JSON.swift */,
+				BE64E76C1EA3CBB90047D035 /* KeyPath.swift */,
 				BE64E7341EA3B23B0047D035 /* Schema.swift */,
 				BE64E71D1EA3AF4D0047D035 /* Schemata.h */,
 				BE64E71E1EA3AF4D0047D035 /* Info.plist */,
@@ -93,7 +105,7 @@
 		BE64E7271EA3AF4D0047D035 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				BE64E7281EA3AF4D0047D035 /* SchemataTests.swift */,
+				BE64E7701EA3CCD40047D035 /* JSONTests.swift */,
 				BE64E72A1EA3AF4D0047D035 /* Info.plist */,
 			);
 			path = Tests;
@@ -102,6 +114,8 @@
 		BE64E74E1EA3B4660047D035 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BE64E7761EA3F3110047D035 /* Result.framework */,
+				BE64E7771EA3F3110047D035 /* Runes.framework */,
 				BE64E7721EA3DDEE0047D035 /* Curry.framework */,
 				BE64E76A1EA3B54A0047D035 /* Runes.framework */,
 				BE64E74F1EA3B4660047D035 /* Result.framework */,
@@ -220,6 +234,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE64E76F1EA3CC800047D035 /* JSON.swift in Sources */,
+				BE64E76D1EA3CBB90047D035 /* KeyPath.swift in Sources */,
 				BE64E7351EA3B23B0047D035 /* Schema.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -228,7 +244,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BE64E7291EA3AF4D0047D035 /* SchemataTests.swift in Sources */,
+				BE64E7711EA3CCD40047D035 /* JSONTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
