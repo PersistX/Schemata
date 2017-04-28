@@ -12,3 +12,9 @@ public struct KeyPath<Root, Leaf> {
 public protocol KeyPathCompliant {
     func value<Leaf>(of keyPath: KeyPath<Self, Leaf>) -> Leaf
 }
+
+extension String: KeyPathCompliant {
+    public func value<Leaf>(of keyPath: KeyPath<String, Leaf>) -> Leaf {
+        fatalError()
+    }
+}

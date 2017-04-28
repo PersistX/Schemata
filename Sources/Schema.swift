@@ -16,16 +16,26 @@ infix operator ~ : SchemataDecodePrecedence
 public protocol Format {
     associatedtype Error: FormatError
     associatedtype Path
+    associatedtype Value
     
     init()
-    subscript(_ path: Path) -> Self? { get set }
+    subscript(_ path: Path) -> Value? { get set }
 }
 
 // Move inside Schema once nested generics are fixed
-public struct Property<Value, Format: Schemata.Format, T: KeyPathCompliant> {
+public struct Property<Object, Format: Schemata.Format, T: KeyPathCompliant> {
+    public let keyPath: KeyPath<Object, T>
     public let path: Format.Path
-    public let keyPath: KeyPath<Value, T>
-    public let schema: Schema<T, Format>
+    public let value: Value<T, Format>
+}
+
+public struct Value<T, Format: Schemata.Format> {
+    public typealias Decoded = Result<T, NSError>
+    public typealias Decoder = (Format.Value) -> Decoded
+    public typealias Encoder = (T) -> Format.Value
+    
+    public let decode: Decoder
+    public let encode: Encoder
 }
 
 public struct Schema<Value: KeyPathCompliant, Format: Schemata.Format> {
@@ -50,28 +60,28 @@ public struct Schema<Value: KeyPathCompliant, Format: Schemata.Format> {
     ) {
         self.init(
             decode: { format -> Decoded in
-                if let a = format[a.path].flatMap({ a.schema.decode($0).value }),
-                  let b = format[b.path].flatMap({ b.schema.decode($0).value }) {
+                if let a = format[a.path].flatMap({ a.value.decode($0).value }),
+                  let b = format[b.path].flatMap({ b.value.decode($0).value }) {
                     return .success(f(a, b))
                 }
                 return Decoded.failure(NSError(domain: "foo", code: 1, userInfo: nil))
             },
             encode: { value -> Format in
                 var format = Format()
-                format[a.path] = a.schema.encode(value.value(of: a.keyPath))
-                format[b.path] = b.schema.encode(value.value(of: b.keyPath))
+                format[a.path] = a.value.encode(value.value(of: a.keyPath))
+                format[b.path] = b.value.encode(value.value(of: b.keyPath))
                 return format
             }
         )
     }
 }
 
-extension Schema {
+extension Value {
     public func bimap<NewValue>(
-        decode: @escaping (Value) -> NewValue,
-        encode: @escaping (NewValue) -> Value
-    ) -> Schema<NewValue, Format> {
-        return Schema<NewValue, Format>(
+        decode: @escaping (T) -> NewValue,
+        encode: @escaping (NewValue) -> T
+    ) -> Value<NewValue, Format> {
+        return Value<NewValue, Format>(
             decode: { self.decode($0).map(decode) },
             encode: { self.encode(encode($0)) }
         )

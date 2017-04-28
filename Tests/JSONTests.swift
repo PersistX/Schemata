@@ -1,14 +1,14 @@
 import Schemata
 import XCTest
 
-extension Author.ID: JSONMapped {
+extension Author.ID: JSONValue {
     static let json = String.json.bimap(
         decode: Author.ID.init,
         encode: { $0.string }
     )
 }
 
-extension Author: JSONMapped {
+extension Author: JSONObject {
     static let json = Schema<Author, JSON>(
         Author.init,
         Author.id ~ "id",
@@ -53,9 +53,9 @@ class JSONMappedTests: XCTestCase {
         let id = Author.ID("1")
         let name = "Ray Bradbury"
         let author = Author(id: id, name: name)
-        let json = JSON.object([
-            "id": JSON.string(id.string),
-            "name": JSON.string(name),
+        let json = JSON([
+            "id": .string(id.string),
+            "name": .string(name),
         ])
         XCTAssertEqual(Author.json.decode(json).value, author)
     }
@@ -64,9 +64,9 @@ class JSONMappedTests: XCTestCase {
         let id = Author.ID("1")
         let name = "Ray Bradbury"
         let author = Author(id: id, name: name)
-        let json = JSON.object([
-            "id": JSON.string(id.string),
-            "name": JSON.string(name),
+        let json = JSON([
+            "id": .string(id.string),
+            "name": .string(name),
         ])
         XCTAssertEqual(Author.json.encode(author), json)
     }

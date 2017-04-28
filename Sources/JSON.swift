@@ -1,11 +1,15 @@
 import Foundation
 import Result
 
-public protocol JSONMapped: KeyPathCompliant {
+public protocol JSONValue {
+    static var json: Value<Self, JSON> { get }
+}
+
+public protocol JSONObject: KeyPathCompliant {
     static var json: Schema<Self, JSON> { get }
 }
 
-public enum JSON: Format {
+public struct JSON: Format {
     public enum Error: Swift.Error {
     }
     
@@ -17,32 +21,35 @@ public enum JSON: Format {
         }
     }
     
-    case object([String: JSON])
-    case array([JSON])
-    case string(String)
-    case number(NSNumber)
-    case bool(Bool)
-    case null
-    
-    public init() {
-        self = .object([:])
+    public enum Value {
+        case object(JSON)
+        case array([Value])
+        case string(String)
+        case number(NSNumber)
+        case bool(Bool)
+        case null
     }
     
-    public subscript(_ path: Path) -> JSON? {
+    public var properties: [String: Value]
+    
+    public init(_ properties: [String: Value]) {
+        self.properties = properties
+    }
+    
+    public init() {
+        self.init([:])
+    }
+    
+    public subscript(_ path: Path) -> Value? {
         get {
-            if case let .object(value) = self {
-                if path.keys.count == 1 {
-                    return value[path.keys[0]]
-                }
+            if path.keys.count == 1 {
+                return properties[path.keys[0]]
             }
             return nil
         }
         set {
-            if case var .object(value) = self {
-                if path.keys.count == 1 {
-                    value[path.keys[0]] = newValue
-                    self = .object(value)
-                }
+            if path.keys.count == 1 {
+                properties[path.keys[0]] = newValue
             }
         }
     }
@@ -72,11 +79,11 @@ extension JSON.Path: ExpressibleByStringLiteral {
     }
 }
 
-extension JSON: Hashable {
+extension JSON.Value: Hashable {
     public var hashValue: Int {
         switch self {
         case let .object(value):
-            return value.map { $0.hashValue ^ $1.hashValue }.reduce(0, ^)
+            return value.hashValue
         case let .array(value):
             return value.map { $0.hashValue }.reduce(0, ^)
         case let .string(value):
@@ -90,7 +97,7 @@ extension JSON: Hashable {
         }
     }
     
-    public static func == (lhs: JSON, rhs: JSON) -> Bool {
+    public static func == (lhs: JSON.Value, rhs: JSON.Value) -> Bool {
         switch (lhs, rhs) {
         case let (.string(lhs), .string(rhs)):
             return lhs == rhs
@@ -110,31 +117,38 @@ extension JSON: Hashable {
     }
 }
 
-public func ~ <Model: KeyPathCompliant, Value: JSONMapped>(
-    lhs: KeyPath<Model, Value>,
+extension JSON: Hashable {
+    public var hashValue: Int {
+        return properties
+            .map { $0.hashValue ^ $1.hashValue }
+            .reduce(0, ^)
+    }
+    
+    public static func == (lhs: JSON, rhs: JSON) -> Bool {
+        return lhs.properties == rhs.properties
+    }
+}
+
+public func ~ <Object: JSONObject, Value: JSONValue>(
+    lhs: KeyPath<Object, Value>,
     rhs: JSON.Path
-) -> Schema<Model, JSON>.Property<Value> {
-    return Schema.Property(
-        path: rhs,
+) -> Schema<Object, JSON>.Property<Value> {
+    return Property<Object, JSON, Value>(
         keyPath: lhs,
-        schema: Value.json
+        path: rhs,
+        value: Value.json
     )
 }
 
-extension String: JSONMapped {
-    public static let json = Schema<String, JSON>(
-        decode: { json in
-            if case let .string(value) = json {
+extension String: JSONValue {
+    public static let json = Value<String, JSON>(
+        decode: { jsonValue in
+            if case let .string(value) = jsonValue {
                 return .success(value)
             } else {
                 fatalError()
             }
         },
-        encode: { JSON.string($0) }
+        encode: JSON.Value.string
     )
-    
-    public func value<Leaf>(of keyPath: KeyPath<String, Leaf>) -> Leaf {
-        fatalError()
-    }
 }
-
