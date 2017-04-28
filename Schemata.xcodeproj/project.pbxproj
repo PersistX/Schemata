@@ -19,6 +19,8 @@
 		BE64E7781EA3F3110047D035 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE64E7761EA3F3110047D035 /* Result.framework */; };
 		BE64E7791EA3F3110047D035 /* Runes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE64E7771EA3F3110047D035 /* Runes.framework */; };
 		BE89D5871EB101C700CEC4D1 /* Fixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE89D5861EB101C700CEC4D1 /* Fixtures.swift */; };
+		BE89D5891EB1924000CEC4D1 /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE89D5881EB1924000CEC4D1 /* Record.swift */; };
+		BE89D58B1EB3A25500CEC4D1 /* RecordTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE89D58A1EB3A25500CEC4D1 /* RecordTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +49,8 @@
 		BE64E7761EA3F3110047D035 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = "../../../Library/Developer/Xcode/DerivedData/Schemata-fleiyfwzrgbgvscfywvtqflpyevd/Build/Products/Debug/Result.framework"; sourceTree = "<group>"; };
 		BE64E7771EA3F3110047D035 /* Runes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Runes.framework; path = "../../../Library/Developer/Xcode/DerivedData/Schemata-fleiyfwzrgbgvscfywvtqflpyevd/Build/Products/Debug/Runes.framework"; sourceTree = "<group>"; };
 		BE89D5861EB101C700CEC4D1 /* Fixtures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fixtures.swift; sourceTree = "<group>"; };
+		BE89D5881EB1924000CEC4D1 /* Record.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
+		BE89D58A1EB3A25500CEC4D1 /* RecordTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +101,7 @@
 			children = (
 				BE64E76E1EA3CC800047D035 /* JSON.swift */,
 				BE64E76C1EA3CBB90047D035 /* KeyPath.swift */,
+				BE89D5881EB1924000CEC4D1 /* Record.swift */,
 				BE64E7341EA3B23B0047D035 /* Schema.swift */,
 				BE64E71D1EA3AF4D0047D035 /* Schemata.h */,
 				BE64E71E1EA3AF4D0047D035 /* Info.plist */,
@@ -108,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				BE64E7701EA3CCD40047D035 /* JSONTests.swift */,
+				BE89D58A1EB3A25500CEC4D1 /* RecordTests.swift */,
 				BE64E72A1EA3AF4D0047D035 /* Info.plist */,
 				BE89D5861EB101C700CEC4D1 /* Fixtures.swift */,
 			);
@@ -239,6 +245,7 @@
 			files = (
 				BE64E76F1EA3CC800047D035 /* JSON.swift in Sources */,
 				BE64E76D1EA3CBB90047D035 /* KeyPath.swift in Sources */,
+				BE89D5891EB1924000CEC4D1 /* Record.swift in Sources */,
 				BE64E7351EA3B23B0047D035 /* Schema.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -249,6 +256,7 @@
 			files = (
 				BE64E7711EA3CCD40047D035 /* JSONTests.swift in Sources */,
 				BE89D5871EB101C700CEC4D1 /* Fixtures.swift in Sources */,
+				BE89D58B1EB3A25500CEC4D1 /* RecordTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
