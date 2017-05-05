@@ -1,6 +1,5 @@
 import Foundation
 import Result
-import Runes
 
 public protocol FormatError: Error, Hashable {
 }
