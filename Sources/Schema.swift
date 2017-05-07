@@ -26,6 +26,12 @@ public struct Property<Object, Format: Schemata.Format, T: KeyPathCompliant> {
     public let keyPath: KeyPath<Object, T>
     public let path: Format.Path
     public let value: Value<T, Format>
+    
+    public init(keyPath: KeyPath<Object, T>, path: Format.Path, value: Value<T, Format>) {
+        self.keyPath = keyPath
+        self.path = path
+        self.value = value
+    }
 }
 
 public struct Value<T, Format: Schemata.Format> {
@@ -35,6 +41,11 @@ public struct Value<T, Format: Schemata.Format> {
     
     public let decode: Decoder
     public let encode: Encoder
+    
+    public init(decode: @escaping Decoder, encode: @escaping Encoder) {
+        self.decode = decode
+        self.encode = encode
+    }
 }
 
 public struct Schema<Value: KeyPathCompliant, Format: Schemata.Format> {
