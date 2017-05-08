@@ -55,7 +55,11 @@ extension Book: KeyPathCompliant {
             return title as! Leaf
         case "author"?:
             let rest = Array(keyPath.keys.dropFirst())
-            return author.value(of: KeyPath<Author, Leaf>(keys: rest))
+            if rest.isEmpty {
+                return author as! Leaf
+            } else {
+                return author.value(of: KeyPath<Author, Leaf>(keys: rest))
+            }
         default:
             fatalError()
         }
