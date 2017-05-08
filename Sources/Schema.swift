@@ -62,7 +62,9 @@ public struct Schema<Value: KeyPathCompliant, Format: Schemata.Format> {
         self.decode = decode
         self.encode = encode
     }
-    
+}
+
+extension Schema {
     public init<A: KeyPathCompliant, B: KeyPathCompliant>(
         _ f: @escaping (A, B) -> Value,
         _ a: Property<A>,
