@@ -129,6 +129,26 @@ extension JSON: Hashable {
     }
 }
 
+public func ~ <Root: JSONObject, Object: JSONObject>(
+    lhs: KeyPath<Root, Object>,
+    rhs: JSON.Path
+) -> Schema<Root, JSON>.Property<Object> {
+    return Property<Root, JSON, Object>(
+        keyPath: lhs,
+        path: rhs,
+        value: Value(
+            decode: { json in
+                if case let .object(json) = json {
+                    return Object.json.decode(json)
+                } else {
+                    fatalError()
+                }
+            },
+            encode:{ value in .object(Object.json.encode(value)) }
+        )
+    )
+}
+
 public func ~ <Object: JSONObject, Value: JSONValue>(
     lhs: KeyPath<Object, Value>,
     rhs: JSON.Path

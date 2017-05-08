@@ -16,6 +16,22 @@ extension Author: JSONObject {
     )
 }
 
+extension Book.ID: JSONValue {
+    static let json = String.json.bimap(
+        decode: Book.ID.init,
+        encode: { $0.string }
+    )
+}
+
+extension Book: JSONObject {
+    static let json = Schema<Book, JSON>(
+        Book.init,
+        Book.id ~ "id",
+        Book.title ~ "title",
+        Book.author ~ "author"
+    )
+}
+
 class JSONTests: XCTestCase {
     func testStringDecodeFailure() {
 //        XCTAssertEqual(String.json.decode(.null).error, [.typeMismatch(String.self, .null)])
@@ -69,6 +85,52 @@ class JSONTests: XCTestCase {
             "name": .string(name),
         ])
         XCTAssertEqual(Author.json.encode(author), json)
+    }
+    
+    func testBookDecodeFailure() {
+        
+    }
+    
+    func testBookDecodeSuccess() {
+        let author = Author(
+            id: Author.ID("1"),
+            name: "Ray Bradbury"
+        )
+        let book = Book(
+            id: Book.ID("a"),
+            title: "The Martian Chronicles",
+            author: author
+        )
+        let json = JSON([
+            "id": .string(book.id.string),
+            "title": .string(book.title),
+            "author": .object(JSON([
+                "id": .string(author.id.string),
+                "name": .string(author.name)
+            ])),
+        ])
+        XCTAssertEqual(Book.json.decode(json).value, book)
+    }
+    
+    func testBookEncode() {
+        let author = Author(
+            id: Author.ID("1"),
+            name: "Ray Bradbury"
+        )
+        let book = Book(
+            id: Book.ID("a"),
+            title: "The Martian Chronicles",
+            author: author
+        )
+        let json = JSON([
+            "id": .string(book.id.string),
+            "title": .string(book.title),
+            "author": .object(JSON([
+                "id": .string(author.id.string),
+                "name": .string(author.name)
+            ])),
+        ])
+        XCTAssertEqual(Book.json.encode(book), json)
     }
 }
 
