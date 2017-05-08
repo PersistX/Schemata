@@ -84,6 +84,31 @@ public struct Schema<Value: KeyPathCompliant, Format: Schemata.Format> {
             }
         )
     }
+    
+    public init<A: KeyPathCompliant, B: KeyPathCompliant, C: KeyPathCompliant>(
+        _ f: @escaping (A, B, C) -> Value,
+        _ a: Property<A>,
+        _ b: Property<B>,
+        _ c: Property<C>
+    ) {
+        self.init(
+            decode: { format -> Decoded in
+                if let a = format[a.path].flatMap({ a.value.decode($0).value }),
+                    let b = format[b.path].flatMap({ b.value.decode($0).value }),
+                    let c = format[c.path].flatMap({ c.value.decode($0).value }) {
+                    return .success(f(a, b, c))
+                }
+                return Decoded.failure(NSError(domain: "foo", code: 1, userInfo: nil))
+            },
+            encode: { value -> Format in
+                var format = Format()
+                format[a.path] = a.value.encode(value.value(of: a.keyPath))
+                format[b.path] = b.value.encode(value.value(of: b.keyPath))
+                format[c.path] = c.value.encode(value.value(of: c.keyPath))
+                return format
+            }
+        )
+    }
 }
 
 extension Value {
