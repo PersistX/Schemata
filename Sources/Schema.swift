@@ -14,7 +14,7 @@ infix operator ~ : SchemataDecodePrecedence
 
 public protocol Format {
     associatedtype Error: FormatError
-    associatedtype Path
+    associatedtype Path: Hashable
     associatedtype Value
     
     init()

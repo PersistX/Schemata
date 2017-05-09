@@ -79,6 +79,16 @@ extension JSON.Path: ExpressibleByStringLiteral {
     }
 }
 
+extension JSON.Path: Hashable {
+    public var hashValue: Int {
+        return keys.map { $0.hashValue }.reduce(0, ^)
+    }
+    
+    public static func == (lhs: JSON.Path, rhs: JSON.Path) -> Bool {
+        return lhs.keys == rhs.keys
+    }
+}
+
 extension JSON.Value: Hashable {
     public var hashValue: Int {
         switch self {
