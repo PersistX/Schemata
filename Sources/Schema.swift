@@ -64,6 +64,21 @@ public struct Schema<Value: KeyPathCompliant, Format: Schemata.Format> {
     }
 }
 
+private extension Format {
+    func decode<Object: KeyPathCompliant, T: KeyPathCompliant>(
+        _ property: Property<Object, Self, T>
+    ) -> T? {
+        return self[property.path].flatMap { property.value.decode($0).value }
+    }
+    
+    mutating func encode<Object: KeyPathCompliant, T: KeyPathCompliant>(
+        _ object: Object,
+        for property: Property<Object, Self, T>
+    ) {
+        self[property.path] = property.value.encode(object.value(of: property.keyPath))
+    }
+}
+
 extension Schema {
     public init<A: KeyPathCompliant, B: KeyPathCompliant>(
         _ f: @escaping (A, B) -> Value,
@@ -72,16 +87,16 @@ extension Schema {
     ) {
         self.init(
             decode: { format -> Decoded in
-                if let a = format[a.path].flatMap({ a.value.decode($0).value }),
-                  let b = format[b.path].flatMap({ b.value.decode($0).value }) {
+                if let a = format.decode(a),
+                    let b = format.decode(b) {
                     return .success(f(a, b))
                 }
                 return Decoded.failure(NSError(domain: "foo", code: 1, userInfo: nil))
             },
             encode: { value -> Format in
                 var format = Format()
-                format[a.path] = a.value.encode(value.value(of: a.keyPath))
-                format[b.path] = b.value.encode(value.value(of: b.keyPath))
+                format.encode(value, for: a)
+                format.encode(value, for: b)
                 return format
             }
         )
@@ -95,18 +110,18 @@ extension Schema {
     ) {
         self.init(
             decode: { format -> Decoded in
-                if let a = format[a.path].flatMap({ a.value.decode($0).value }),
-                    let b = format[b.path].flatMap({ b.value.decode($0).value }),
-                    let c = format[c.path].flatMap({ c.value.decode($0).value }) {
+                if let a = format.decode(a),
+                    let b = format.decode(b),
+                    let c = format.decode(c) {
                     return .success(f(a, b, c))
                 }
                 return Decoded.failure(NSError(domain: "foo", code: 1, userInfo: nil))
             },
             encode: { value -> Format in
                 var format = Format()
-                format[a.path] = a.value.encode(value.value(of: a.keyPath))
-                format[b.path] = b.value.encode(value.value(of: b.keyPath))
-                format[c.path] = c.value.encode(value.value(of: c.keyPath))
+                format.encode(value, for: a)
+                format.encode(value, for: b)
+                format.encode(value, for: c)
                 return format
             }
         )
