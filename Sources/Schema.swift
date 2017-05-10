@@ -19,6 +19,23 @@ public protocol Format {
     
     init()
     subscript(_ path: Path) -> Value? { get set }
+    
+    func decode<T>(_ path: Path, _ decode: Schemata.Value<T, Self>.Decoder) -> T?
+}
+
+private extension Format {
+    func decode<Object: KeyPathCompliant, T: KeyPathCompliant>(
+        _ property: Property<Object, Self, T>
+        ) -> T? {
+        return decode(property.path, property.value.decode)
+    }
+    
+    mutating func encode<Object: KeyPathCompliant, T: KeyPathCompliant>(
+        _ object: Object,
+        for property: Property<Object, Self, T>
+    ) {
+        self[property.path] = property.value.encode(object.value(of: property.keyPath))
+    }
 }
 
 // Move inside Schema once nested generics are fixed
@@ -61,21 +78,6 @@ public struct Schema<Value: KeyPathCompliant, Format: Schemata.Format> {
     public init(decode: @escaping Decoder, encode: @escaping Encoder) {
         self.decode = decode
         self.encode = encode
-    }
-}
-
-private extension Format {
-    func decode<Object: KeyPathCompliant, T: KeyPathCompliant>(
-        _ property: Property<Object, Self, T>
-    ) -> T? {
-        return self[property.path].flatMap { property.value.decode($0).value }
-    }
-    
-    mutating func encode<Object: KeyPathCompliant, T: KeyPathCompliant>(
-        _ object: Object,
-        for property: Property<Object, Self, T>
-    ) {
-        self[property.path] = property.value.encode(object.value(of: property.keyPath))
     }
 }
 

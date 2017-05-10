@@ -53,6 +53,10 @@ public struct JSON: Format {
             }
         }
     }
+    
+    public func decode<T>(_ path: Path, _ decode: Schemata.Value<T, JSON>.Decoder) -> T? {
+        return self[path].flatMap { decode($0).value }
+    }
 }
 
 extension JSON.Error: FormatError {
