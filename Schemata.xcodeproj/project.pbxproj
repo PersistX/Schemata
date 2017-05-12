@@ -16,6 +16,7 @@
 		BE64E7711EA3CCD40047D035 /* JSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE64E7701EA3CCD40047D035 /* JSONTests.swift */; };
 		BE64E7781EA3F3110047D035 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE64E7761EA3F3110047D035 /* Result.framework */; };
 		BE89D5871EB101C700CEC4D1 /* Fixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE89D5861EB101C700CEC4D1 /* Fixtures.swift */; };
+		BEE9FD751EC282D20081AD1E /* DecodeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE9FD741EC282D20081AD1E /* DecodeError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +42,7 @@
 		BE64E7701EA3CCD40047D035 /* JSONTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONTests.swift; sourceTree = "<group>"; };
 		BE64E7761EA3F3110047D035 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = "../../../Library/Developer/Xcode/DerivedData/Schemata-fleiyfwzrgbgvscfywvtqflpyevd/Build/Products/Debug/Result.framework"; sourceTree = "<group>"; };
 		BE89D5861EB101C700CEC4D1 /* Fixtures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fixtures.swift; sourceTree = "<group>"; };
+		BEE9FD741EC282D20081AD1E /* DecodeError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecodeError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +88,7 @@
 		BE64E71C1EA3AF4D0047D035 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				BEE9FD741EC282D20081AD1E /* DecodeError.swift */,
 				BE64E76E1EA3CC800047D035 /* JSON.swift */,
 				BE64E76C1EA3CBB90047D035 /* KeyPath.swift */,
 				BE64E7341EA3B23B0047D035 /* Schema.swift */,
@@ -227,6 +230,7 @@
 			files = (
 				BE64E76F1EA3CC800047D035 /* JSON.swift in Sources */,
 				BE64E76D1EA3CBB90047D035 /* KeyPath.swift in Sources */,
+				BEE9FD751EC282D20081AD1E /* DecodeError.swift in Sources */,
 				BE64E7351EA3B23B0047D035 /* Schema.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
