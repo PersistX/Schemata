@@ -2,9 +2,23 @@ import Schemata
 import XCTest
 
 extension Author.ID: JSONValue {
-    static let json = String.json.bimap(
-        decode: Author.ID.init,
-        encode: { $0.string }
+    static let json = Value<Author.ID, JSON>(
+        decode: { value in
+            return String.json
+                .decode(value)
+                .flatMap { string in
+                    if string.contains("#") {
+                        let path = JSON.Path([])
+                        let error = JSON.Error.invalidValue(value, description: "no #s allowed")
+                        return .failure(DecodeError([path: error]))
+                    } else {
+                        return .success(Author.ID(string))
+                    }
+                }
+        },
+        encode: { id in
+            return String.json.encode(id.string)
+        }
     )
 }
 
@@ -52,8 +66,22 @@ class JSONTests: XCTestCase {
         XCTAssertEqual(String.json.encode("foo"), .string("foo"))
     }
     
-    func testAuthorIDDecodeFailure() {
-//        XCTAssertEqual(Author.ID.json.decode(.null).error, [.typeMismatch(Author.ID.self, .null)])
+    func testAuthorIDDecodeTypeMismatchFailure() {
+        XCTAssertEqual(
+            Author.ID.json.decode(.null).error,
+            DecodeError([
+                JSON.Path([]): .typeMismatch(expected: String.self, actual: .null)
+            ])
+        )
+    }
+    
+    func testAuthorIDDecodeInvalidValueFailure() {
+        XCTAssertEqual(
+            Author.ID.json.decode(.string("#")).error,
+            DecodeError([
+                JSON.Path([]): .invalidValue(.string("#"), description: "no #s allowed")
+            ])
+        )
     }
     
     func testAuthorIDDecodeSuccess() {
