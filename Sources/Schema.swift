@@ -5,6 +5,10 @@ public protocol FormatError: Error, Hashable {
 }
 
 public protocol FormatValue: Hashable {
+    typealias Decoded<T> = Result<T, Error>
+    typealias Decoder<T> = (Self) -> Decoded<T>
+    typealias Encoder<T> = (T) -> Self
+    
     associatedtype Error: FormatError
 }
 
@@ -56,9 +60,8 @@ public struct Property<Object, Format: Schemata.Format, T: KeyPathCompliant> {
 }
 
 public struct Value<T, Format: Schemata.Format> {
-    public typealias Decoded<U> = Result<U, Format.Value.Error>
-    public typealias Decoder = (Format.Value) -> Decoded<T>
-    public typealias Encoder = (T) -> Format.Value
+    public typealias Decoder = Format.Value.Decoder<T>
+    public typealias Encoder = Format.Value.Encoder<T>
     
     public let decode: Decoder
     public let encode: Encoder
