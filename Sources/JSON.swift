@@ -11,6 +11,9 @@ public protocol JSONObject: KeyPathCompliant {
 
 public struct JSON: Format {
     public enum Error: Swift.Error {
+        case typeMismatch(expected: Any.Type, actual: JSON.Value)
+        case missingKey
+        case invalidValue(JSON.Value, description: String?)
     }
     
     public struct Path {
@@ -61,11 +64,27 @@ public struct JSON: Format {
 
 extension JSON.Error: FormatError {
     public var hashValue: Int {
-        return 0
+        switch self {
+        case let .typeMismatch(expected, actual):
+            return 0 ^ ObjectIdentifier(expected).hashValue ^ actual.hashValue
+        case .missingKey:
+            return 1
+        case let .invalidValue(value, description):
+            return 2 ^ value.hashValue ^ (description?.hashValue ?? 0)
+        }
     }
     
     public static func == (_ lhs: JSON.Error, _ rhs: JSON.Error) -> Bool {
-        return false
+        switch (lhs, rhs) {
+        case let (.typeMismatch(lhsExpected, lhsActual), .typeMismatch(rhsExpected, rhsActual)):
+            return lhsExpected == rhsExpected && lhsActual == rhsActual
+        case (.missingKey, .missingKey):
+            return true
+        case let (.invalidValue(lhsValue, lhsDescription), .invalidValue(rhsValue, rhsDescription)):
+            return lhsValue == rhsValue && lhsDescription == rhsDescription
+        default:
+            return false
+        }
     }
 }
 
