@@ -34,7 +34,12 @@ extension Book: JSONObject {
 
 class JSONTests: XCTestCase {
     func testStringDecodeFailure() {
-//        XCTAssertEqual(String.json.decode(.null).error, [.typeMismatch(String.self, .null)])
+        XCTAssertEqual(
+            String.json.decode(.null).error,
+            DecodeError([
+                JSON.Path([]): .typeMismatch(expected: String.self, actual: .null)
+            ])
+        )
     }
     
     func testStringDecodeSuccess() {

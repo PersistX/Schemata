@@ -201,7 +201,9 @@ extension String: JSONValue {
             if case let .string(value) = jsonValue {
                 return .success(value)
             } else {
-                fatalError()
+                let path = JSON.Path([])
+                let error = JSON.Error.typeMismatch(expected: String.self, actual: jsonValue)
+                return .failure(DecodeError([path: error]))
             }
         },
         encode: JSON.Value.string
