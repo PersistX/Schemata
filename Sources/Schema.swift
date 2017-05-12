@@ -4,6 +4,10 @@ import Result
 public protocol FormatError: Error, Hashable {
 }
 
+public protocol FormatValue: Hashable {
+    associatedtype Error: FormatError
+}
+
 precedencegroup SchemataDecodePrecedence {
     associativity: left
     higherThan: LogicalConjunctionPrecedence
@@ -15,7 +19,7 @@ infix operator ~ : SchemataDecodePrecedence
 public protocol Format {
     associatedtype Error: FormatError
     associatedtype Path: Hashable
-    associatedtype Value
+    associatedtype Value: FormatValue
     
     init()
     subscript(_ path: Path) -> Value? { get set }
@@ -26,7 +30,7 @@ public protocol Format {
 private extension Format {
     func decode<Object: KeyPathCompliant, T: KeyPathCompliant>(
         _ property: Property<Object, Self, T>
-        ) -> T? {
+    ) -> T? {
         return decode(property.path, property.value.decode)
     }
     

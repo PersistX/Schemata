@@ -24,7 +24,9 @@ public struct JSON: Format {
         }
     }
     
-    public enum Value {
+    public enum Value: FormatValue {
+        public typealias Error = DecodeError<JSON>
+        
         case object(JSON)
         case array([Value])
         case string(String)
