@@ -56,8 +56,8 @@ public struct Property<Object, Format: Schemata.Format, T: KeyPathCompliant> {
 }
 
 public struct Value<T, Format: Schemata.Format> {
-    public typealias Decoded = Result<T, NSError>
-    public typealias Decoder = (Format.Value) -> Decoded
+    public typealias Decoded<U> = Result<U, Format.Value.Error>
+    public typealias Decoder = (Format.Value) -> Decoded<T>
     public typealias Encoder = (T) -> Format.Value
     
     public let decode: Decoder
@@ -72,7 +72,7 @@ public struct Value<T, Format: Schemata.Format> {
 public struct Schema<Value: KeyPathCompliant, Format: Schemata.Format> {
     public typealias Property<T: KeyPathCompliant> = Schemata.Property<Value, Format, T>
     
-    public typealias Decoded = Result<Value, NSError>
+    public typealias Decoded = Result<Value, DecodeError<Format>>
     public typealias Decoder = (Format) -> Decoded
     public typealias Encoder = (Value) -> Format
     
@@ -93,11 +93,12 @@ extension Schema {
     ) {
         self.init(
             decode: { format -> Decoded in
-                if let a = format.decode(a),
-                    let b = format.decode(b) {
+                let a = format.decode(a)
+                let b = format.decode(b)
+                if let a = a, let b = b {
                     return .success(f(a, b))
                 }
-                return Decoded.failure(NSError(domain: "foo", code: 1, userInfo: nil))
+                fatalError()
             },
             encode: { value -> Format in
                 var format = Format()
@@ -116,12 +117,13 @@ extension Schema {
     ) {
         self.init(
             decode: { format -> Decoded in
-                if let a = format.decode(a),
-                    let b = format.decode(b),
-                    let c = format.decode(c) {
+                let a = format.decode(a)
+                let b = format.decode(b)
+                let c = format.decode(c)
+                if let a = a, let b = b, let c = c {
                     return .success(f(a, b, c))
                 }
-                return Decoded.failure(NSError(domain: "foo", code: 1, userInfo: nil))
+                fatalError()
             },
             encode: { value -> Format in
                 var format = Format()
