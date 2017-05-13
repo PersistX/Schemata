@@ -28,13 +28,13 @@ public protocol Format {
     init()
     subscript(_ path: Path) -> Value? { get set }
     
-    func decode<T>(_ path: Path, _ decode: Schemata.Value<T, Self>.Decoder) -> T?
+    func decode<T>(_ path: Path, _ decode: (Value) -> Result<T, Value.Error>) -> Result<T, Value.Error>
 }
 
 private extension Format {
     func decode<Object: KeyPathCompliant, T: KeyPathCompliant>(
         _ property: Property<Object, Self, T>
-    ) -> T? {
+    ) -> Result<T, Value.Error> {
         return decode(property.path, property.value.decode)
     }
     
@@ -96,8 +96,8 @@ extension Schema {
     ) {
         self.init(
             decode: { format -> Decoded in
-                let a = format.decode(a)
-                let b = format.decode(b)
+                let a = format.decode(a).value
+                let b = format.decode(b).value
                 if let a = a, let b = b {
                     return .success(f(a, b))
                 }
@@ -120,9 +120,9 @@ extension Schema {
     ) {
         self.init(
             decode: { format -> Decoded in
-                let a = format.decode(a)
-                let b = format.decode(b)
-                let c = format.decode(c)
+                let a = format.decode(a).value
+                let b = format.decode(b).value
+                let c = format.decode(c).value
                 if let a = a, let b = b, let c = c {
                     return .success(f(a, b, c))
                 }
