@@ -95,12 +95,8 @@ class JSONTests: XCTestCase {
     }
     
     func testAuthorDecodeMissingPropertyFailure() {
-        let author = Author(
-            id: Author.ID("#"),
-            name: "Ray Bradbury"
-        )
         let json = JSON([
-            "id": .string(author.id.string),
+            "id": .string("#"),
         ])
         XCTAssertEqual(
             Author.json.decode(json).error,
@@ -112,13 +108,9 @@ class JSONTests: XCTestCase {
     }
     
     func testAuthorDecodeOnePropertyFailure() {
-        let author = Author(
-            id: Author.ID("#"),
-            name: "Ray Bradbury"
-        )
         let json = JSON([
-            "id": .string(author.id.string),
-            "name": .string(author.name),
+            "id": .string("#"),
+            "name": .string("Ray Bradbury"),
         ])
         XCTAssertEqual(
             Author.json.decode(json).error,
@@ -153,7 +145,21 @@ class JSONTests: XCTestCase {
     }
     
     func testBookDecodeFailure() {
-        
+        let json = JSON([
+            "id": .string("1"),
+            "author": .object(JSON([
+                "id": .string("#"),
+                "name": .null
+            ])),
+        ])
+        XCTAssertEqual(
+            Book.json.decode(json).error,
+            DecodeError([
+                JSON.Path(["author", "id"]): .invalidValue(.string("#"), description: "no #s allowed"),
+                JSON.Path(["author", "name"]): .typeMismatch(expected: String.self, actual: .null),
+                JSON.Path(["title"]): .missingKey,
+            ])
+        )
     }
     
     func testBookDecodeSuccess() {
