@@ -22,6 +22,10 @@ public struct JSON: Format {
         public init(_ keys: [String]) {
             self.keys = keys
         }
+        
+        fileprivate static func + (lhs: Path, rhs: Path) -> Path {
+            return Path(lhs.keys + rhs.keys)
+        }
     }
     
     public enum Value: FormatValue {
@@ -59,12 +63,19 @@ public struct JSON: Format {
         }
     }
     
-    public func decode<T>(_ path: Path, _ decode: Value.Decoder<T>) -> Result<T, Value.Error> {
-        guard let value = self[path] else {
-            fatalError()
+    public func decode<T>(_ path: Path, _ decode: Value.Decoder<T>) -> Result<T, DecodeError<JSON>> {
+        if let value = self[path] {
+            return decode(value)
+                .mapError { error in
+                    var errors: [Path: Error] = [:]
+                    for (errorPath, error) in error.errors {
+                        errors[path + errorPath] = error
+                    }
+                    return DecodeError(errors)
+                }
+        } else {
+            return .failure(DecodeError([path: Error.missingKey]))
         }
-        
-        return decode(value)
     }
 }
 

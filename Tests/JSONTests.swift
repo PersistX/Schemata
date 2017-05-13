@@ -94,28 +94,60 @@ class JSONTests: XCTestCase {
         XCTAssertEqual(Author.ID.json.encode(Author.ID("foo")), .string("foo"))
     }
     
-    func testAuthorDecodeFailure() {
-        
+    func testAuthorDecodeMissingPropertyFailure() {
+        let author = Author(
+            id: Author.ID("#"),
+            name: "Ray Bradbury"
+        )
+        let json = JSON([
+            "id": .string(author.id.string),
+        ])
+        XCTAssertEqual(
+            Author.json.decode(json).error,
+            DecodeError([
+                JSON.Path(["id"]): .invalidValue(.string("#"), description: "no #s allowed"),
+                JSON.Path(["name"]): .missingKey,
+            ])
+        )
+    }
+    
+    func testAuthorDecodeOnePropertyFailure() {
+        let author = Author(
+            id: Author.ID("#"),
+            name: "Ray Bradbury"
+        )
+        let json = JSON([
+            "id": .string(author.id.string),
+            "name": .string(author.name),
+        ])
+        XCTAssertEqual(
+            Author.json.decode(json).error,
+            DecodeError([
+                JSON.Path(["id"]): .invalidValue(.string("#"), description: "no #s allowed")
+            ])
+        )
     }
     
     func testAuthorDecodeSuccess() {
-        let id = Author.ID("1")
-        let name = "Ray Bradbury"
-        let author = Author(id: id, name: name)
+        let author = Author(
+            id: Author.ID("1"),
+            name: "Ray Bradbury"
+        )
         let json = JSON([
-            "id": .string(id.string),
-            "name": .string(name),
+            "id": .string(author.id.string),
+            "name": .string(author.name),
         ])
         XCTAssertEqual(Author.json.decode(json).value, author)
     }
     
     func testAuthorEncode() {
-        let id = Author.ID("1")
-        let name = "Ray Bradbury"
-        let author = Author(id: id, name: name)
+        let author = Author(
+            id: Author.ID("1"),
+            name: "Ray Bradbury"
+        )
         let json = JSON([
-            "id": .string(id.string),
-            "name": .string(name),
+            "id": .string(author.id.string),
+            "name": .string(author.name),
         ])
         XCTAssertEqual(Author.json.encode(author), json)
     }

@@ -28,13 +28,13 @@ public protocol Format {
     init()
     subscript(_ path: Path) -> Value? { get set }
     
-    func decode<T>(_ path: Path, _ decode: (Value) -> Result<T, Value.Error>) -> Result<T, Value.Error>
+    func decode<T>(_ path: Path, _ decode: (Value) -> Result<T, Value.Error>) -> Result<T, DecodeError<Self>>
 }
 
 private extension Format {
     func decode<Object: KeyPathCompliant, T: KeyPathCompliant>(
         _ property: Property<Object, Self, T>
-    ) -> Result<T, Value.Error> {
+    ) -> Result<T, DecodeError<Self>> {
         return decode(property.path, property.value.decode)
     }
     
@@ -88,6 +88,14 @@ public struct Schema<Value: KeyPathCompliant, Format: Schemata.Format> {
     }
 }
 
+private extension DecodeError {
+    init(_ errors: DecodeError?...) {
+        self = errors
+            .flatMap { $0 }
+            .reduce(DecodeError([:]), +)
+    }
+}
+
 extension Schema {
     public init<A: KeyPathCompliant, B: KeyPathCompliant>(
         _ f: @escaping (A, B) -> Value,
@@ -96,12 +104,17 @@ extension Schema {
     ) {
         self.init(
             decode: { format -> Decoded in
-                let a = format.decode(a).value
-                let b = format.decode(b).value
-                if let a = a, let b = b {
+                let a = format.decode(a)
+                let b = format.decode(b)
+                if let a = a.value,
+                   let b = b.value {
                     return .success(f(a, b))
+                } else {
+                    return .failure(DecodeError(
+                        a.error,
+                        b.error
+                    ))
                 }
-                fatalError()
             },
             encode: { value -> Format in
                 var format = Format()
@@ -120,13 +133,20 @@ extension Schema {
     ) {
         self.init(
             decode: { format -> Decoded in
-                let a = format.decode(a).value
-                let b = format.decode(b).value
-                let c = format.decode(c).value
-                if let a = a, let b = b, let c = c {
+                let a = format.decode(a)
+                let b = format.decode(b)
+                let c = format.decode(c)
+                if let a = a.value,
+                   let b = b.value,
+                   let c = c.value {
                     return .success(f(a, b, c))
+                } else {
+                    return .failure(DecodeError(
+                        a.error,
+                        b.error,
+                        c.error
+                    ))
                 }
-                fatalError()
             },
             encode: { value -> Format in
                 var format = Format()
