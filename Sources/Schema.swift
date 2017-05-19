@@ -1,15 +1,12 @@
 import Foundation
 import Result
 
-public protocol FormatError: Error, Hashable {
-}
-
 public protocol FormatValue: Hashable {
     typealias Decoded<T> = Result<T, Error>
     typealias Decoder<T> = (Self) -> Decoded<T>
     typealias Encoder<T> = (T) -> Self
     
-    associatedtype Error: FormatError
+    associatedtype Error: Swift.Error, Hashable
 }
 
 precedencegroup SchemataDecodePrecedence {
@@ -21,7 +18,7 @@ precedencegroup SchemataDecodePrecedence {
 infix operator ~ : SchemataDecodePrecedence
 
 public protocol Format {
-    associatedtype Error: FormatError
+    associatedtype Error: Swift.Error, Hashable
     associatedtype Path: Hashable
     associatedtype Value: FormatValue
     

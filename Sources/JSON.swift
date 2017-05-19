@@ -79,7 +79,7 @@ public struct JSON: Format {
     }
 }
 
-extension JSON.Error: FormatError {
+extension JSON.Error: Hashable {
     public var hashValue: Int {
         switch self {
         case let .typeMismatch(expected, actual):

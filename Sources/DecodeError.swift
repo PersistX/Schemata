@@ -1,12 +1,14 @@
 import Foundation
 
-public struct DecodeError<Format: Schemata.Format>: FormatError {
+public struct DecodeError<Format: Schemata.Format>: Error {
     public var errors: [Format.Path: Format.Error]
     
     public init(_ errors: [Format.Path: Format.Error]) {
         self.errors = errors
     }
-    
+}
+
+extension DecodeError: Hashable {
     public var hashValue: Int {
         return errors
             .map { $0.hashValue ^ $1.hashValue }
