@@ -3,8 +3,8 @@ import Schemata
 
 // MARK: - Book
 
-struct Book {
-    struct ID {
+struct Book: KeyPathCompliant {
+    struct ID: KeyPathCompliant {
         let string: String
         
         init(_ string: String) {
@@ -31,7 +31,7 @@ extension Book: Equatable {
 
 #if swift(>=4)
 #else
-    extension Book.ID: KeyPathCompliant {
+    extension Book.ID {
         func value<Leaf>(of keyPath: KeyPath<Book.ID, Leaf>) -> Leaf {
             fatalError()
         }
@@ -43,7 +43,7 @@ extension Book: Equatable {
         var title: KeyPath<Root, String> { return KeyPath<Root, String>(keys: keys + ["title"]) }
     }
 
-    extension Book: KeyPathCompliant {
+    extension Book {
         private static let root = KeyPath<Book, Book>(keys: [])
         static let id = root.id
         static let author = root.author
@@ -71,8 +71,8 @@ extension Book: Equatable {
 
 // MARK: - Author
 
-struct Author {
-    struct ID {
+struct Author: KeyPathCompliant {
+    struct ID: KeyPathCompliant {
         let string: String
         
         init(_ string: String) {
@@ -98,7 +98,7 @@ extension Author: Equatable {
 
 #if swift(>=4)
 #else
-    extension Author.ID: KeyPathCompliant {
+    extension Author.ID {
         func value<Leaf>(of keyPath: KeyPath<Author.ID, Leaf>) -> Leaf {
             fatalError()
         }
@@ -109,7 +109,7 @@ extension Author: Equatable {
         var name: KeyPath<Root, String> { return KeyPath<Root, String>(keys: keys + ["name"]) }
     }
 
-    extension Author: KeyPathCompliant {
+    extension Author {
         static private let root = KeyPath<Author, Author>(keys: [])
         static let id = root.id
         static let name = root.name

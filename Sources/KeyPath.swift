@@ -2,6 +2,8 @@ import Foundation
 
 #if swift(>=4)
     public protocol KeyPathCompliant { }
+    
+    extension String: KeyPathCompliant { }
 #else
     /// Until Swift 4.0 ships its built-in KeyPath.
     public struct KeyPath<Root, Leaf> {
