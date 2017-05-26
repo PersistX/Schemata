@@ -10,15 +10,9 @@ public struct DecodeError<Format: Schemata.Format>: Error {
 
 extension DecodeError: Hashable {
     public var hashValue: Int {
-        #if swift(>=4)
-            return errors
-                .map { $0.key.hashValue ^ $0.value.hashValue }
-                .reduce(0, ^)
-        #else
-            return errors
-                .map { $0.hashValue ^ $1.hashValue }
-                .reduce(0, ^)
-        #endif
+        return errors
+            .map { $0.key.hashValue ^ $0.value.hashValue }
+            .reduce(0, ^)
     }
     
     public static func == (lhs: DecodeError, rhs: DecodeError) -> Bool {

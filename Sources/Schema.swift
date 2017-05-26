@@ -39,11 +39,7 @@ private extension Format {
         _ object: Object,
         for property: Property<Object, Self, T>
     ) {
-        #if swift(>=4)
-            self[property.path] = property.value.encode(object[keyPath: property.keyPath])
-        #else
-            self[property.path] = property.value.encode(object.value(of: property.keyPath))
-        #endif
+        self[property.path] = property.value.encode(object[keyPath: property.keyPath])
     }
 }
 

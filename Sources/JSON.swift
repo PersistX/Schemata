@@ -169,15 +169,9 @@ extension JSON.Value: Hashable {
 
 extension JSON: Hashable {
     public var hashValue: Int {
-        #if swift(>=4)
-            return properties
-                .map { $0.key.hashValue ^ $0.value.hashValue }
-                .reduce(0, ^)
-        #else
-            return properties
-                .map { $0.hashValue ^ $1.hashValue }
-                .reduce(0, ^)
-        #endif
+        return properties
+            .map { $0.key.hashValue ^ $0.value.hashValue }
+            .reduce(0, ^)
     }
     
     public static func == (lhs: JSON, rhs: JSON) -> Bool {

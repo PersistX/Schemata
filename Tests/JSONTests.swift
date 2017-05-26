@@ -23,19 +23,11 @@ extension Author.ID: JSONValue {
 }
 
 extension Author: JSONObject {
-    #if swift(>=4)
-        static let json = Schema<Author, JSON>(
-            Author.init,
-            \Author.id ~ "id",
-            \Author.name ~ "name"
-        )
-    #else
-        static let json = Schema<Author, JSON>(
-            Author.init,
-            Author.id ~ "id",
-            Author.name ~ "name"
-        )
-    #endif
+    static let json = Schema<Author, JSON>(
+        Author.init,
+        \Author.id ~ "id",
+        \Author.name ~ "name"
+    )
 }
 
 extension Book.ID: JSONValue {
@@ -46,21 +38,12 @@ extension Book.ID: JSONValue {
 }
 
 extension Book: JSONObject {
-    #if swift(>=4)
-        static let json = Schema<Book, JSON>(
-            Book.init,
-            \Book.id ~ "id",
-            \Book.title ~ "title",
-            \Book.author ~ "author"
-        )
-    #else
-        static let json = Schema<Book, JSON>(
-            Book.init,
-            Book.id ~ "id",
-            Book.title ~ "title",
-            Book.author ~ "author"
-        )
-    #endif
+    static let json = Schema<Book, JSON>(
+        Book.init,
+        \Book.id ~ "id",
+        \Book.title ~ "title",
+        \Book.author ~ "author"
+    )
 }
 
 class JSONTests: XCTestCase {
