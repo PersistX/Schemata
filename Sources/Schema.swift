@@ -16,6 +16,14 @@ private extension Format {
     }
 }
 
+private extension DecodeError {
+    init(_ errors: DecodeError?...) {
+        self = errors
+            .flatMap { $0 }
+            .reduce(DecodeError([:]), +)
+    }
+}
+
 public struct Schema<Model, Format: Schemata.Format> {
     public struct Property<T> {
         public let keyPath: KeyPath<Model, T>
@@ -39,14 +47,6 @@ public struct Schema<Model, Format: Schemata.Format> {
     public init(decode: @escaping Decoder, encode: @escaping Encoder) {
         self.decode = decode
         self.encode = encode
-    }
-}
-
-private extension DecodeError {
-    init(_ errors: DecodeError?...) {
-        self = errors
-            .flatMap { $0 }
-            .reduce(DecodeError([:]), +)
     }
 }
 
