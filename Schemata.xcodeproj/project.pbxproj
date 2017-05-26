@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		BE1DC5FE1ED7B76B00A0671F /* Value.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DC5FD1ED7B76B00A0671F /* Value.swift */; };
+		BE1DC6001ED7B7DE00A0671F /* Format.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DC5FF1ED7B7DE00A0671F /* Format.swift */; };
 		BE64E7241EA3AF4D0047D035 /* Schemata.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE64E71A1EA3AF4D0047D035 /* Schemata.framework */; };
 		BE64E72B1EA3AF4D0047D035 /* Schemata.h in Headers */ = {isa = PBXBuildFile; fileRef = BE64E71D1EA3AF4D0047D035 /* Schemata.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BE64E7351EA3B23B0047D035 /* Schema.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE64E7341EA3B23B0047D035 /* Schema.swift */; };
@@ -31,6 +32,7 @@
 
 /* Begin PBXFileReference section */
 		BE1DC5FD1ED7B76B00A0671F /* Value.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Value.swift; sourceTree = "<group>"; };
+		BE1DC5FF1ED7B7DE00A0671F /* Format.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Format.swift; sourceTree = "<group>"; };
 		BE64E71A1EA3AF4D0047D035 /* Schemata.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Schemata.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE64E71D1EA3AF4D0047D035 /* Schemata.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Schemata.h; sourceTree = "<group>"; };
 		BE64E71E1EA3AF4D0047D035 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 			isa = PBXGroup;
 			children = (
 				BEE9FD741EC282D20081AD1E /* DecodeError.swift */,
+				BE1DC5FF1ED7B7DE00A0671F /* Format.swift */,
 				BE64E76E1EA3CC800047D035 /* JSON.swift */,
 				BE64E7341EA3B23B0047D035 /* Schema.swift */,
 				BE64E71D1EA3AF4D0047D035 /* Schemata.h */,
@@ -230,6 +233,7 @@
 			files = (
 				BE64E76F1EA3CC800047D035 /* JSON.swift in Sources */,
 				BEE9FD751EC282D20081AD1E /* DecodeError.swift in Sources */,
+				BE1DC6001ED7B7DE00A0671F /* Format.swift in Sources */,
 				BE64E7351EA3B23B0047D035 /* Schema.swift in Sources */,
 				BE1DC5FE1ED7B76B00A0671F /* Value.swift in Sources */,
 			);
