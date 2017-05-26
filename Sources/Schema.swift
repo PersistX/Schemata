@@ -2,39 +2,36 @@ import Foundation
 import Result
 
 private extension Format {
-    func decode<Object, T>(
-        _ property: Property<Object, Self, T>
+    func decode<Model, T>(
+        _ property: Schema<Model, Self>.Property<T>
     ) -> Result<T, DecodeError<Self>> {
         return decode(property.path, property.value.decode)
     }
     
-    mutating func encode<Object, T>(
-        _ object: Object,
-        for property: Property<Object, Self, T>
+    mutating func encode<Model, T>(
+        _ model: Model,
+        for property: Schema<Model, Self>.Property<T>
     ) {
-        self[property.path] = property.value.encode(object[keyPath: property.keyPath])
+        self[property.path] = property.value.encode(model[keyPath: property.keyPath])
     }
 }
 
-// Move inside Schema once nested generics are fixed
-public struct Property<Object, Format: Schemata.Format, T> {
-    public let keyPath: KeyPath<Object, T>
-    public let path: Format.Path
-    public let value: Value<T, Format>
-    
-    public init(keyPath: KeyPath<Object, T>, path: Format.Path, value: Value<T, Format>) {
-        self.keyPath = keyPath
-        self.path = path
-        self.value = value
+public struct Schema<Model, Format: Schemata.Format> {
+    public struct Property<T> {
+        public let keyPath: KeyPath<Model, T>
+        public let path: Format.Path
+        public let value: Value<T, Format>
+        
+        public init(keyPath: KeyPath<Model, T>, path: Format.Path, value: Value<T, Format>) {
+            self.keyPath = keyPath
+            self.path = path
+            self.value = value
+        }
     }
-}
-
-public struct Schema<Value, Format: Schemata.Format> {
-    public typealias Property<T> = Schemata.Property<Value, Format, T>
     
-    public typealias Decoded = Result<Value, DecodeError<Format>>
+    public typealias Decoded = Result<Model, DecodeError<Format>>
     public typealias Decoder = (Format) -> Decoded
-    public typealias Encoder = (Value) -> Format
+    public typealias Encoder = (Model) -> Format
     
     public let decode: Decoder
     public let encode: Encoder
@@ -55,7 +52,7 @@ private extension DecodeError {
 
 extension Schema {
     public init<A, B>(
-        _ f: @escaping (A, B) -> Value,
+        _ f: @escaping (A, B) -> Model,
         _ a: Property<A>,
         _ b: Property<B>
     ) {
@@ -83,7 +80,7 @@ extension Schema {
     }
     
     public init<A, B, C>(
-        _ f: @escaping (A, B, C) -> Value,
+        _ f: @escaping (A, B, C) -> Model,
         _ a: Property<A>,
         _ b: Property<B>,
         _ c: Property<C>

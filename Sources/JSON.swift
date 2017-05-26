@@ -183,7 +183,7 @@ public func ~ <Root: JSONObject, Object: JSONObject>(
     lhs: KeyPath<Root, Object>,
     rhs: JSON.Path
 ) -> Schema<Root, JSON>.Property<Object> {
-    return Property<Root, JSON, Object>(
+    return Schema<Root, JSON>.Property<Object>(
         keyPath: lhs,
         path: rhs,
         value: Value(
@@ -203,7 +203,7 @@ public func ~ <Object: JSONObject, Value: JSONValue>(
     lhs: KeyPath<Object, Value>,
     rhs: JSON.Path
 ) -> Schema<Object, JSON>.Property<Value> {
-    return Property<Object, JSON, Value>(
+    return Schema<Object, JSON>.Property<Value>(
         keyPath: lhs,
         path: rhs,
         value: Value.json
