@@ -11,7 +11,6 @@
 		BE64E72B1EA3AF4D0047D035 /* Schemata.h in Headers */ = {isa = PBXBuildFile; fileRef = BE64E71D1EA3AF4D0047D035 /* Schemata.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BE64E7351EA3B23B0047D035 /* Schema.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE64E7341EA3B23B0047D035 /* Schema.swift */; };
 		BE64E7501EA3B4660047D035 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE64E74F1EA3B4660047D035 /* Result.framework */; };
-		BE64E76D1EA3CBB90047D035 /* KeyPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE64E76C1EA3CBB90047D035 /* KeyPath.swift */; };
 		BE64E76F1EA3CC800047D035 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE64E76E1EA3CC800047D035 /* JSON.swift */; };
 		BE64E7711EA3CCD40047D035 /* JSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE64E7701EA3CCD40047D035 /* JSONTests.swift */; };
 		BE64E7781EA3F3110047D035 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE64E7761EA3F3110047D035 /* Result.framework */; };
@@ -37,7 +36,6 @@
 		BE64E72A1EA3AF4D0047D035 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BE64E7341EA3B23B0047D035 /* Schema.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Schema.swift; sourceTree = "<group>"; };
 		BE64E74F1EA3B4660047D035 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Checkouts/Result/build/Debug/Result.framework; sourceTree = "<group>"; };
-		BE64E76C1EA3CBB90047D035 /* KeyPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyPath.swift; sourceTree = "<group>"; };
 		BE64E76E1EA3CC800047D035 /* JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
 		BE64E7701EA3CCD40047D035 /* JSONTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONTests.swift; sourceTree = "<group>"; };
 		BE64E7761EA3F3110047D035 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = "../../../Library/Developer/Xcode/DerivedData/Schemata-fleiyfwzrgbgvscfywvtqflpyevd/Build/Products/Debug/Result.framework"; sourceTree = "<group>"; };
@@ -90,7 +88,6 @@
 			children = (
 				BEE9FD741EC282D20081AD1E /* DecodeError.swift */,
 				BE64E76E1EA3CC800047D035 /* JSON.swift */,
-				BE64E76C1EA3CBB90047D035 /* KeyPath.swift */,
 				BE64E7341EA3B23B0047D035 /* Schema.swift */,
 				BE64E71D1EA3AF4D0047D035 /* Schemata.h */,
 				BE64E71E1EA3AF4D0047D035 /* Info.plist */,
@@ -229,7 +226,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE64E76F1EA3CC800047D035 /* JSON.swift in Sources */,
-				BE64E76D1EA3CBB90047D035 /* KeyPath.swift in Sources */,
 				BEE9FD751EC282D20081AD1E /* DecodeError.swift in Sources */,
 				BE64E7351EA3B23B0047D035 /* Schema.swift in Sources */,
 			);

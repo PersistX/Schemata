@@ -3,8 +3,8 @@ import Schemata
 
 // MARK: - Book
 
-struct Book: KeyPathCompliant {
-    struct ID: KeyPathCompliant {
+struct Book {
+    struct ID {
         let string: String
         
         init(_ string: String) {
@@ -31,8 +31,8 @@ extension Book: Equatable {
 
 // MARK: - Author
 
-struct Author: KeyPathCompliant {
-    struct ID: KeyPathCompliant {
+struct Author {
+    struct ID {
         let string: String
         
         init(_ string: String) {

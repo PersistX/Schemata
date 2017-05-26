@@ -29,13 +29,13 @@ public protocol Format {
 }
 
 private extension Format {
-    func decode<Object: KeyPathCompliant, T: KeyPathCompliant>(
+    func decode<Object, T>(
         _ property: Property<Object, Self, T>
     ) -> Result<T, DecodeError<Self>> {
         return decode(property.path, property.value.decode)
     }
     
-    mutating func encode<Object: KeyPathCompliant, T: KeyPathCompliant>(
+    mutating func encode<Object, T>(
         _ object: Object,
         for property: Property<Object, Self, T>
     ) {
@@ -44,7 +44,7 @@ private extension Format {
 }
 
 // Move inside Schema once nested generics are fixed
-public struct Property<Object, Format: Schemata.Format, T: KeyPathCompliant> {
+public struct Property<Object, Format: Schemata.Format, T> {
     public let keyPath: KeyPath<Object, T>
     public let path: Format.Path
     public let value: Value<T, Format>
@@ -69,8 +69,8 @@ public struct Value<T, Format: Schemata.Format> {
     }
 }
 
-public struct Schema<Value: KeyPathCompliant, Format: Schemata.Format> {
-    public typealias Property<T: KeyPathCompliant> = Schemata.Property<Value, Format, T>
+public struct Schema<Value, Format: Schemata.Format> {
+    public typealias Property<T> = Schemata.Property<Value, Format, T>
     
     public typealias Decoded = Result<Value, DecodeError<Format>>
     public typealias Decoder = (Format) -> Decoded
@@ -94,7 +94,7 @@ private extension DecodeError {
 }
 
 extension Schema {
-    public init<A: KeyPathCompliant, B: KeyPathCompliant>(
+    public init<A, B>(
         _ f: @escaping (A, B) -> Value,
         _ a: Property<A>,
         _ b: Property<B>
@@ -122,7 +122,7 @@ extension Schema {
         )
     }
     
-    public init<A: KeyPathCompliant, B: KeyPathCompliant, C: KeyPathCompliant>(
+    public init<A, B, C>(
         _ f: @escaping (A, B, C) -> Value,
         _ a: Property<A>,
         _ b: Property<B>,

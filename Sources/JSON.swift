@@ -5,7 +5,7 @@ public protocol JSONValue {
     static var json: Value<Self, JSON> { get }
 }
 
-public protocol JSONObject: KeyPathCompliant {
+public protocol JSONObject {
     static var json: Schema<Self, JSON> { get }
 }
 
