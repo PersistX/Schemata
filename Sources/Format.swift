@@ -18,7 +18,7 @@ infix operator ~ : SchemataDecodePrecedence
 
 public protocol Format {
     associatedtype Error: Swift.Error, Hashable
-    associatedtype Path: Hashable
+    associatedtype Path: Hashable, CustomDebugStringConvertible
     associatedtype Value: FormatValue
     
     init()

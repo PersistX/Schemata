@@ -49,6 +49,18 @@ public struct Schema<Model, Format: Schemata.Format> {
 			self.encode = encode
         }
     }
+	
+	public struct AnyProperty {
+		public let path: Format.Path
+		public let decoded: Any.Type
+		public let encoded: Any.Type
+		
+		public init<Decoded>(_ property: Property<Decoded>) {
+			path = property.path
+			decoded = Decoded.self
+			encoded = property.encoded
+		}
+	}
     
     public typealias Decoded = Result<Model, DecodeError<Format>>
     public typealias Decoder = (Format) -> Decoded
@@ -56,10 +68,12 @@ public struct Schema<Model, Format: Schemata.Format> {
     
     public let decode: Decoder
     public let encode: Encoder
+	public let properties: [AnyProperty]
     
-    public init(decode: @escaping Decoder, encode: @escaping Encoder) {
+	public init(decode: @escaping Decoder, encode: @escaping Encoder, properties: [AnyProperty]) {
         self.decode = decode
         self.encode = encode
+		self.properties = properties
     }
 }
 
@@ -88,7 +102,8 @@ extension Schema {
                 format.encode(value, for: a)
                 format.encode(value, for: b)
                 return format
-            }
+            },
+            properties: [AnyProperty(a), AnyProperty(b)]
         )
     }
     
@@ -121,7 +136,22 @@ extension Schema {
                 format.encode(value, for: b)
                 format.encode(value, for: c)
                 return format
-            }
+			},
+            properties: [AnyProperty(a), AnyProperty(b), AnyProperty(c)]
         )
     }
+}
+
+extension Schema.AnyProperty: CustomDebugStringConvertible {
+	public var debugDescription: String {
+		return "\(path): \(encoded) (\(decoded))"
+	}
+}
+
+extension Schema: CustomDebugStringConvertible {
+	public var debugDescription: String {
+		return "\(Model.self) {\n"
+			+ properties.map { "\t" + $0.debugDescription }.sorted().joined(separator: "\n")
+			+ "\n}"
+	}
 }

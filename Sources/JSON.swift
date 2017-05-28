@@ -130,6 +130,12 @@ extension JSON.Path: Hashable {
     }
 }
 
+extension JSON.Path: CustomDebugStringConvertible {
+	public var debugDescription: String {
+		return keys.joined(separator: ".")
+	}
+}
+
 extension JSON.Value: Hashable {
     public var hashValue: Int {
         switch self {

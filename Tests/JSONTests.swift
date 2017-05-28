@@ -194,6 +194,18 @@ class JSONTests: XCTestCase {
         ])
         XCTAssertEqual(Book.json.encode(book), json)
     }
+	
+	func testDebugDescription() {
+		XCTAssertEqual(
+			Author.json.debugDescription,
+			"""
+			Author {
+			\tid: String (ID)
+			\tname: String (String)
+			}
+			"""
+		)
+	}
 }
 
 
