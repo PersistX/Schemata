@@ -2,7 +2,7 @@ import Foundation
 import Result
 
 public protocol JSONValue {
-	associatedtype Encoded
+    associatedtype Encoded
     static var json: Value<JSON, Encoded, Self> { get }
 }
 
@@ -131,9 +131,9 @@ extension JSON.Path: Hashable {
 }
 
 extension JSON.Path: CustomDebugStringConvertible {
-	public var debugDescription: String {
-		return keys.joined(separator: ".")
-	}
+    public var debugDescription: String {
+        return keys.joined(separator: ".")
+    }
 }
 
 extension JSON.Value: Hashable {
@@ -193,15 +193,15 @@ public func ~ <Root: JSONObject, Object: JSONObject>(
     return Schema<Root, JSON>.Property<Object>(
         keyPath: lhs,
         path: rhs,
-		decode: { jsonValue in
-			if case let .object(json) = jsonValue {
-				return Object.json.decode(json)
-			} else {
-				fatalError()
-			}
-		},
-		encoded: JSON.self,
-		encode: { JSON.Value.object(Object.json.encode($0)) }
+        decode: { jsonValue in
+            if case let .object(json) = jsonValue {
+                return Object.json.decode(json)
+            } else {
+                fatalError()
+            }
+        },
+        encoded: JSON.self,
+        encode: { JSON.Value.object(Object.json.encode($0)) }
     )
 }
 
@@ -220,7 +220,7 @@ public func ~ <Object: JSONObject, Value: JSONValue>(
                 let error = JSON.Error.typeMismatch(expected: String.self, actual: jsonValue)
                 return .failure(DecodeError([path: error]))
             }
-		},
+        },
         encoded: Value.Encoded.self,
         encode: { JSON.Value.string(Value.json.encode($0)) }
     )

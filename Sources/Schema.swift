@@ -26,41 +26,41 @@ private extension DecodeError {
 
 public struct Schema<Model, Format: Schemata.Format> {
     public struct Property<Decoded> {
-		public typealias Decoder = Format.Value.Decoder<Decoded>
-		public typealias Encoder = Format.Value.Encoder<Decoded>
-		
+        public typealias Decoder = Format.Value.Decoder<Decoded>
+        public typealias Encoder = Format.Value.Encoder<Decoded>
+        
         public let keyPath: KeyPath<Model, Decoded>
-		public let path: Format.Path
-		public let decode: Decoder
-		public let encoded: Any.Type
-		public let encode: Encoder
+        public let path: Format.Path
+        public let decode: Decoder
+        public let encoded: Any.Type
+        public let encode: Encoder
         
         public init(
-			keyPath: KeyPath<Model, Decoded>,
-			path: Format.Path,
-			decode: @escaping Decoder,
-			encoded: Any.Type,
-			encode: @escaping Encoder
-		) {
+            keyPath: KeyPath<Model, Decoded>,
+            path: Format.Path,
+            decode: @escaping Decoder,
+            encoded: Any.Type,
+            encode: @escaping Encoder
+        ) {
             self.keyPath = keyPath
             self.path = path
             self.decode = decode
-			self.encoded = encoded
-			self.encode = encode
+            self.encoded = encoded
+            self.encode = encode
         }
     }
-	
-	public struct AnyProperty {
-		public let path: Format.Path
-		public let decoded: Any.Type
-		public let encoded: Any.Type
-		
-		public init<Decoded>(_ property: Property<Decoded>) {
-			path = property.path
-			decoded = Decoded.self
-			encoded = property.encoded
-		}
-	}
+    
+    public struct AnyProperty {
+        public let path: Format.Path
+        public let decoded: Any.Type
+        public let encoded: Any.Type
+        
+        public init<Decoded>(_ property: Property<Decoded>) {
+            path = property.path
+            decoded = Decoded.self
+            encoded = property.encoded
+        }
+    }
     
     public typealias Decoded = Result<Model, DecodeError<Format>>
     public typealias Decoder = (Format) -> Decoded
@@ -68,12 +68,12 @@ public struct Schema<Model, Format: Schemata.Format> {
     
     public let decode: Decoder
     public let encode: Encoder
-	public let properties: [AnyProperty]
+    public let properties: [AnyProperty]
     
-	public init(decode: @escaping Decoder, encode: @escaping Encoder, properties: [AnyProperty]) {
+    public init(decode: @escaping Decoder, encode: @escaping Encoder, properties: [AnyProperty]) {
         self.decode = decode
         self.encode = encode
-		self.properties = properties
+        self.properties = properties
     }
 }
 
@@ -136,22 +136,22 @@ extension Schema {
                 format.encode(value, for: b)
                 format.encode(value, for: c)
                 return format
-			},
+            },
             properties: [AnyProperty(a), AnyProperty(b), AnyProperty(c)]
         )
     }
 }
 
 extension Schema.AnyProperty: CustomDebugStringConvertible {
-	public var debugDescription: String {
-		return "\(path): \(encoded) (\(decoded))"
-	}
+    public var debugDescription: String {
+        return "\(path): \(encoded) (\(decoded))"
+    }
 }
 
 extension Schema: CustomDebugStringConvertible {
-	public var debugDescription: String {
-		return "\(Model.self) {\n"
-			+ properties.map { "\t" + $0.debugDescription }.sorted().joined(separator: "\n")
-			+ "\n}"
-	}
+    public var debugDescription: String {
+        return "\(Model.self) {\n"
+            + properties.map { "\t" + $0.debugDescription }.sorted().joined(separator: "\n")
+            + "\n}"
+    }
 }

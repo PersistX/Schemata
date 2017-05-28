@@ -3,18 +3,18 @@ import Schemata
 import XCTest
 
 extension Author.ID: JSONValue {
-	static let json = String.json.bimap(
-		decode: { string -> Result<Author.ID, DecodeError<JSON>> in
-			if string.contains("#") {
-				let path = JSON.Path([])
-				let error = JSON.Error.invalidValue(.string(string), description: "no #s allowed")
-				return .failure(DecodeError([path: error]))
-			} else {
-				return .success(Author.ID(string))
-			}
+    static let json = String.json.bimap(
+        decode: { string -> Result<Author.ID, DecodeError<JSON>> in
+            if string.contains("#") {
+                let path = JSON.Path([])
+                let error = JSON.Error.invalidValue(.string(string), description: "no #s allowed")
+                return .failure(DecodeError([path: error]))
+            } else {
+                return .success(Author.ID(string))
+            }
         },
         encode: { (id: Author.ID) -> String in return id.string }
-	)
+    )
 }
 
 extension Author: JSONObject {
@@ -83,8 +83,8 @@ class JSONTests: XCTestCase {
             ])
         )
     }
-	
-	func testAuthorDecodedTypeMismatchFailure() {
+    
+    func testAuthorDecodedTypeMismatchFailure() {
         let json = JSON([
             "id": .null,
             "name": .null,
@@ -92,11 +92,11 @@ class JSONTests: XCTestCase {
         XCTAssertEqual(
             Author.json.decode(json).error,
             DecodeError([
-				JSON.Path(["id"]): .typeMismatch(expected: String.self, actual: .null),
-				JSON.Path(["name"]): .typeMismatch(expected: String.self, actual: .null),
+                JSON.Path(["id"]): .typeMismatch(expected: String.self, actual: .null),
+                JSON.Path(["name"]): .typeMismatch(expected: String.self, actual: .null),
             ])
         )
-	}
+    }
     
     func testAuthorDecodeOnePropertyFailure() {
         let json = JSON([
@@ -194,18 +194,18 @@ class JSONTests: XCTestCase {
         ])
         XCTAssertEqual(Book.json.encode(book), json)
     }
-	
-	func testDebugDescription() {
-		XCTAssertEqual(
-			Author.json.debugDescription,
-			"""
-			Author {
-			\tid: String (ID)
-			\tname: String (String)
-			}
-			"""
-		)
-	}
+    
+    func testDebugDescription() {
+        XCTAssertEqual(
+            Author.json.debugDescription,
+            """
+            Author {
+            \tid: String (ID)
+            \tname: String (String)
+            }
+            """
+        )
+    }
 }
 
 
