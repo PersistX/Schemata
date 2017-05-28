@@ -31,4 +31,14 @@ extension Value {
             encode: { self.encode(encode($0)) }
         )
     }
+	
+	public func bimap<NewDecoded>(
+		decode: @escaping (Decoded) -> Result<NewDecoded, Format.Value.Error>,
+		encode: @escaping (NewDecoded) -> Decoded
+	) -> Value<Format, Encoded, NewDecoded> {
+        return Value<Format, Encoded, NewDecoded>(
+            decode: { self.decode($0).flatMap(decode) },
+            encode: { self.encode(encode($0)) }
+        )
+	}
 }

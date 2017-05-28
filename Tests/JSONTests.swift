@@ -1,10 +1,10 @@
 import Result
-@testable import Schemata
+import Schemata
 import XCTest
 
 extension Author.ID: JSONValue {
-    static let json = Value<JSON, String, Author.ID>(
-        decode: { string in
+	static let json = String.json.bimap(
+		decode: { string -> Result<Author.ID, DecodeError<JSON>> in
 			if string.contains("#") {
 				let path = JSON.Path([])
 				let error = JSON.Error.invalidValue(.string(string), description: "no #s allowed")
@@ -14,7 +14,7 @@ extension Author.ID: JSONValue {
 			}
         },
         encode: { (id: Author.ID) -> String in return id.string }
-    )
+	)
 }
 
 extension Author: JSONObject {
