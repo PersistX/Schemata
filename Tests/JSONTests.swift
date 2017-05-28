@@ -4,7 +4,7 @@ import XCTest
 
 // MARK: - Book
 
-struct Book {
+struct JBook {
     struct ID {
         let string: String
         
@@ -15,24 +15,24 @@ struct Book {
     
     let id: ID
     var title: String
-    var author: Author
+    var author: JAuthor
 }
 
-extension Book.ID: Equatable {
-    static func == (lhs: Book.ID, rhs: Book.ID) -> Bool {
+extension JBook.ID: Equatable {
+    static func == (lhs: JBook.ID, rhs: JBook.ID) -> Bool {
         return lhs.string == rhs.string
     }
 }
 
-extension Book: Equatable {
-    static func == (lhs: Book, rhs: Book) -> Bool {
+extension JBook: Equatable {
+    static func == (lhs: JBook, rhs: JBook) -> Bool {
         return lhs.id == rhs.id && lhs.title == rhs.title && lhs.author == rhs.author
     }
 }
 
 // MARK: - Author
 
-struct Author {
+struct JAuthor {
     struct ID {
         let string: String
         
@@ -45,54 +45,54 @@ struct Author {
     var name: String
 }
 
-extension Author.ID: Equatable {
-    static func == (lhs: Author.ID, rhs: Author.ID) -> Bool {
+extension JAuthor.ID: Equatable {
+    static func == (lhs: JAuthor.ID, rhs: JAuthor.ID) -> Bool {
         return lhs.string == rhs.string
     }
 }
 
-extension Author: Equatable {
-    static func == (lhs: Author, rhs: Author) -> Bool {
+extension JAuthor: Equatable {
+    static func == (lhs: JAuthor, rhs: JAuthor) -> Bool {
         return lhs.id == rhs.id && lhs.name == rhs.name
     }
 }
 
-extension Author.ID: JSONValue {
+extension JAuthor.ID: JSONValue {
     static let json = String.json.bimap(
-        decode: { string -> Result<Author.ID, DecodeError<JSON>> in
+        decode: { string -> Result<JAuthor.ID, DecodeError<JSON>> in
             if string.contains("#") {
                 let path = JSON.Path([])
                 let error = JSON.Error.invalidValue(.string(string), description: "no #s allowed")
                 return .failure(DecodeError([path: error]))
             } else {
-                return .success(Author.ID(string))
+                return .success(JAuthor.ID(string))
             }
         },
-        encode: { (id: Author.ID) -> String in return id.string }
+        encode: { (id: JAuthor.ID) -> String in return id.string }
     )
 }
 
-extension Author: JSONObject {
-    static let json = Schema<Author, JSON>(
-        Author.init,
-        \Author.id ~ "id",
-        \Author.name ~ "name"
+extension JAuthor: JSONObject {
+    static let json = Schema<JAuthor, JSON>(
+        JAuthor.init,
+        \JAuthor.id ~ "id",
+        \JAuthor.name ~ "name"
     )
 }
 
-extension Book.ID: JSONValue {
+extension JBook.ID: JSONValue {
     static let json = String.json.bimap(
-        decode: Book.ID.init,
+        decode: JBook.ID.init,
         encode: { $0.string }
     )
 }
 
-extension Book: JSONObject {
-    static let json = Schema<Book, JSON>(
-        Book.init,
-        \Book.id ~ "id",
-        \Book.title ~ "title",
-        \Book.author ~ "author"
+extension JBook: JSONObject {
+    static let json = Schema<JBook, JSON>(
+        JBook.init,
+        \JBook.id ~ "id",
+        \JBook.title ~ "title",
+        \JBook.author ~ "author"
     )
 }
 
@@ -109,7 +109,7 @@ class JSONTests: XCTestCase {
     
     func testAuthorIDDecodeInvalidValueFailure() {
         XCTAssertEqual(
-            Author.ID.json.decode("#").error,
+            JAuthor.ID.json.decode("#").error,
             DecodeError([
                 JSON.Path([]): .invalidValue(.string("#"), description: "no #s allowed")
             ])
@@ -117,13 +117,13 @@ class JSONTests: XCTestCase {
     }
     
     func testAuthorIDDecodeSuccess() {
-        let result = Author.ID.json.decode("foo")
-        XCTAssertEqual(result.value, Author.ID("foo"))
+        let result = JAuthor.ID.json.decode("foo")
+        XCTAssertEqual(result.value, JAuthor.ID("foo"))
         XCTAssertNil(result.error)
     }
     
     func testAuthorIDEncode() {
-        XCTAssertEqual(Author.ID.json.encode(Author.ID("foo")), "foo")
+        XCTAssertEqual(JAuthor.ID.json.encode(JAuthor.ID("foo")), "foo")
     }
     
     func testAuthorDecodeMissingPropertyFailure() {
@@ -131,7 +131,7 @@ class JSONTests: XCTestCase {
             "id": .string("#"),
         ])
         XCTAssertEqual(
-            Author.json.decode(json).error,
+            JAuthor.json.decode(json).error,
             DecodeError([
                 JSON.Path(["id"]): .invalidValue(.string("#"), description: "no #s allowed"),
                 JSON.Path(["name"]): .missingKey,
@@ -145,7 +145,7 @@ class JSONTests: XCTestCase {
             "name": .null,
         ])
         XCTAssertEqual(
-            Author.json.decode(json).error,
+            JAuthor.json.decode(json).error,
             DecodeError([
                 JSON.Path(["id"]): .typeMismatch(expected: String.self, actual: .null),
                 JSON.Path(["name"]): .typeMismatch(expected: String.self, actual: .null),
@@ -159,7 +159,7 @@ class JSONTests: XCTestCase {
             "name": .string("Ray Bradbury"),
         ])
         XCTAssertEqual(
-            Author.json.decode(json).error,
+            JAuthor.json.decode(json).error,
             DecodeError([
                 JSON.Path(["id"]): .invalidValue(.string("#"), description: "no #s allowed")
             ])
@@ -167,27 +167,27 @@ class JSONTests: XCTestCase {
     }
     
     func testAuthorDecodeSuccess() {
-        let author = Author(
-            id: Author.ID("1"),
+        let author = JAuthor(
+            id: JAuthor.ID("1"),
             name: "Ray Bradbury"
         )
         let json = JSON([
             "id": .string(author.id.string),
             "name": .string(author.name),
         ])
-        XCTAssertEqual(Author.json.decode(json).value, author)
+        XCTAssertEqual(JAuthor.json.decode(json).value, author)
     }
     
     func testAuthorEncode() {
-        let author = Author(
-            id: Author.ID("1"),
+        let author = JAuthor(
+            id: JAuthor.ID("1"),
             name: "Ray Bradbury"
         )
         let json = JSON([
             "id": .string(author.id.string),
             "name": .string(author.name),
         ])
-        XCTAssertEqual(Author.json.encode(author), json)
+        XCTAssertEqual(JAuthor.json.encode(author), json)
     }
     
     func testBookDecodeFailure() {
@@ -199,7 +199,7 @@ class JSONTests: XCTestCase {
             ])),
         ])
         XCTAssertEqual(
-            Book.json.decode(json).error,
+            JBook.json.decode(json).error,
             DecodeError([
                 JSON.Path(["author", "id"]): .invalidValue(.string("#"), description: "no #s allowed"),
                 JSON.Path(["author", "name"]): .typeMismatch(expected: String.self, actual: .null),
@@ -215,7 +215,7 @@ class JSONTests: XCTestCase {
             "author": .null,
         ])
         XCTAssertEqual(
-            Book.json.decode(json).error,
+            JBook.json.decode(json).error,
             DecodeError([
                 JSON.Path(["author"]): .typeMismatch(expected: JSON.self, actual: .null),
             ])
@@ -228,7 +228,7 @@ class JSONTests: XCTestCase {
             "title": .string("The Martian Chronicles"),
         ])
         XCTAssertEqual(
-            Book.json.decode(json).error,
+            JBook.json.decode(json).error,
             DecodeError([
                 JSON.Path(["author"]): .missingKey,
             ])
@@ -236,12 +236,12 @@ class JSONTests: XCTestCase {
     }
     
     func testBookDecodeSuccess() {
-        let author = Author(
-            id: Author.ID("1"),
+        let author = JAuthor(
+            id: JAuthor.ID("1"),
             name: "Ray Bradbury"
         )
-        let book = Book(
-            id: Book.ID("a"),
+        let book = JBook(
+            id: JBook.ID("a"),
             title: "The Martian Chronicles",
             author: author
         )
@@ -253,16 +253,16 @@ class JSONTests: XCTestCase {
                 "name": .string(author.name)
             ])),
         ])
-        XCTAssertEqual(Book.json.decode(json).value, book)
+        XCTAssertEqual(JBook.json.decode(json).value, book)
     }
     
     func testBookEncode() {
-        let author = Author(
-            id: Author.ID("1"),
+        let author = JAuthor(
+            id: JAuthor.ID("1"),
             name: "Ray Bradbury"
         )
-        let book = Book(
-            id: Book.ID("a"),
+        let book = JBook(
+            id: JBook.ID("a"),
             title: "The Martian Chronicles",
             author: author
         )
@@ -274,14 +274,14 @@ class JSONTests: XCTestCase {
                 "name": .string(author.name)
             ])),
         ])
-        XCTAssertEqual(Book.json.encode(book), json)
+        XCTAssertEqual(JBook.json.encode(book), json)
     }
     
     func testDebugDescription() {
         XCTAssertEqual(
-            Author.json.debugDescription,
+            JAuthor.json.debugDescription,
             """
-            Author {
+            JAuthor {
             \tid: String (ID)
             \tname: String (String)
             }
