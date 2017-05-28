@@ -197,7 +197,9 @@ public func ~ <Root: JSONObject, Object: JSONObject>(
             if case let .object(json) = jsonValue {
                 return Object.json.decode(json)
             } else {
-                fatalError()
+                let path = JSON.Path([])
+                let error = JSON.Error.typeMismatch(expected: JSON.self, actual: jsonValue)
+                return .failure(DecodeError([path: error]))
             }
         },
         encoded: JSON.self,

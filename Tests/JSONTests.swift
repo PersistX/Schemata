@@ -153,6 +153,34 @@ class JSONTests: XCTestCase {
         )
     }
     
+    func testBookDecodeObjectTypeMismatchFailure() {
+        let json = JSON([
+            "id": .string("1"),
+            "title": .string("The Martian Chronicles"),
+            "author": .null,
+        ])
+        XCTAssertEqual(
+            Book.json.decode(json).error,
+            DecodeError([
+                JSON.Path(["author"]): .typeMismatch(expected: JSON.self, actual: .null),
+            ])
+        )
+        
+    }
+    
+    func testBookDecodeObjectTypeMissingFailure() {
+        let json = JSON([
+            "id": .string("1"),
+            "title": .string("The Martian Chronicles"),
+        ])
+        XCTAssertEqual(
+            Book.json.decode(json).error,
+            DecodeError([
+                JSON.Path(["author"]): .missingKey,
+            ])
+        )
+    }
+    
     func testBookDecodeSuccess() {
         let author = Author(
             id: Author.ID("1"),
