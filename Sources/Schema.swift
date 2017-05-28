@@ -25,12 +25,12 @@ private extension DecodeError {
 }
 
 public struct Schema<Model, Format: Schemata.Format> {
-    public struct Property<T> {
-        public let keyPath: KeyPath<Model, T>
+    public struct Property<Decoded> {
+        public let keyPath: KeyPath<Model, Decoded>
         public let path: Format.Path
-        public let value: Value<Format, T>
+        public let value: Value<Format, Decoded>
         
-        public init(keyPath: KeyPath<Model, T>, path: Format.Path, value: Value<Format, T>) {
+        public init(keyPath: KeyPath<Model, Decoded>, path: Format.Path, value: Value<Format, Decoded>) {
             self.keyPath = keyPath
             self.path = path
             self.value = value
