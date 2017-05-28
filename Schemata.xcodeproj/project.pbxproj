@@ -17,6 +17,8 @@
 		BE64E7711EA3CCD40047D035 /* JSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE64E7701EA3CCD40047D035 /* JSONTests.swift */; };
 		BE64E7781EA3F3110047D035 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE64E7761EA3F3110047D035 /* Result.framework */; };
 		BEE9FD751EC282D20081AD1E /* DecodeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE9FD741EC282D20081AD1E /* DecodeError.swift */; };
+		BEFD30B61EDB51B6004FF8FB /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFD30B51EDB51B6004FF8FB /* Record.swift */; };
+		BEFD30B91EDB52CD004FF8FB /* RecordTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFD30B71EDB51C0004FF8FB /* RecordTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +45,8 @@
 		BE64E7701EA3CCD40047D035 /* JSONTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONTests.swift; sourceTree = "<group>"; };
 		BE64E7761EA3F3110047D035 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = "../../../Library/Developer/Xcode/DerivedData/Schemata-fleiyfwzrgbgvscfywvtqflpyevd/Build/Products/Debug/Result.framework"; sourceTree = "<group>"; };
 		BEE9FD741EC282D20081AD1E /* DecodeError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecodeError.swift; sourceTree = "<group>"; };
+		BEFD30B51EDB51B6004FF8FB /* Record.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
+		BEFD30B71EDB51C0004FF8FB /* RecordTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +96,7 @@
 				BEE9FD741EC282D20081AD1E /* DecodeError.swift */,
 				BE1DC5FF1ED7B7DE00A0671F /* Format.swift */,
 				BE64E76E1EA3CC800047D035 /* JSON.swift */,
+				BEFD30B51EDB51B6004FF8FB /* Record.swift */,
 				BE64E7341EA3B23B0047D035 /* Schema.swift */,
 				BE64E71D1EA3AF4D0047D035 /* Schemata.h */,
 				BE1DC5FD1ED7B76B00A0671F /* Value.swift */,
@@ -104,6 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				BE64E7701EA3CCD40047D035 /* JSONTests.swift */,
+				BEFD30B71EDB51C0004FF8FB /* RecordTests.swift */,
 				BE64E72A1EA3AF4D0047D035 /* Info.plist */,
 			);
 			path = Tests;
@@ -231,6 +237,7 @@
 			files = (
 				BE64E76F1EA3CC800047D035 /* JSON.swift in Sources */,
 				BEE9FD751EC282D20081AD1E /* DecodeError.swift in Sources */,
+				BEFD30B61EDB51B6004FF8FB /* Record.swift in Sources */,
 				BE1DC6001ED7B7DE00A0671F /* Format.swift in Sources */,
 				BE64E7351EA3B23B0047D035 /* Schema.swift in Sources */,
 				BE1DC5FE1ED7B76B00A0671F /* Value.swift in Sources */,
@@ -241,6 +248,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BEFD30B91EDB52CD004FF8FB /* RecordTests.swift in Sources */,
 				BE64E7711EA3CCD40047D035 /* JSONTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
