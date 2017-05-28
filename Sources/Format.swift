@@ -2,8 +2,7 @@ import Foundation
 import Result
 
 public protocol FormatValue: Hashable {
-    typealias Decoded<T> = Result<T, Error>
-    typealias Decoder<T> = (Self) -> Decoded<T>
+    typealias Decoder<T> = (Self) -> Result<T, Error>
     typealias Encoder<T> = (T) -> Self
     
     associatedtype Error: Swift.Error, Hashable
