@@ -2,7 +2,8 @@ import Foundation
 import Result
 
 public protocol JSONValue {
-    static var json: Value<JSON, Self> { get }
+	associatedtype Encoded
+    static var json: Value<JSON, Encoded, Self> { get }
 }
 
 public protocol JSONObject {
@@ -186,41 +187,39 @@ public func ~ <Root: JSONObject, Object: JSONObject>(
     return Schema<Root, JSON>.Property<Object>(
         keyPath: lhs,
         path: rhs,
-        value: Value(
-            decode: { json in
-                if case let .object(json) = json {
-                    return Object.json.decode(json)
-                } else {
-                    fatalError()
-                }
-            },
-            encode:{ value in .object(Object.json.encode(value)) }
-        )
+		decode: { jsonValue in
+			if case let .object(json) = jsonValue {
+				return Object.json.decode(json)
+			} else {
+				fatalError()
+			}
+		},
+		encoded: JSON.self,
+		encode: { JSON.Value.object(Object.json.encode($0)) }
     )
 }
 
 public func ~ <Object: JSONObject, Value: JSONValue>(
     lhs: KeyPath<Object, Value>,
     rhs: JSON.Path
-) -> Schema<Object, JSON>.Property<Value> {
+) -> Schema<Object, JSON>.Property<Value> where Value.Encoded == String {
     return Schema<Object, JSON>.Property<Value>(
         keyPath: lhs,
         path: rhs,
-        value: Value.json
-    )
-}
-
-extension String: JSONValue {
-    public static let json = Value<JSON, String>(
         decode: { jsonValue in
             if case let .string(value) = jsonValue {
-                return .success(value)
+                return Value.json.decode(value)
             } else {
                 let path = JSON.Path([])
                 let error = JSON.Error.typeMismatch(expected: String.self, actual: jsonValue)
                 return .failure(DecodeError([path: error]))
             }
-        },
-        encode: JSON.Value.string
+		},
+        encoded: Value.Encoded.self,
+        encode: { JSON.Value.string(Value.json.encode($0)) }
     )
+}
+
+extension String: JSONValue {
+    public static let json = Value<JSON, String, String>()
 }

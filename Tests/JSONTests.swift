@@ -1,24 +1,19 @@
-import Schemata
+import Result
+@testable import Schemata
 import XCTest
 
 extension Author.ID: JSONValue {
-    static let json = Value<JSON, Author.ID>(
-        decode: { value in
-            return String.json
-                .decode(value)
-                .flatMap { string in
-                    if string.contains("#") {
-                        let path = JSON.Path([])
-                        let error = JSON.Error.invalidValue(value, description: "no #s allowed")
-                        return .failure(DecodeError([path: error]))
-                    } else {
-                        return .success(Author.ID(string))
-                    }
-                }
+    static let json = Value<JSON, String, Author.ID>(
+        decode: { string in
+			if string.contains("#") {
+				let path = JSON.Path([])
+				let error = JSON.Error.invalidValue(.string(string), description: "no #s allowed")
+				return .failure(DecodeError([path: error]))
+			} else {
+				return .success(Author.ID(string))
+			}
         },
-        encode: { id in
-            return String.json.encode(id.string)
-        }
+        encode: { (id: Author.ID) -> String in return id.string }
     )
 }
 
@@ -47,37 +42,19 @@ extension Book: JSONObject {
 }
 
 class JSONTests: XCTestCase {
-    func testStringDecodeFailure() {
-        XCTAssertEqual(
-            String.json.decode(.null).error,
-            DecodeError([
-                JSON.Path([]): .typeMismatch(expected: String.self, actual: .null)
-            ])
-        )
-    }
-    
     func testStringDecodeSuccess() {
-        let result = String.json.decode(.string("foo"))
+        let result = String.json.decode("foo")
         XCTAssertEqual(result.value, "foo")
         XCTAssertNil(result.error)
     }
     
     func testStringEncode() {
-        XCTAssertEqual(String.json.encode("foo"), .string("foo"))
-    }
-    
-    func testAuthorIDDecodeTypeMismatchFailure() {
-        XCTAssertEqual(
-            Author.ID.json.decode(.null).error,
-            DecodeError([
-                JSON.Path([]): .typeMismatch(expected: String.self, actual: .null)
-            ])
-        )
+        XCTAssertEqual(String.json.encode("foo"), "foo")
     }
     
     func testAuthorIDDecodeInvalidValueFailure() {
         XCTAssertEqual(
-            Author.ID.json.decode(.string("#")).error,
+            Author.ID.json.decode("#").error,
             DecodeError([
                 JSON.Path([]): .invalidValue(.string("#"), description: "no #s allowed")
             ])
@@ -85,13 +62,13 @@ class JSONTests: XCTestCase {
     }
     
     func testAuthorIDDecodeSuccess() {
-        let result = Author.ID.json.decode(.string("foo"))
+        let result = Author.ID.json.decode("foo")
         XCTAssertEqual(result.value, Author.ID("foo"))
         XCTAssertNil(result.error)
     }
     
     func testAuthorIDEncode() {
-        XCTAssertEqual(Author.ID.json.encode(Author.ID("foo")), .string("foo"))
+        XCTAssertEqual(Author.ID.json.encode(Author.ID("foo")), "foo")
     }
     
     func testAuthorDecodeMissingPropertyFailure() {
@@ -106,6 +83,20 @@ class JSONTests: XCTestCase {
             ])
         )
     }
+	
+	func testAuthorDecodedTypeMismatchFailure() {
+        let json = JSON([
+            "id": .null,
+            "name": .null,
+        ])
+        XCTAssertEqual(
+            Author.json.decode(json).error,
+            DecodeError([
+				JSON.Path(["id"]): .typeMismatch(expected: String.self, actual: .null),
+				JSON.Path(["name"]): .typeMismatch(expected: String.self, actual: .null),
+            ])
+        )
+	}
     
     func testAuthorDecodeOnePropertyFailure() {
         let json = JSON([
