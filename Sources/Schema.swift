@@ -28,9 +28,9 @@ public struct Schema<Model, Format: Schemata.Format> {
     public struct Property<T> {
         public let keyPath: KeyPath<Model, T>
         public let path: Format.Path
-        public let value: Value<T, Format>
+        public let value: Value<Format, T>
         
-        public init(keyPath: KeyPath<Model, T>, path: Format.Path, value: Value<T, Format>) {
+        public init(keyPath: KeyPath<Model, T>, path: Format.Path, value: Value<Format, T>) {
             self.keyPath = keyPath
             self.path = path
             self.value = value

@@ -2,7 +2,7 @@ import Foundation
 import Result
 
 public protocol JSONValue {
-    static var json: Value<Self, JSON> { get }
+    static var json: Value<JSON, Self> { get }
 }
 
 public protocol JSONObject {
@@ -211,7 +211,7 @@ public func ~ <Object: JSONObject, Value: JSONValue>(
 }
 
 extension String: JSONValue {
-    public static let json = Value<String, JSON>(
+    public static let json = Value<JSON, String>(
         decode: { jsonValue in
             if case let .string(value) = jsonValue {
                 return .success(value)

@@ -2,7 +2,7 @@ import Schemata
 import XCTest
 
 extension Author.ID: JSONValue {
-    static let json = Value<Author.ID, JSON>(
+    static let json = Value<JSON, Author.ID>(
         decode: { value in
             return String.json
                 .decode(value)

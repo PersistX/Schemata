@@ -1,6 +1,6 @@
 import Foundation
 
-public struct Value<Decoded, Format: Schemata.Format> {
+public struct Value<Format: Schemata.Format, Decoded> {
     public typealias Decoder = Format.Value.Decoder<Decoded>
     public typealias Encoder = Format.Value.Encoder<Decoded>
     
@@ -17,8 +17,8 @@ extension Value {
     public func bimap<NewDecoded>(
         decode: @escaping (Decoded) -> NewDecoded,
         encode: @escaping (NewDecoded) -> Decoded
-    ) -> Value<NewDecoded, Format> {
-        return Value<NewDecoded, Format>(
+    ) -> Value<Format, NewDecoded> {
+        return Value<Format, NewDecoded>(
             decode: { self.decode($0).map(decode) },
             encode: { self.encode(encode($0)) }
         )
