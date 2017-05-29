@@ -13,8 +13,8 @@ struct RBook {
     }
     
     let id: ID
-    var title: String
-    var author: RAuthor
+    let title: String
+    let author: RAuthor
 }
 
 extension RBook.ID: Hashable {
@@ -37,6 +37,23 @@ extension RBook: Hashable {
     }
 }
 
+extension RBook.ID: RecordValue {
+    static let record = String.record.bimap(
+        decode: RBook.ID.init,
+        encode: { $0.string }
+    )
+}
+
+extension RBook: RecordObject {
+    static let record = Schema<RBook, Record>(
+        RBook.init,
+        \RBook.id ~ "id",
+        \RBook.title ~ "title",
+        \RBook.author ~ "author"
+    )
+}
+
+
 // MARK: - RAuthor
 
 struct RAuthor {
@@ -49,7 +66,8 @@ struct RAuthor {
     }
     
     let id: ID
-    var name: String
+    let name: String
+    let books: Set<RBook>
 }
 
 extension RAuthor.ID: Hashable {
@@ -64,11 +82,13 @@ extension RAuthor.ID: Hashable {
 
 extension RAuthor: Hashable {
     var hashValue: Int {
-        return id.hashValue ^ name.hashValue
+        return id.hashValue ^ name.hashValue ^ books.hashValue
     }
     
     static func == (lhs: RAuthor, rhs: RAuthor) -> Bool {
-        return lhs.id == rhs.id && lhs.name == rhs.name
+        return lhs.id == rhs.id
+            && lhs.name == rhs.name
+            && lhs.books == rhs.books
     }
 }
 
@@ -83,7 +103,8 @@ extension RAuthor: RecordObject {
     static let record = Schema<RAuthor, Record>(
         RAuthor.init,
         \RAuthor.id ~ "id",
-        \RAuthor.name ~ "name"
+        \RAuthor.name ~ "name",
+        \RAuthor.books ~ \RBook.author
     )
 }
 

@@ -20,6 +20,7 @@ public struct Record: Format {
         public typealias Error = Record.Error
         
         case string(String)
+        case reference
     }
     
     public var fields: [String: Field]
@@ -65,6 +66,8 @@ extension Record.Field: Hashable {
         switch self {
         case let .string(value):
             return value.hashValue
+        case .reference:
+            return 0
         }
     }
     
@@ -72,6 +75,10 @@ extension Record.Field: Hashable {
         switch (lhs, rhs) {
         case let (.string(lhs), .string(rhs)):
             return lhs == rhs
+        case (.reference, .reference):
+            return true
+        default:
+            return false
         }
     }
 }
@@ -86,6 +93,34 @@ extension Record: Hashable {
     public static func == (lhs: Record, rhs: Record) -> Bool {
         return lhs.fields == rhs.fields
     }
+}
+
+public func ~ <Object: RecordObject, Child: RecordObject>(
+    lhs: KeyPath<Object, Set<Child>>,
+    rhs: KeyPath<Child, Object>
+) -> Schema<Object, Record>.Property<Set<Child>> {
+    return Schema<Object, Record>.Property<Set<Child>>(
+        keyPath: lhs,
+        path: "(\(Child.self))",
+        decode: { _ in .success([]) },
+        encoded: Set<Child>.self,
+        encode: { _ in .reference }
+    )
+}
+
+public func ~ <Object: RecordObject, Value: RecordObject>(
+    lhs: KeyPath<Object, Value>,
+    rhs: Record.Path
+) -> Schema<Object, Record>.Property<Value> {
+    return Schema<Object, Record>.Property<Value>(
+        keyPath: lhs,
+        path: rhs,
+        decode: { value in
+            fatalError()
+        },
+        encoded: Value.self,
+        encode: { _ in fatalError() }
+    )
 }
 
 public func ~ <Object: RecordObject, Value: RecordValue>(
