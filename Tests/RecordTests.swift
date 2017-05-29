@@ -1,9 +1,9 @@
 import Schemata
 import XCTest
 
-// MARK: - Book
+// MARK: - RBook
 
-struct Book {
+struct RBook {
     struct ID {
         let string: String
         
@@ -14,24 +14,24 @@ struct Book {
     
     let id: ID
     var title: String
-    var author: Author
+    var author: RAuthor
 }
 
-extension Book.ID: Equatable {
-    static func == (lhs: Book.ID, rhs: Book.ID) -> Bool {
+extension RBook.ID: Equatable {
+    static func == (lhs: RBook.ID, rhs: RBook.ID) -> Bool {
         return lhs.string == rhs.string
     }
 }
 
-extension Book: Equatable {
-    static func == (lhs: Book, rhs: Book) -> Bool {
+extension RBook: Equatable {
+    static func == (lhs: RBook, rhs: RBook) -> Bool {
         return lhs.id == rhs.id && lhs.title == rhs.title && lhs.author == rhs.author
     }
 }
 
-// MARK: - Author
+// MARK: - RAuthor
 
-struct Author {
+struct RAuthor {
     struct ID {
         let string: String
         
@@ -44,30 +44,30 @@ struct Author {
     var name: String
 }
 
-extension Author.ID: Equatable {
-    static func == (lhs: Author.ID, rhs: Author.ID) -> Bool {
+extension RAuthor.ID: Equatable {
+    static func == (lhs: RAuthor.ID, rhs: RAuthor.ID) -> Bool {
         return lhs.string == rhs.string
     }
 }
 
-extension Author: Equatable {
-    static func == (lhs: Author, rhs: Author) -> Bool {
+extension RAuthor: Equatable {
+    static func == (lhs: RAuthor, rhs: RAuthor) -> Bool {
         return lhs.id == rhs.id && lhs.name == rhs.name
     }
 }
 
-extension Author.ID: RecordValue {
+extension RAuthor.ID: RecordValue {
     static let record = String.record.bimap(
-        decode: Author.ID.init,
+        decode: RAuthor.ID.init,
         encode: { $0.string }
     )
 }
 
-extension Author: RecordObject {
-    static let record = Schema<Author, Record>(
-        Author.init,
-        \Author.id ~ "id",
-        \Author.name ~ "name"
+extension RAuthor: RecordObject {
+    static let record = Schema<RAuthor, Record>(
+        RAuthor.init,
+        \RAuthor.id ~ "id",
+        \RAuthor.name ~ "name"
     )
 }
 
