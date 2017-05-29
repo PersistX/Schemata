@@ -17,13 +17,21 @@ struct RBook {
     var author: RAuthor
 }
 
-extension RBook.ID: Equatable {
+extension RBook.ID: Hashable {
+    var hashValue: Int {
+        return string.hashValue
+    }
+    
     static func == (lhs: RBook.ID, rhs: RBook.ID) -> Bool {
         return lhs.string == rhs.string
     }
 }
 
-extension RBook: Equatable {
+extension RBook: Hashable {
+    var hashValue: Int {
+        return id.hashValue ^ title.hashValue ^ author.hashValue
+    }
+    
     static func == (lhs: RBook, rhs: RBook) -> Bool {
         return lhs.id == rhs.id && lhs.title == rhs.title && lhs.author == rhs.author
     }
@@ -44,13 +52,21 @@ struct RAuthor {
     var name: String
 }
 
-extension RAuthor.ID: Equatable {
+extension RAuthor.ID: Hashable {
+    var hashValue: Int {
+        return string.hashValue
+    }
+    
     static func == (lhs: RAuthor.ID, rhs: RAuthor.ID) -> Bool {
         return lhs.string == rhs.string
     }
 }
 
-extension RAuthor: Equatable {
+extension RAuthor: Hashable {
+    var hashValue: Int {
+        return id.hashValue ^ name.hashValue
+    }
+    
     static func == (lhs: RAuthor, rhs: RAuthor) -> Bool {
         return lhs.id == rhs.id && lhs.name == rhs.name
     }
