@@ -25,7 +25,6 @@ public struct Record: Format {
     
     public var fields: [String: Field]
     
-    
     public init(_ fields: [String: Field]) {
         self.fields = fields
     }
