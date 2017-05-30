@@ -114,7 +114,7 @@ struct RBookViewModel {
 }
 
 extension RBookViewModel {
-    static let projection = Projection<RBook, RBookViewModel>(
+    static let projection = Projection<Record, RBook, RBookViewModel>(
         RBookViewModel.init,
         \RBook.title,
         \RBook.author.name
