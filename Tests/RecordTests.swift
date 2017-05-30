@@ -108,5 +108,18 @@ extension RAuthor: RecordObject {
     )
 }
 
+struct RBookViewModel {
+    let title: String
+    let authorName: String
+}
+
+extension RBookViewModel {
+    static let projection = Projection<RBook, RBookViewModel>(
+        RBookViewModel.init,
+        \RBook.title,
+        \RBook.author.name
+    )
+}
+
 class RecordTests: XCTestCase {
 }
