@@ -7,7 +7,7 @@ public protocol RecordValue {
 }
 
 public protocol RecordObject {
-    static var record: Schema<Self, Record> { get }
+    static var record: Schema<Record, Self> { get }
 }
 
 public struct Record: Format {
@@ -97,8 +97,8 @@ extension Record: Hashable {
 public func ~ <Object: RecordObject, Child: RecordObject>(
     lhs: KeyPath<Object, Set<Child>>,
     rhs: KeyPath<Child, Object>
-) -> Schema<Object, Record>.Property<Set<Child>> {
-    return Schema<Object, Record>.Property<Set<Child>>(
+) -> Schema<Record, Object>.Property<Set<Child>> {
+    return Schema<Record, Object>.Property<Set<Child>>(
         keyPath: lhs,
         path: "(\(Child.self))",
         decode: { _ in .success([]) },
@@ -110,8 +110,8 @@ public func ~ <Object: RecordObject, Child: RecordObject>(
 public func ~ <Object: RecordObject, Value: RecordObject>(
     lhs: KeyPath<Object, Value>,
     rhs: Record.Path
-) -> Schema<Object, Record>.Property<Value> {
-    return Schema<Object, Record>.Property<Value>(
+) -> Schema<Record, Object>.Property<Value> {
+    return Schema<Record, Object>.Property<Value>(
         keyPath: lhs,
         path: rhs,
         decode: { value in
@@ -125,8 +125,8 @@ public func ~ <Object: RecordObject, Value: RecordObject>(
 public func ~ <Object: RecordObject, Value: RecordValue>(
     lhs: KeyPath<Object, Value>,
     rhs: Record.Path
-) -> Schema<Object, Record>.Property<Value> where Value.Encoded == String {
-    return Schema<Object, Record>.Property<Value>(
+) -> Schema<Record, Object>.Property<Value> where Value.Encoded == String {
+    return Schema<Record, Object>.Property<Value>(
         keyPath: lhs,
         path: rhs,
         decode: { value in

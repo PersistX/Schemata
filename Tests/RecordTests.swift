@@ -45,7 +45,7 @@ extension RBook.ID: RecordValue {
 }
 
 extension RBook: RecordObject {
-    static let record = Schema<RBook, Record>(
+    static let record = Schema<Record, RBook>(
         RBook.init,
         \RBook.id ~ "id",
         \RBook.title ~ "title",
@@ -100,7 +100,7 @@ extension RAuthor.ID: RecordValue {
 }
 
 extension RAuthor: RecordObject {
-    static let record = Schema<RAuthor, Record>(
+    static let record = Schema<Record, RAuthor>(
         RAuthor.init,
         \RAuthor.id ~ "id",
         \RAuthor.name ~ "name",

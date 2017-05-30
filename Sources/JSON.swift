@@ -7,7 +7,7 @@ public protocol JSONValue {
 }
 
 public protocol JSONObject {
-    static var json: Schema<Self, JSON> { get }
+    static var json: Schema<JSON, Self> { get }
 }
 
 public struct JSON: Format {
@@ -189,8 +189,8 @@ extension JSON: Hashable {
 public func ~ <Root: JSONObject, Object: JSONObject>(
     lhs: KeyPath<Root, Object>,
     rhs: JSON.Path
-) -> Schema<Root, JSON>.Property<Object> {
-    return Schema<Root, JSON>.Property<Object>(
+) -> Schema<JSON, Root>.Property<Object> {
+    return Schema<JSON, Root>.Property<Object>(
         keyPath: lhs,
         path: rhs,
         decode: { jsonValue in
@@ -210,8 +210,8 @@ public func ~ <Root: JSONObject, Object: JSONObject>(
 public func ~ <Object: JSONObject, Value: JSONValue>(
     lhs: KeyPath<Object, Value>,
     rhs: JSON.Path
-) -> Schema<Object, JSON>.Property<Value> where Value.Encoded == String {
-    return Schema<Object, JSON>.Property<Value>(
+) -> Schema<JSON, Object>.Property<Value> where Value.Encoded == String {
+    return Schema<JSON, Object>.Property<Value>(
         keyPath: lhs,
         path: rhs,
         decode: { jsonValue in

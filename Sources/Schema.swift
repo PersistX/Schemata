@@ -3,14 +3,14 @@ import Result
 
 private extension Format {
     func decode<Model, T>(
-        _ property: Schema<Model, Self>.Property<T>
+        _ property: Schema<Self, Model>.Property<T>
     ) -> Result<T, DecodeError<Self>> {
         return decode(property.path, property.decode)
     }
     
     mutating func encode<Model, T>(
         _ model: Model,
-        for property: Schema<Model, Self>.Property<T>
+        for property: Schema<Self, Model>.Property<T>
     ) {
         self[property.path] = property.encode(model[keyPath: property.keyPath])
     }
@@ -24,7 +24,7 @@ private extension DecodeError {
     }
 }
 
-public struct Schema<Model, Format: Schemata.Format> {
+public struct Schema<Format: Schemata.Format, Model> {
     public struct Property<Decoded> {
         public typealias Decoder = Format.Value.Decoder<Decoded>
         public typealias Encoder = Format.Value.Encoder<Decoded>
