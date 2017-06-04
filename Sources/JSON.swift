@@ -6,7 +6,7 @@ public protocol JSONValue {
     static var json: Value<JSON, Encoded, Self> { get }
 }
 
-public protocol JSONObject {
+public protocol JSONModel {
     static var json: Schema<JSON, Self> { get }
 }
 
@@ -186,16 +186,16 @@ extension JSON: Hashable {
     }
 }
 
-public func ~ <Root: JSONObject, Object: JSONObject>(
-    lhs: KeyPath<Root, Object>,
+public func ~ <Root: JSONModel, Model: JSONModel>(
+    lhs: KeyPath<Root, Model>,
     rhs: JSON.Path
-) -> Schema<JSON, Root>.Property<Object> {
-    return Schema<JSON, Root>.Property<Object>(
+) -> Schema<JSON, Root>.Property<Model> {
+    return Schema<JSON, Root>.Property<Model>(
         keyPath: lhs,
         path: rhs,
         decode: { jsonValue in
             if case let .object(json) = jsonValue {
-                return Object.json.decode(json)
+                return Model.json.decode(json)
             } else {
                 let path = JSON.Path([])
                 let error = JSON.Error.typeMismatch(expected: JSON.self, actual: jsonValue)
@@ -203,15 +203,15 @@ public func ~ <Root: JSONObject, Object: JSONObject>(
             }
         },
         encoded: JSON.self,
-        encode: { JSON.Value.object(Object.json.encode($0)) }
+        encode: { JSON.Value.object(Model.json.encode($0)) }
     )
 }
 
-public func ~ <Object: JSONObject, Value: JSONValue>(
-    lhs: KeyPath<Object, Value>,
+public func ~ <Model: JSONModel, Value: JSONValue>(
+    lhs: KeyPath<Model, Value>,
     rhs: JSON.Path
-) -> Schema<JSON, Object>.Property<Value> where Value.Encoded == String {
-    return Schema<JSON, Object>.Property<Value>(
+) -> Schema<JSON, Model>.Property<Value> where Value.Encoded == String {
+    return Schema<JSON, Model>.Property<Value>(
         keyPath: lhs,
         path: rhs,
         decode: { jsonValue in

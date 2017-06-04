@@ -6,7 +6,7 @@ public protocol RecordValue {
     static var record: Value<Record, Encoded, Self> { get }
 }
 
-public protocol RecordObject {
+public protocol RecordModel {
     static var record: Schema<Record, Self> { get }
 }
 
@@ -94,11 +94,11 @@ extension Record: Hashable {
     }
 }
 
-public func ~ <Object: RecordObject, Child: RecordObject>(
-    lhs: KeyPath<Object, Set<Child>>,
-    rhs: KeyPath<Child, Object>
-) -> Schema<Record, Object>.Property<Set<Child>> {
-    return Schema<Record, Object>.Property<Set<Child>>(
+public func ~ <Model: RecordModel, Child: RecordModel>(
+    lhs: KeyPath<Model, Set<Child>>,
+    rhs: KeyPath<Child, Model>
+) -> Schema<Record, Model>.Property<Set<Child>> {
+    return Schema<Record, Model>.Property<Set<Child>>(
         keyPath: lhs,
         path: "(\(Child.self))",
         decode: { _ in .success([]) },
@@ -107,11 +107,11 @@ public func ~ <Object: RecordObject, Child: RecordObject>(
     )
 }
 
-public func ~ <Object: RecordObject, Value: RecordObject>(
-    lhs: KeyPath<Object, Value>,
+public func ~ <Model: RecordModel, Value: RecordModel>(
+    lhs: KeyPath<Model, Value>,
     rhs: Record.Path
-) -> Schema<Record, Object>.Property<Value> {
-    return Schema<Record, Object>.Property<Value>(
+) -> Schema<Record, Model>.Property<Value> {
+    return Schema<Record, Model>.Property<Value>(
         keyPath: lhs,
         path: rhs,
         decode: { value in
@@ -122,11 +122,11 @@ public func ~ <Object: RecordObject, Value: RecordObject>(
     )
 }
 
-public func ~ <Object: RecordObject, Value: RecordValue>(
-    lhs: KeyPath<Object, Value>,
+public func ~ <Model: RecordModel, Value: RecordValue>(
+    lhs: KeyPath<Model, Value>,
     rhs: Record.Path
-) -> Schema<Record, Object>.Property<Value> where Value.Encoded == String {
-    return Schema<Record, Object>.Property<Value>(
+) -> Schema<Record, Model>.Property<Value> where Value.Encoded == String {
+    return Schema<Record, Model>.Property<Value>(
         keyPath: lhs,
         path: rhs,
         decode: { value in

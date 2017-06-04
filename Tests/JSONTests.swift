@@ -72,7 +72,7 @@ extension JAuthor.ID: JSONValue {
     )
 }
 
-extension JAuthor: JSONObject {
+extension JAuthor: JSONModel {
     static let json = Schema<JSON, JAuthor>(
         JAuthor.init,
         \JAuthor.id ~ "id",
@@ -87,7 +87,7 @@ extension JBook.ID: JSONValue {
     )
 }
 
-extension JBook: JSONObject {
+extension JBook: JSONModel {
     static let json = Schema<JSON, JBook>(
         JBook.init,
         \JBook.id ~ "id",

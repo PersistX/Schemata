@@ -44,7 +44,7 @@ extension RBook.ID: RecordValue {
     )
 }
 
-extension RBook: RecordObject {
+extension RBook: RecordModel {
     static let record = Schema<Record, RBook>(
         RBook.init,
         \RBook.id ~ "id",
@@ -99,7 +99,7 @@ extension RAuthor.ID: RecordValue {
     )
 }
 
-extension RAuthor: RecordObject {
+extension RAuthor: RecordModel {
     static let record = Schema<Record, RAuthor>(
         RAuthor.init,
         \RAuthor.id ~ "id",
