@@ -1,7 +1,7 @@
 import Foundation
 import Result
 
-public protocol RecordValue {
+public protocol RecordValue: Equatable {
     associatedtype Encoded
     static var record: Value<Record, Encoded, Self> { get }
 }

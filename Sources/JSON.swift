@@ -1,7 +1,7 @@
 import Foundation
 import Result
 
-public protocol JSONValue {
+public protocol JSONValue: Equatable {
     associatedtype Encoded
     static var json: Value<JSON, Encoded, Self> { get }
 }
