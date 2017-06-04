@@ -10,6 +10,11 @@ public protocol RecordModel {
     static var record: Schema<Record, Self> { get }
 }
 
+public protocol RecordProjection {
+    associatedtype Model: RecordModel
+    static var record: Projection<Model, Self> { get }
+}
+
 public struct Record: Format {
     public enum Error: Swift.Error {
     }
