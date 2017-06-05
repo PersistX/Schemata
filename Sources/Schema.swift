@@ -68,12 +68,13 @@ public struct Schema<Format: Schemata.Format, Model> {
     
     public let decode: Decoder
     public let encode: Encoder
-    public let properties: [AnyProperty]
+    public let properties: [Format.Path: AnyProperty]
     
     public init(decode: @escaping Decoder, encode: @escaping Encoder, properties: [AnyProperty]) {
         self.decode = decode
         self.encode = encode
-        self.properties = properties
+        self.properties = Dictionary(uniqueKeysWithValues: properties.map { ($0.path, $0) })
+    }
     }
 }
 
@@ -151,7 +152,7 @@ extension Schema.AnyProperty: CustomDebugStringConvertible {
 extension Schema: CustomDebugStringConvertible {
     public var debugDescription: String {
         return "\(Model.self) {\n"
-            + properties.map { "\t" + $0.debugDescription }.sorted().joined(separator: "\n")
+            + properties.values.map { "\t" + $0.debugDescription }.sorted().joined(separator: "\n")
             + "\n}"
     }
 }
