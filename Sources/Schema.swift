@@ -77,6 +77,24 @@ public struct Schema<Format: Schemata.Format, Model> {
         self.encode = encode
         self.properties = Dictionary(uniqueKeysWithValues: properties.map { ($0.path, $0) })
     }
+    
+    public func properties(for keyPath: PartialKeyPath<Model>) -> [AnyProperty] {
+        var queue: [(keyPath: PartialKeyPath<Model>, properties: [AnyProperty])]
+            = properties.values.map { ($0.keyPath, [$0]) }
+        
+        while let next = queue.first {
+            queue.removeFirst()
+            
+            if next.keyPath == keyPath {
+                return next.properties
+            }
+        }
+        
+        fatalError()
+    }
+    
+    public func properties<Value>(for keyPath: KeyPath<Model, Value>) -> [AnyProperty] {
+        return properties(for: keyPath as PartialKeyPath<Model>)
     }
 }
 

@@ -122,4 +122,16 @@ extension RBookViewModel {
 }
 
 class RecordTests: XCTestCase {
+    func test_properties_string() {
+        let title = RBook.record.properties["title"]!
+        XCTAssertEqual(title.keyPath, \RBook.title)
+        XCTAssertEqual(title.path, "title")
+        XCTAssert(title.decoded == String.self)
+        XCTAssert(title.encoded == String.self)
+    }
+    
+    func test_propertiesForKeyPath_string() {
+        let properties = RBook.record.properties(for: \RBook.title)
+        XCTAssertEqual(properties, [RBook.record.properties["title"]!])
+    }
 }
