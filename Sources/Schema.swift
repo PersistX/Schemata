@@ -51,11 +51,13 @@ public struct Schema<Format: Schemata.Format, Model> {
     }
     
     public struct AnyProperty {
+        public let keyPath: PartialKeyPath<Model>
         public let path: Format.Path
         public let decoded: Any.Type
         public let encoded: Any.Type
         
         public init<Decoded>(_ property: Property<Decoded>) {
+            keyPath = property.keyPath as PartialKeyPath<Model>
             path = property.path
             decoded = Decoded.self
             encoded = property.encoded
