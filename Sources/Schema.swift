@@ -145,6 +145,19 @@ extension Schema {
     }
 }
 
+extension Schema.AnyProperty: Hashable {
+    public var hashValue: Int {
+        return keyPath.hashValue
+    }
+
+    public static func ==(lhs: Schema.AnyProperty, rhs: Schema.AnyProperty) -> Bool {
+        return lhs.keyPath == rhs.keyPath
+            && lhs.path == rhs.path
+            && lhs.decoded == rhs.decoded
+            && lhs.encoded == rhs.encoded
+    }
+}
+
 extension Schema.AnyProperty: CustomDebugStringConvertible {
     public var debugDescription: String {
         return "\(path): \(encoded) (\(decoded))"
