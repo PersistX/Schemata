@@ -24,6 +24,43 @@ private extension DecodeError {
     }
 }
 
+
+public struct AnyProperty<Format: Schemata.Format> {
+    public let model: Any.Type
+    public let keyPath: AnyKeyPath
+    public let path: Format.Path
+    public let decoded: Any.Type
+    public let encoded: Any.Type
+    
+    public init<Model, Decoded>(_ property: Schema<Format, Model>.Property<Decoded>) {
+        model = Model.self
+        keyPath = property.keyPath as AnyKeyPath
+        path = property.path
+        decoded = Decoded.self
+        encoded = property.encoded
+    }
+}
+
+extension AnyProperty: Hashable {
+    public var hashValue: Int {
+        return ObjectIdentifier(model).hashValue ^ keyPath.hashValue
+    }
+    
+    public static func ==(lhs: AnyProperty, rhs: AnyProperty) -> Bool {
+        return lhs.model == rhs.model
+            && lhs.keyPath == rhs.keyPath
+            && lhs.path == rhs.path
+            && lhs.decoded == rhs.decoded
+            && lhs.encoded == rhs.encoded
+    }
+}
+
+extension AnyProperty: CustomDebugStringConvertible {
+    public var debugDescription: String {
+        return "\(path): \(encoded) (\(decoded))"
+    }
+}
+
 public struct Schema<Format: Schemata.Format, Model> {
     public struct Property<Decoded> {
         public typealias Decoder = Format.Value.Decoder<Decoded>
@@ -50,36 +87,22 @@ public struct Schema<Format: Schemata.Format, Model> {
         }
     }
     
-    public struct AnyProperty {
-        public let keyPath: PartialKeyPath<Model>
-        public let path: Format.Path
-        public let decoded: Any.Type
-        public let encoded: Any.Type
-        
-        public init<Decoded>(_ property: Property<Decoded>) {
-            keyPath = property.keyPath as PartialKeyPath<Model>
-            path = property.path
-            decoded = Decoded.self
-            encoded = property.encoded
-        }
-    }
-    
     public typealias Decoded = Result<Model, DecodeError<Format>>
     public typealias Decoder = (Format) -> Decoded
     public typealias Encoder = (Model) -> Format
     
     public let decode: Decoder
     public let encode: Encoder
-    public let properties: [Format.Path: AnyProperty]
+    public let properties: [Format.Path: AnyProperty<Format>]
     
-    public init(decode: @escaping Decoder, encode: @escaping Encoder, properties: [AnyProperty]) {
+    public init(decode: @escaping Decoder, encode: @escaping Encoder, properties: [AnyProperty<Format>]) {
         self.decode = decode
         self.encode = encode
         self.properties = Dictionary(uniqueKeysWithValues: properties.map { ($0.path, $0) })
     }
     
-    public func properties(for keyPath: PartialKeyPath<Model>) -> [AnyProperty] {
-        var queue: [(keyPath: PartialKeyPath<Model>, properties: [AnyProperty])]
+    public func properties(for keyPath: AnyKeyPath) -> [AnyProperty<Format>] {
+        var queue: [(keyPath: AnyKeyPath, properties: [AnyProperty<Format>])]
             = properties.values.map { ($0.keyPath, [$0]) }
         
         while let next = queue.first {
@@ -93,8 +116,8 @@ public struct Schema<Format: Schemata.Format, Model> {
         fatalError()
     }
     
-    public func properties<Value>(for keyPath: KeyPath<Model, Value>) -> [AnyProperty] {
-        return properties(for: keyPath as PartialKeyPath<Model>)
+    public func properties<Value>(for keyPath: KeyPath<Model, Value>) -> [AnyProperty<Format>] {
+        return properties(for: keyPath as AnyKeyPath)
     }
 }
 
@@ -160,25 +183,6 @@ extension Schema {
             },
             properties: [AnyProperty(a), AnyProperty(b), AnyProperty(c)]
         )
-    }
-}
-
-extension Schema.AnyProperty: Hashable {
-    public var hashValue: Int {
-        return keyPath.hashValue
-    }
-
-    public static func ==(lhs: Schema.AnyProperty, rhs: Schema.AnyProperty) -> Bool {
-        return lhs.keyPath == rhs.keyPath
-            && lhs.path == rhs.path
-            && lhs.decoded == rhs.decoded
-            && lhs.encoded == rhs.encoded
-    }
-}
-
-extension Schema.AnyProperty: CustomDebugStringConvertible {
-    public var debugDescription: String {
-        return "\(path): \(encoded) (\(decoded))"
     }
 }
 
