@@ -135,4 +135,12 @@ class RecordTests: XCTestCase {
         let properties = RBook.record.properties(for: \RBook.title)
         XCTAssertEqual(properties, [RBook.record.properties["title"]!])
     }
+    
+    func test_propertiesForKeyPath_toOne_string() {
+        let properties = RBook.record.properties(for: \RBook.author.name)
+        XCTAssertEqual(properties, [
+            RBook.record.properties["author"]!,
+            RAuthor.record.properties["name"]!,
+        ])
+    }
 }

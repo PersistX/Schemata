@@ -108,7 +108,8 @@ public func ~ <Model: RecordModel, Child: RecordModel>(
         path: "(\(Child.self))",
         decode: { _ in .success([]) },
         encoded: Set<Child>.self,
-        encode: { _ in .reference }
+        encode: { _ in .reference },
+        schema: nil
     )
 }
 
@@ -123,7 +124,8 @@ public func ~ <Model: RecordModel, Value: RecordModel>(
             fatalError()
         },
         encoded: Value.self,
-        encode: { _ in fatalError() }
+        encode: { _ in fatalError() },
+        schema: { Value.record }
     )
 }
 
@@ -142,7 +144,8 @@ public func ~ <Model: RecordModel, Value: RecordValue>(
             }
         },
         encoded: Value.Encoded.self,
-        encode: { Record.Value.string(Value.record.encode($0)) }
+        encode: { Record.Value.string(Value.record.encode($0)) },
+        schema: nil
     )
 }
 

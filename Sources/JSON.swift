@@ -203,7 +203,8 @@ public func ~ <Root: JSONModel, Model: JSONModel>(
             }
         },
         encoded: JSON.self,
-        encode: { JSON.Value.object(Model.json.encode($0)) }
+        encode: { JSON.Value.object(Model.json.encode($0)) },
+        schema: { Model.json }
     )
 }
 
@@ -224,7 +225,8 @@ public func ~ <Model: JSONModel, Value: JSONValue>(
             }
         },
         encoded: Value.Encoded.self,
-        encode: { JSON.Value.string(Value.json.encode($0)) }
+        encode: { JSON.Value.string(Value.json.encode($0)) },
+        schema: nil
     )
 }
 
