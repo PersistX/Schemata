@@ -124,7 +124,7 @@ public func ~ <Model: RecordModel, Value: RecordModel>(
             fatalError()
         },
         encoded: Value.self,
-        encode: { _ in fatalError() },
+        encode: { _ in .reference },
         schema: { Value.record }
     )
 }
