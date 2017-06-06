@@ -47,9 +47,9 @@ extension RBook.ID: RecordValue {
 extension RBook: RecordModel {
     static let record = Schema<Record, RBook>(
         RBook.init,
-        \RBook.id ~ "id",
-        \RBook.title ~ "title",
-        \RBook.author ~ "author"
+        \.id ~ "id",
+        \.title ~ "title",
+        \.author ~ "author"
     )
 }
 
@@ -102,9 +102,9 @@ extension RAuthor.ID: RecordValue {
 extension RAuthor: RecordModel {
     static let record = Schema<Record, RAuthor>(
         RAuthor.init,
-        \RAuthor.id ~ "id",
-        \RAuthor.name ~ "name",
-        \RAuthor.books ~ \RBook.author
+        \.id ~ "id",
+        \.name ~ "name",
+        \.books ~ \RBook.author
     )
 }
 
@@ -116,8 +116,8 @@ struct RBookViewModel {
 extension RBookViewModel {
     static let projection = Projection<RBook, RBookViewModel>(
         RBookViewModel.init,
-        \RBook.title,
-        \RBook.author.name
+        \.title,
+        \.author.name
     )
 }
 
