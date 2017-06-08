@@ -16,9 +16,8 @@ public protocol RecordProjection {
 }
 
 public struct Record: Format {
-    public enum Field: FormatValue {
+    public enum Field {
         case string(String)
-        case reference
     }
     
     public var fields: [String: Field]
@@ -31,20 +30,19 @@ public struct Record: Format {
         self.init([:])
     }
     
-    public subscript(_ field: String) -> Field? {
+    public subscript(_ path: String) -> String? {
         get {
-            return fields[field]
+            return fields[path].flatMap { field in
+                if case let .string(value) = field {
+                    return value
+                } else {
+                    return nil
+                }
+            }
         }
         set {
-            fields[field] = newValue
+            fields[path] = newValue.map(Field.string)
         }
-    }
-    
-    public func decode<T>(_ path: String, _ decode: Field.Decoder<T>) -> Result<T, DecodeError> {
-        guard let value = self[path].flatMap({ decode($0).value }) else {
-            fatalError()
-        }
-        return .success(value)
     }
 }
 
@@ -53,8 +51,6 @@ extension Record.Field: Hashable {
         switch self {
         case let .string(value):
             return value.hashValue
-        case .reference:
-            return 0
         }
     }
     
@@ -62,10 +58,6 @@ extension Record.Field: Hashable {
         switch (lhs, rhs) {
         case let (.string(lhs), .string(rhs)):
             return lhs == rhs
-        case (.reference, .reference):
-            return true
-        default:
-            return false
         }
     }
 }
@@ -117,11 +109,9 @@ public func ~ <Model: RecordModel, Value: ModelValue>(
     return Property<Record, Model, Value>(
         keyPath: lhs,
         path: rhs,
-        decode: { value in
-            return Value.value.decode(value as! String)
-        },
+        decode: { Value.value.decode($0 as! String) },
         encoded: Value.Encoded.self,
-        encode: { Record.Value.string(Value.value.encode($0)) },
+        encode: { Value.value.encode($0) as Any },
         schema: nil
     )
 }
