@@ -20,6 +20,4 @@ public protocol Format {
     
     init()
     subscript(_ path: Path) -> Value? { get set }
-    
-    func decode<T>(_ path: Path, _ decode: (Value) -> Result<T, ValueError>) -> Result<T, DecodeError<Self>>
 }

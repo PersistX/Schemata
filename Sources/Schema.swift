@@ -1,21 +1,6 @@
 import Foundation
 import Result
 
-private extension Format {
-    func decode<Model, T>(
-        _ property: Schema<Self, Model>.Property<T>
-    ) -> Result<T, DecodeError<Self>> {
-        return decode(property.path, property.decode)
-    }
-    
-    mutating func encode<Model, T>(
-        _ model: Model,
-        for property: Schema<Self, Model>.Property<T>
-    ) {
-        self[property.path] = property.encode(model[keyPath: property.keyPath])
-    }
-}
-
 private extension DecodeError {
     init(_ errors: DecodeError?...) {
         self = errors
@@ -62,13 +47,9 @@ public struct Schema<Format: Schemata.Format, Model> {
     public typealias Decoder = (Format) -> Decoded
     public typealias Encoder = (Model) -> Format
     
-    public let decode: Decoder
-    public let encode: Encoder
     public let properties: [Format.Path: AnySchema<Format>.Property]
     
-    public init(decode: @escaping Decoder, encode: @escaping Encoder, properties: [AnySchema<Format>.Property]) {
-        self.decode = decode
-        self.encode = encode
+    public init(properties: [AnySchema<Format>.Property]) {
         self.properties = Dictionary(uniqueKeysWithValues: properties.map { ($0.path, $0) })
     }
     
@@ -108,25 +89,6 @@ extension Schema {
         _ b: Property<B>
     ) {
         self.init(
-            decode: { format -> Decoded in
-                let a = format.decode(a)
-                let b = format.decode(b)
-                if let a = a.value,
-                   let b = b.value {
-                    return .success(f(a, b))
-                } else {
-                    return .failure(DecodeError(
-                        a.error,
-                        b.error
-                    ))
-                }
-            },
-            encode: { value -> Format in
-                var format = Format()
-                format.encode(value, for: a)
-                format.encode(value, for: b)
-                return format
-            },
             properties: [AnySchema.Property(a), AnySchema.Property(b)]
         )
     }
@@ -138,29 +100,6 @@ extension Schema {
         _ c: Property<C>
     ) {
         self.init(
-            decode: { format -> Decoded in
-                let a = format.decode(a)
-                let b = format.decode(b)
-                let c = format.decode(c)
-                if let a = a.value,
-                   let b = b.value,
-                   let c = c.value {
-                    return .success(f(a, b, c))
-                } else {
-                    return .failure(DecodeError(
-                        a.error,
-                        b.error,
-                        c.error
-                    ))
-                }
-            },
-            encode: { value -> Format in
-                var format = Format()
-                format.encode(value, for: a)
-                format.encode(value, for: b)
-                format.encode(value, for: c)
-                return format
-            },
             properties: [AnySchema.Property(a), AnySchema.Property(b), AnySchema.Property(c)]
         )
     }
