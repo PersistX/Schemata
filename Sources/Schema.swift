@@ -43,7 +43,7 @@ public struct Schema<Format: Schemata.Format, Model> {
         }
     }
     
-    public typealias Decoded = Result<Model, DecodeError<Format>>
+    public typealias Decoded = Result<Model, DecodeError>
     public typealias Decoder = (Format) -> Decoded
     public typealias Encoder = (Model) -> Format
     

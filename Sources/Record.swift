@@ -40,7 +40,7 @@ public struct Record: Format {
         }
     }
     
-    public func decode<T>(_ path: String, _ decode: Field.Decoder<T>) -> Result<T, DecodeError<Record>> {
+    public func decode<T>(_ path: String, _ decode: Field.Decoder<T>) -> Result<T, DecodeError> {
         guard let value = self[path].flatMap({ decode($0).value }) else {
             fatalError()
         }

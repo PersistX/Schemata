@@ -13,7 +13,7 @@ extension ValueError: Hashable {
     }
 }
 
-public struct DecodeError<Format: Schemata.Format>: Error {
+public struct DecodeError: Error {
     public var errors: [String: ValueError]
     
     public init(_ errors: [String: ValueError]) {
