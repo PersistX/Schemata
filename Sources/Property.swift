@@ -1,7 +1,7 @@
 import Foundation
 import Result
 
-public struct Property<Format: Schemata.Format, Model, Decoded> {
+public struct Property<Model, Decoded> {
     public typealias Decoder = (Any) -> Result<Decoded, ValueError>
     public typealias Encoder = (Decoded) -> Any
     
@@ -12,8 +12,8 @@ public struct Property<Format: Schemata.Format, Model, Decoded> {
     public let encode: Encoder
     
     // Since schemas can by cyclical, this needs to be lazy.
-    fileprivate let makeSchema: (() -> Schema<Format, Decoded>)?
-    public var schema: Schema<Format, Decoded>? {
+    fileprivate let makeSchema: (() -> Schema<Decoded>)?
+    public var schema: Schema<Decoded>? {
         return makeSchema?()
     }
     
@@ -23,7 +23,7 @@ public struct Property<Format: Schemata.Format, Model, Decoded> {
         decode: @escaping Decoder,
         encoded: Any.Type,
         encode: @escaping Encoder,
-        schema: (() -> Schema<Format, Decoded>)?
+        schema: (() -> Schema<Decoded>)?
     ) {
         self.keyPath = keyPath
         self.path = path
@@ -34,7 +34,7 @@ public struct Property<Format: Schemata.Format, Model, Decoded> {
     }
 }
 
-public struct AnyProperty<Format: Schemata.Format> {
+public struct AnyProperty {
     public let model: Any.Type
     public let keyPath: AnyKeyPath
     public let path: String
@@ -42,12 +42,12 @@ public struct AnyProperty<Format: Schemata.Format> {
     public let encoded: Any.Type
     
     // Since schemas can by cyclical, this needs to be lazy.
-    fileprivate let makeSchema: (() -> AnySchema<Format>)?
-    public var schema: AnySchema<Format>? {
+    fileprivate let makeSchema: (() -> AnySchema)?
+    public var schema: AnySchema? {
         return makeSchema?()
     }
     
-    public init<Model, Decoded>(_ property: Property<Format, Model, Decoded>) {
+    public init<Model, Decoded>(_ property: Property<Model, Decoded>) {
         model = Model.self
         keyPath = property.keyPath as AnyKeyPath
         path = property.path

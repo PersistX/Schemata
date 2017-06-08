@@ -44,7 +44,7 @@ extension Book.ID: ModelValue {
 }
 
 extension Book: RecordModel {
-    static let record = Schema<Record, Book>(
+    static let record = Schema<Book>(
         Book.init,
         \.id ~ "id",
         \.title ~ "title",
@@ -99,7 +99,7 @@ extension Author.ID: ModelValue {
 }
 
 extension Author: RecordModel {
-    static let record = Schema<Record, Author>(
+    static let record = Schema<Author>(
         Author.init,
         \.id ~ "id",
         \.name ~ "name",

@@ -9,15 +9,15 @@ private extension DecodeError {
     }
 }
 
-public struct Schema<Format: Schemata.Format, Model> {
-    public let properties: [String: AnyProperty<Format>]
+public struct Schema<Model> {
+    public let properties: [String: AnyProperty]
     
-    public init(properties: [AnyProperty<Format>]) {
+    public init(properties: [AnyProperty]) {
         self.properties = Dictionary(uniqueKeysWithValues: properties.map { ($0.path, $0) })
     }
     
-    public func properties(for keyPath: AnyKeyPath) -> [AnyProperty<Format>] {
-        var queue: [(keyPath: AnyKeyPath, properties: [AnyProperty<Format>])]
+    public func properties(for keyPath: AnyKeyPath) -> [AnyProperty] {
+        var queue: [(keyPath: AnyKeyPath, properties: [AnyProperty])]
             = properties.values.map { ($0.keyPath, [$0]) }
         
         while let next = queue.first {
@@ -40,7 +40,7 @@ public struct Schema<Format: Schemata.Format, Model> {
         return []
     }
     
-    public func properties<Value>(for keyPath: KeyPath<Model, Value>) -> [AnyProperty<Format>] {
+    public func properties<Value>(for keyPath: KeyPath<Model, Value>) -> [AnyProperty] {
         return properties(for: keyPath as AnyKeyPath)
     }
 }
@@ -48,8 +48,8 @@ public struct Schema<Format: Schemata.Format, Model> {
 extension Schema {
     public init<A, B>(
         _ f: @escaping (A, B) -> Model,
-        _ a: Property<Format, Model, A>,
-        _ b: Property<Format, Model, B>
+        _ a: Property<Model, A>,
+        _ b: Property<Model, B>
     ) {
         self.init(
             properties: [AnyProperty(a), AnyProperty(b)]
@@ -58,9 +58,9 @@ extension Schema {
     
     public init<A, B, C>(
         _ f: @escaping (A, B, C) -> Model,
-        _ a: Property<Format, Model, A>,
-        _ b: Property<Format, Model, B>,
-        _ c: Property<Format, Model, C>
+        _ a: Property<Model, A>,
+        _ b: Property<Model, B>,
+        _ c: Property<Model, C>
     ) {
         self.init(
             properties: [AnyProperty(a), AnyProperty(b), AnyProperty(c)]
@@ -76,10 +76,10 @@ extension Schema: CustomDebugStringConvertible {
     }
 }
 
-public struct AnySchema<Format: Schemata.Format> {
-    public let properties: [String: AnyProperty<Format>]
+public struct AnySchema {
+    public let properties: [String: AnyProperty]
     
-    public init<Model>(_ schema: Schema<Format, Model>) {
+    public init<Model>(_ schema: Schema<Model>) {
         self.properties = schema.properties
     }
 }

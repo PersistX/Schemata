@@ -7,7 +7,7 @@ public protocol ModelValue: Equatable {
 }
 
 public protocol RecordModel {
-    static var record: Schema<Record, Self> { get }
+    static var record: Schema<Self> { get }
 }
 
 public protocol RecordProjection {
@@ -77,8 +77,8 @@ extension Record: Hashable {
 public func ~ <Model: RecordModel, Child: RecordModel>(
     lhs: KeyPath<Model, Set<Child>>,
     rhs: KeyPath<Child, Model>
-) -> Property<Record, Model, Set<Child>> {
-    return Property<Record, Model, Set<Child>>(
+) -> Property<Model, Set<Child>> {
+    return Property<Model, Set<Child>>(
         keyPath: lhs,
         path: "(\(Child.self))",
         decode: { _ in .success([]) },
@@ -91,8 +91,8 @@ public func ~ <Model: RecordModel, Child: RecordModel>(
 public func ~ <Model: RecordModel, Value: RecordModel>(
     lhs: KeyPath<Model, Value>,
     rhs: String
-) -> Property<Record, Model, Value> {
-    return Property<Record, Model, Value>(
+) -> Property<Model, Value> {
+    return Property<Model, Value>(
         keyPath: lhs,
         path: rhs,
         decode: { _ in fatalError()  },
@@ -105,8 +105,8 @@ public func ~ <Model: RecordModel, Value: RecordModel>(
 public func ~ <Model: RecordModel, Value: ModelValue>(
     lhs: KeyPath<Model, Value>,
     rhs: String
-) -> Property<Record, Model, Value> where Value.Encoded == String {
-    return Property<Record, Model, Value>(
+) -> Property<Model, Value> where Value.Encoded == String {
+    return Property<Model, Value>(
         keyPath: lhs,
         path: rhs,
         decode: { Value.value.decode($0 as! String) },
