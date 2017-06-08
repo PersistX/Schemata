@@ -10,6 +10,7 @@
 		BE1DC5FE1ED7B76B00A0671F /* Value.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DC5FD1ED7B76B00A0671F /* Value.swift */; };
 		BE1DC6001ED7B7DE00A0671F /* Format.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DC5FF1ED7B7DE00A0671F /* Format.swift */; };
 		BE1DC6021EDCFC9F00A0671F /* Projection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DC6011EDCFC9F00A0671F /* Projection.swift */; };
+		BE3C258F1EE92B2500FF64C3 /* Fixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3C258D1EE92B1A00FF64C3 /* Fixtures.swift */; };
 		BE64E7241EA3AF4D0047D035 /* Schemata.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE64E71A1EA3AF4D0047D035 /* Schemata.framework */; };
 		BE64E72B1EA3AF4D0047D035 /* Schemata.h in Headers */ = {isa = PBXBuildFile; fileRef = BE64E71D1EA3AF4D0047D035 /* Schemata.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BE64E7351EA3B23B0047D035 /* Schema.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE64E7341EA3B23B0047D035 /* Schema.swift */; };
@@ -34,6 +35,7 @@
 		BE1DC5FD1ED7B76B00A0671F /* Value.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Value.swift; sourceTree = "<group>"; };
 		BE1DC5FF1ED7B7DE00A0671F /* Format.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Format.swift; sourceTree = "<group>"; };
 		BE1DC6011EDCFC9F00A0671F /* Projection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Projection.swift; sourceTree = "<group>"; };
+		BE3C258D1EE92B1A00FF64C3 /* Fixtures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fixtures.swift; sourceTree = "<group>"; };
 		BE64E71A1EA3AF4D0047D035 /* Schemata.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Schemata.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE64E71D1EA3AF4D0047D035 /* Schemata.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Schemata.h; sourceTree = "<group>"; };
 		BE64E71E1EA3AF4D0047D035 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 		BE64E7271EA3AF4D0047D035 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				BE3C258D1EE92B1A00FF64C3 /* Fixtures.swift */,
 				BEFD30B71EDB51C0004FF8FB /* RecordTests.swift */,
 				BE64E72A1EA3AF4D0047D035 /* Info.plist */,
 			);
@@ -246,6 +249,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BEFD30B91EDB52CD004FF8FB /* RecordTests.swift in Sources */,
+				BE3C258F1EE92B2500FF64C3 /* Fixtures.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
