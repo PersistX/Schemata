@@ -10,10 +10,6 @@ private extension DecodeError {
 }
 
 public struct Schema<Format: Schemata.Format, Model> {
-    public typealias Decoded = Result<Model, DecodeError>
-    public typealias Decoder = (Format) -> Decoded
-    public typealias Encoder = (Model) -> Format
-    
     public let properties: [String: AnyProperty<Format>]
     
     public init(properties: [AnyProperty<Format>]) {
