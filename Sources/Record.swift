@@ -1,20 +1,6 @@
 import Foundation
 import Result
 
-public protocol ModelValue: Equatable {
-    associatedtype Encoded
-    static var value: Value<Encoded, Self> { get }
-}
-
-public protocol Model {
-    static var schema: Schema<Self> { get }
-}
-
-public protocol ModelProjection {
-    associatedtype Model: Model
-    static var projection: Projection<Model, Self> { get }
-}
-
 public struct Record: Format {
     public enum Field {
         case string(String)
@@ -72,8 +58,4 @@ extension Record: Hashable {
     public static func == (lhs: Record, rhs: Record) -> Bool {
         return lhs.fields == rhs.fields
     }
-}
-
-extension String: ModelValue {
-    public static let value = Value<String, String>()
 }
