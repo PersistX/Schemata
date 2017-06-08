@@ -16,14 +16,9 @@ public protocol RecordProjection {
 }
 
 public struct Record: Format {
-    public enum Error: Swift.Error {
-    }
-    
     public typealias Path = String
     
     public enum Field: FormatValue {
-        public typealias Error = Record.Error
-        
         case string(String)
         case reference
     }
@@ -52,16 +47,6 @@ public struct Record: Format {
             fatalError()
         }
         return .success(value)
-    }
-}
-
-extension Record.Error: Hashable {
-    public var hashValue: Int {
-        return 0
-    }
-    
-    public static func == (lhs: Record.Error, rhs: Record.Error) -> Bool {
-        return false
     }
 }
 

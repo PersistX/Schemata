@@ -1,9 +1,22 @@
 import Foundation
 
-public struct DecodeError<Format: Schemata.Format>: Error {
-    public var errors: [Format.Path: Format.Error]
+public enum ValueError: Swift.Error {
+}
+
+extension ValueError: Hashable {
+    public var hashValue: Int {
+        return 0
+    }
     
-    public init(_ errors: [Format.Path: Format.Error]) {
+    public static func ==(lhs: ValueError, rhs: ValueError) -> Bool {
+        return false
+    }
+}
+
+public struct DecodeError<Format: Schemata.Format>: Error {
+    public var errors: [Format.Path: ValueError]
+    
+    public init(_ errors: [Format.Path: ValueError]) {
         self.errors = errors
     }
 }

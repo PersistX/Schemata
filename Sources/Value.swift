@@ -2,7 +2,7 @@ import Foundation
 import Result
 
 public struct Value<Format: Schemata.Format, Encoded, Decoded> {
-    public typealias Decoder = (Encoded) -> Result<Decoded, Format.Value.Error>
+    public typealias Decoder = (Encoded) -> Result<Decoded, ValueError>
     public typealias Encoder = (Decoded) -> Encoded
     
     public let decode: Decoder
@@ -33,7 +33,7 @@ extension Value {
     }
     
     public func bimap<NewDecoded>(
-        decode: @escaping (Decoded) -> Result<NewDecoded, Format.Value.Error>,
+        decode: @escaping (Decoded) -> Result<NewDecoded, ValueError>,
         encode: @escaping (NewDecoded) -> Decoded
     ) -> Value<Format, Encoded, NewDecoded> {
         return Value<Format, Encoded, NewDecoded>(
