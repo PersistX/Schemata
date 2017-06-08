@@ -1,8 +1,9 @@
 import Foundation
+import Result
 
 public struct Property<Format: Schemata.Format, Model, Decoded> {
-    public typealias Decoder = Format.Value.Decoder<Decoded>
-    public typealias Encoder = Format.Value.Encoder<Decoded>
+    public typealias Decoder = (Any) -> Result<Decoded, ValueError>
+    public typealias Encoder = (Decoded) -> Any
     
     public let keyPath: KeyPath<Model, Decoded>
     public let path: String
