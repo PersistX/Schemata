@@ -85,8 +85,8 @@ extension Record: Hashable {
 public func ~ <Model: RecordModel, Child: RecordModel>(
     lhs: KeyPath<Model, Set<Child>>,
     rhs: KeyPath<Child, Model>
-) -> Schema<Record, Model>.Property<Set<Child>> {
-    return Schema<Record, Model>.Property<Set<Child>>(
+) -> Property<Record, Model, Set<Child>> {
+    return Property<Record, Model, Set<Child>>(
         keyPath: lhs,
         path: "(\(Child.self))",
         decode: { _ in .success([]) },
@@ -99,8 +99,8 @@ public func ~ <Model: RecordModel, Child: RecordModel>(
 public func ~ <Model: RecordModel, Value: RecordModel>(
     lhs: KeyPath<Model, Value>,
     rhs: String
-) -> Schema<Record, Model>.Property<Value> {
-    return Schema<Record, Model>.Property<Value>(
+) -> Property<Record, Model, Value> {
+    return Property<Record, Model, Value>(
         keyPath: lhs,
         path: rhs,
         decode: { value in
@@ -115,8 +115,8 @@ public func ~ <Model: RecordModel, Value: RecordModel>(
 public func ~ <Model: RecordModel, Value: ModelValue>(
     lhs: KeyPath<Model, Value>,
     rhs: String
-) -> Schema<Record, Model>.Property<Value> where Value.Encoded == String {
-    return Schema<Record, Model>.Property<Value>(
+) -> Property<Record, Model, Value> where Value.Encoded == String {
+    return Property<Record, Model, Value>(
         keyPath: lhs,
         path: rhs,
         decode: { value in

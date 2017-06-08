@@ -10,51 +10,18 @@ private extension DecodeError {
 }
 
 public struct Schema<Format: Schemata.Format, Model> {
-    public struct Property<Decoded> {
-        public typealias Decoder = Format.Value.Decoder<Decoded>
-        public typealias Encoder = Format.Value.Encoder<Decoded>
-        
-        public let keyPath: KeyPath<Model, Decoded>
-        public let path: String
-        public let decode: Decoder
-        public let encoded: Any.Type
-        public let encode: Encoder
-        
-        // Since schemas can by cyclical, this needs to be lazy.
-        fileprivate let makeSchema: (() -> Schema<Format, Decoded>)?
-        public var schema: Schema<Format, Decoded>? {
-            return makeSchema?()
-        }
-        
-        public init(
-            keyPath: KeyPath<Model, Decoded>,
-            path: String,
-            decode: @escaping Decoder,
-            encoded: Any.Type,
-            encode: @escaping Encoder,
-            schema: (() -> Schema<Format, Decoded>)?
-        ) {
-            self.keyPath = keyPath
-            self.path = path
-            self.decode = decode
-            self.encoded = encoded
-            self.encode = encode
-            self.makeSchema = schema
-        }
-    }
-    
     public typealias Decoded = Result<Model, DecodeError>
     public typealias Decoder = (Format) -> Decoded
     public typealias Encoder = (Model) -> Format
     
-    public let properties: [String: AnySchema<Format>.Property]
+    public let properties: [String: AnyProperty<Format>]
     
-    public init(properties: [AnySchema<Format>.Property]) {
+    public init(properties: [AnyProperty<Format>]) {
         self.properties = Dictionary(uniqueKeysWithValues: properties.map { ($0.path, $0) })
     }
     
-    public func properties(for keyPath: AnyKeyPath) -> [AnySchema<Format>.Property] {
-        var queue: [(keyPath: AnyKeyPath, properties: [AnySchema<Format>.Property])]
+    public func properties(for keyPath: AnyKeyPath) -> [AnyProperty<Format>] {
+        var queue: [(keyPath: AnyKeyPath, properties: [AnyProperty<Format>])]
             = properties.values.map { ($0.keyPath, [$0]) }
         
         while let next = queue.first {
@@ -77,7 +44,7 @@ public struct Schema<Format: Schemata.Format, Model> {
         return []
     }
     
-    public func properties<Value>(for keyPath: KeyPath<Model, Value>) -> [AnySchema<Format>.Property] {
+    public func properties<Value>(for keyPath: KeyPath<Model, Value>) -> [AnyProperty<Format>] {
         return properties(for: keyPath as AnyKeyPath)
     }
 }
@@ -85,22 +52,22 @@ public struct Schema<Format: Schemata.Format, Model> {
 extension Schema {
     public init<A, B>(
         _ f: @escaping (A, B) -> Model,
-        _ a: Property<A>,
-        _ b: Property<B>
+        _ a: Property<Format, Model, A>,
+        _ b: Property<Format, Model, B>
     ) {
         self.init(
-            properties: [AnySchema.Property(a), AnySchema.Property(b)]
+            properties: [AnyProperty(a), AnyProperty(b)]
         )
     }
     
     public init<A, B, C>(
         _ f: @escaping (A, B, C) -> Model,
-        _ a: Property<A>,
-        _ b: Property<B>,
-        _ c: Property<C>
+        _ a: Property<Format, Model, A>,
+        _ b: Property<Format, Model, B>,
+        _ c: Property<Format, Model, C>
     ) {
         self.init(
-            properties: [AnySchema.Property(a), AnySchema.Property(b), AnySchema.Property(c)]
+            properties: [AnyProperty(a), AnyProperty(b), AnyProperty(c)]
         )
     }
 }
@@ -114,57 +81,9 @@ extension Schema: CustomDebugStringConvertible {
 }
 
 public struct AnySchema<Format: Schemata.Format> {
-    public struct Property {
-        public let model: Any.Type
-        public let keyPath: AnyKeyPath
-        public let path: String
-        public let decoded: Any.Type
-        public let encoded: Any.Type
-        
-        // Since schemas can by cyclical, this needs to be lazy.
-        fileprivate let makeSchema: (() -> AnySchema<Format>)?
-        public var schema: AnySchema<Format>? {
-            return makeSchema?()
-        }
-        
-        public init<Model, Decoded>(_ property: Schema<Format, Model>.Property<Decoded>) {
-            model = Model.self
-            keyPath = property.keyPath as AnyKeyPath
-            path = property.path
-            decoded = Decoded.self
-            encoded = property.encoded
-            
-            if let makeSchema = property.makeSchema {
-                self.makeSchema = { AnySchema(makeSchema()) }
-            } else {
-                self.makeSchema = nil
-            }
-        }
-    }
-    
-    public let properties: [String: Property]
+    public let properties: [String: AnyProperty<Format>]
     
     public init<Model>(_ schema: Schema<Format, Model>) {
         self.properties = schema.properties
-    }
-}
-
-extension AnySchema.Property: Hashable {
-    public var hashValue: Int {
-        return ObjectIdentifier(model).hashValue ^ keyPath.hashValue
-    }
-    
-    public static func ==(lhs: AnySchema<Format>.Property, rhs: AnySchema<Format>.Property) -> Bool {
-        return lhs.model == rhs.model
-            && lhs.keyPath == rhs.keyPath
-            && lhs.path == rhs.path
-            && lhs.decoded == rhs.decoded
-            && lhs.encoded == rhs.encoded
-    }
-}
-
-extension AnySchema.Property: CustomDebugStringConvertible {
-    public var debugDescription: String {
-        return "\(path): \(encoded) (\(decoded))"
     }
 }
