@@ -3,7 +3,7 @@ import Result
 
 public protocol RecordValue: Equatable {
     associatedtype Encoded
-    static var record: Value<Record, Encoded, Self> { get }
+    static var record: Value<Encoded, Self> { get }
 }
 
 public protocol RecordModel {
@@ -133,5 +133,5 @@ public func ~ <Model: RecordModel, Value: RecordValue>(
 }
 
 extension String: RecordValue {
-    public static let record = Value<Record, String, String>()
+    public static let record = Value<String, String>()
 }

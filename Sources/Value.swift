@@ -1,7 +1,7 @@
 import Foundation
 import Result
 
-public struct Value<Format: Schemata.Format, Encoded, Decoded> {
+public struct Value<Encoded, Decoded> {
     public typealias Decoder = (Encoded) -> Result<Decoded, ValueError>
     public typealias Encoder = (Decoded) -> Encoded
     
@@ -25,8 +25,8 @@ extension Value {
     public func bimap<NewDecoded>(
         decode: @escaping (Decoded) -> NewDecoded,
         encode: @escaping (NewDecoded) -> Decoded
-    ) -> Value<Format, Encoded, NewDecoded> {
-        return Value<Format, Encoded, NewDecoded>(
+    ) -> Value<Encoded, NewDecoded> {
+        return Value<Encoded, NewDecoded>(
             decode: { self.decode($0).map(decode) },
             encode: { self.encode(encode($0)) }
         )
@@ -35,8 +35,8 @@ extension Value {
     public func bimap<NewDecoded>(
         decode: @escaping (Decoded) -> Result<NewDecoded, ValueError>,
         encode: @escaping (NewDecoded) -> Decoded
-    ) -> Value<Format, Encoded, NewDecoded> {
-        return Value<Format, Encoded, NewDecoded>(
+    ) -> Value<Encoded, NewDecoded> {
+        return Value<Encoded, NewDecoded>(
             decode: { self.decode($0).flatMap(decode) },
             encode: { self.encode(encode($0)) }
         )
