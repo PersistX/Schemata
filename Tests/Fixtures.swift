@@ -1,8 +1,8 @@
 import Schemata
 
-// MARK: - RBook
+// MARK: - Book
 
-struct RBook {
+struct Book {
     struct ID {
         let string: String
         
@@ -13,39 +13,39 @@ struct RBook {
     
     let id: ID
     let title: String
-    let author: RAuthor
+    let author: Author
 }
 
-extension RBook.ID: Hashable {
+extension Book.ID: Hashable {
     var hashValue: Int {
         return string.hashValue
     }
     
-    static func == (lhs: RBook.ID, rhs: RBook.ID) -> Bool {
+    static func == (lhs: Book.ID, rhs: Book.ID) -> Bool {
         return lhs.string == rhs.string
     }
 }
 
-extension RBook: Hashable {
+extension Book: Hashable {
     var hashValue: Int {
         return id.hashValue ^ title.hashValue ^ author.hashValue
     }
     
-    static func == (lhs: RBook, rhs: RBook) -> Bool {
+    static func == (lhs: Book, rhs: Book) -> Bool {
         return lhs.id == rhs.id && lhs.title == rhs.title && lhs.author == rhs.author
     }
 }
 
-extension RBook.ID: RecordValue {
+extension Book.ID: RecordValue {
     static let record = String.record.bimap(
-        decode: RBook.ID.init,
+        decode: Book.ID.init,
         encode: { $0.string }
     )
 }
 
-extension RBook: RecordModel {
-    static let record = Schema<Record, RBook>(
-        RBook.init,
+extension Book: RecordModel {
+    static let record = Schema<Record, Book>(
+        Book.init,
         \.id ~ "id",
         \.title ~ "title",
         \.author ~ "author"
@@ -53,9 +53,9 @@ extension RBook: RecordModel {
 }
 
 
-// MARK: - RAuthor
+// MARK: - Author
 
-struct RAuthor {
+struct Author {
     struct ID {
         let string: String
         
@@ -66,55 +66,55 @@ struct RAuthor {
     
     let id: ID
     let name: String
-    let books: Set<RBook>
+    let books: Set<Book>
 }
 
-extension RAuthor.ID: Hashable {
+extension Author.ID: Hashable {
     var hashValue: Int {
         return string.hashValue
     }
     
-    static func == (lhs: RAuthor.ID, rhs: RAuthor.ID) -> Bool {
+    static func == (lhs: Author.ID, rhs: Author.ID) -> Bool {
         return lhs.string == rhs.string
     }
 }
 
-extension RAuthor: Hashable {
+extension Author: Hashable {
     var hashValue: Int {
         return id.hashValue ^ name.hashValue ^ books.hashValue
     }
     
-    static func == (lhs: RAuthor, rhs: RAuthor) -> Bool {
+    static func == (lhs: Author, rhs: Author) -> Bool {
         return lhs.id == rhs.id
             && lhs.name == rhs.name
             && lhs.books == rhs.books
     }
 }
 
-extension RAuthor.ID: RecordValue {
+extension Author.ID: RecordValue {
     static let record = String.record.bimap(
-        decode: RAuthor.ID.init,
+        decode: Author.ID.init,
         encode: { $0.string }
     )
 }
 
-extension RAuthor: RecordModel {
-    static let record = Schema<Record, RAuthor>(
-        RAuthor.init,
+extension Author: RecordModel {
+    static let record = Schema<Record, Author>(
+        Author.init,
         \.id ~ "id",
         \.name ~ "name",
-        \.books ~ \RBook.author
+        \.books ~ \Book.author
     )
 }
 
-struct RBookViewModel {
+struct BookViewModel {
     let title: String
     let authorName: String
 }
 
-extension RBookViewModel {
-    static let projection = Projection<RBook, RBookViewModel>(
-        RBookViewModel.init,
+extension BookViewModel {
+    static let projection = Projection<Book, BookViewModel>(
+        BookViewModel.init,
         \.title,
         \.author.name
     )
