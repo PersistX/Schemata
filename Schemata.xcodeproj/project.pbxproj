@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		BE1DC5FE1ED7B76B00A0671F /* Value.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DC5FD1ED7B76B00A0671F /* Value.swift */; };
-		BE1DC6001ED7B7DE00A0671F /* Format.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DC5FF1ED7B7DE00A0671F /* Format.swift */; };
 		BE1DC6021EDCFC9F00A0671F /* Projection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DC6011EDCFC9F00A0671F /* Projection.swift */; };
 		BE3C258F1EE92B2500FF64C3 /* Fixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3C258D1EE92B1A00FF64C3 /* Fixtures.swift */; };
 		BE3C25921EE9AB5F00FF64C3 /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3C25911EE9AB5F00FF64C3 /* Property.swift */; };
@@ -35,7 +34,6 @@
 
 /* Begin PBXFileReference section */
 		BE1DC5FD1ED7B76B00A0671F /* Value.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Value.swift; sourceTree = "<group>"; };
-		BE1DC5FF1ED7B7DE00A0671F /* Format.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Format.swift; sourceTree = "<group>"; };
 		BE1DC6011EDCFC9F00A0671F /* Projection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Projection.swift; sourceTree = "<group>"; };
 		BE3C258D1EE92B1A00FF64C3 /* Fixtures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fixtures.swift; sourceTree = "<group>"; };
 		BE3C25911EE9AB5F00FF64C3 /* Property.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Property.swift; sourceTree = "<group>"; };
@@ -98,7 +96,6 @@
 			isa = PBXGroup;
 			children = (
 				BEE9FD741EC282D20081AD1E /* DecodeError.swift */,
-				BE1DC5FF1ED7B7DE00A0671F /* Format.swift */,
 				BECF338E1EE9BCAC00F9FC88 /* Model.swift */,
 				BE1DC6011EDCFC9F00A0671F /* Projection.swift */,
 				BE3C25911EE9AB5F00FF64C3 /* Property.swift */,
@@ -245,7 +242,6 @@
 				BE3C25921EE9AB5F00FF64C3 /* Property.swift in Sources */,
 				BEE9FD751EC282D20081AD1E /* DecodeError.swift in Sources */,
 				BE3C25941EE9BAD900FF64C3 /* PropertyCreation.swift in Sources */,
-				BE1DC6001ED7B7DE00A0671F /* Format.swift in Sources */,
 				BE64E7351EA3B23B0047D035 /* Schema.swift in Sources */,
 				BE1DC6021EDCFC9F00A0671F /* Projection.swift in Sources */,
 				BE1DC5FE1ED7B76B00A0671F /* Value.swift in Sources */,
