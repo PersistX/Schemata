@@ -4,7 +4,7 @@ public struct Projection<Model, Value> {
     
 }
 
-extension Projection where Model: RecordModel {
+extension Projection {
     public init<A, B>(
         _ f: @escaping (A, B) -> Value,
         _ a: KeyPath<Model, A>,

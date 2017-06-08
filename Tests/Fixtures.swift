@@ -43,8 +43,8 @@ extension Book.ID: ModelValue {
     )
 }
 
-extension Book: RecordModel {
-    static let record = Schema<Book>(
+extension Book: Model {
+    static let schema = Schema<Book>(
         Book.init,
         \.id ~ "id",
         \.title ~ "title",
@@ -98,8 +98,8 @@ extension Author.ID: ModelValue {
     )
 }
 
-extension Author: RecordModel {
-    static let record = Schema<Author>(
+extension Author: Model {
+    static let schema = Schema<Author>(
         Author.init,
         \.id ~ "id",
         \.name ~ "name",
@@ -112,7 +112,7 @@ struct BookViewModel {
     let authorName: String
 }
 
-extension BookViewModel {
+extension BookViewModel: ModelProjection {
     static let projection = Projection<Book, BookViewModel>(
         BookViewModel.init,
         \.title,

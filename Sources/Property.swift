@@ -1,7 +1,7 @@
 import Foundation
 import Result
 
-public struct Property<Model, Decoded> {
+public struct Property<Model: Schemata.Model, Decoded> {
     public typealias Decoder = (Any) -> Result<Decoded, ValueError>
     public typealias Encoder = (Decoded) -> Any
     

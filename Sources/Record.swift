@@ -6,13 +6,13 @@ public protocol ModelValue: Equatable {
     static var value: Value<Encoded, Self> { get }
 }
 
-public protocol RecordModel {
-    static var record: Schema<Self> { get }
+public protocol Model {
+    static var schema: Schema<Self> { get }
 }
 
-public protocol RecordProjection {
-    associatedtype Model: RecordModel
-    static var record: Projection<Model, Self> { get }
+public protocol ModelProjection {
+    associatedtype Model: Model
+    static var projection: Projection<Model, Self> { get }
 }
 
 public struct Record: Format {
@@ -74,7 +74,7 @@ extension Record: Hashable {
     }
 }
 
-public func ~ <Model: RecordModel, Child: RecordModel>(
+public func ~ <Model, Child: Schemata.Model>(
     lhs: KeyPath<Model, Set<Child>>,
     rhs: KeyPath<Child, Model>
 ) -> Property<Model, Set<Child>> {
@@ -88,7 +88,7 @@ public func ~ <Model: RecordModel, Child: RecordModel>(
     )
 }
 
-public func ~ <Model: RecordModel, Value: RecordModel>(
+public func ~ <Model, Value: Schemata.Model>(
     lhs: KeyPath<Model, Value>,
     rhs: String
 ) -> Property<Model, Value> {
@@ -98,11 +98,11 @@ public func ~ <Model: RecordModel, Value: RecordModel>(
         decode: { _ in fatalError()  },
         encoded: Value.self,
         encode: { _ in fatalError() },
-        schema: { Value.record }
+        schema: { Value.schema }
     )
 }
 
-public func ~ <Model: RecordModel, Value: ModelValue>(
+public func ~ <Model, Value: ModelValue>(
     lhs: KeyPath<Model, Value>,
     rhs: String
 ) -> Property<Model, Value> where Value.Encoded == String {
