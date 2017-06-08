@@ -1,7 +1,7 @@
 import Schemata
 import XCTest
 
-class RecordTests: XCTestCase {
+class SchemaTests: XCTestCase {
     func test_properties_string() {
         let title = Book.schema.properties["title"]!
         XCTAssert(title.model == Book.self)
