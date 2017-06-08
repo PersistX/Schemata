@@ -15,7 +15,7 @@ public struct Schema<Format: Schemata.Format, Model> {
         public typealias Encoder = Format.Value.Encoder<Decoded>
         
         public let keyPath: KeyPath<Model, Decoded>
-        public let path: Format.Path
+        public let path: String
         public let decode: Decoder
         public let encoded: Any.Type
         public let encode: Encoder
@@ -28,7 +28,7 @@ public struct Schema<Format: Schemata.Format, Model> {
         
         public init(
             keyPath: KeyPath<Model, Decoded>,
-            path: Format.Path,
+            path: String,
             decode: @escaping Decoder,
             encoded: Any.Type,
             encode: @escaping Encoder,
@@ -47,7 +47,7 @@ public struct Schema<Format: Schemata.Format, Model> {
     public typealias Decoder = (Format) -> Decoded
     public typealias Encoder = (Model) -> Format
     
-    public let properties: [Format.Path: AnySchema<Format>.Property]
+    public let properties: [String: AnySchema<Format>.Property]
     
     public init(properties: [AnySchema<Format>.Property]) {
         self.properties = Dictionary(uniqueKeysWithValues: properties.map { ($0.path, $0) })
@@ -117,7 +117,7 @@ public struct AnySchema<Format: Schemata.Format> {
     public struct Property {
         public let model: Any.Type
         public let keyPath: AnyKeyPath
-        public let path: Format.Path
+        public let path: String
         public let decoded: Any.Type
         public let encoded: Any.Type
         
@@ -142,7 +142,7 @@ public struct AnySchema<Format: Schemata.Format> {
         }
     }
     
-    public let properties: [Format.Path: Property]
+    public let properties: [String: Property]
     
     public init<Model>(_ schema: Schema<Format, Model>) {
         self.properties = schema.properties

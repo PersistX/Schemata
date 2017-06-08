@@ -15,9 +15,8 @@ precedencegroup SchemataDecodePrecedence {
 infix operator ~ : SchemataDecodePrecedence
 
 public protocol Format {
-    associatedtype Path: Hashable, CustomDebugStringConvertible
     associatedtype Value: FormatValue
     
     init()
-    subscript(_ path: Path) -> Value? { get set }
+    subscript(_ path: String) -> Value? { get set }
 }

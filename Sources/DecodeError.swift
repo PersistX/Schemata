@@ -14,9 +14,9 @@ extension ValueError: Hashable {
 }
 
 public struct DecodeError<Format: Schemata.Format>: Error {
-    public var errors: [Format.Path: ValueError]
+    public var errors: [String: ValueError]
     
-    public init(_ errors: [Format.Path: ValueError]) {
+    public init(_ errors: [String: ValueError]) {
         self.errors = errors
     }
 }

@@ -16,8 +16,6 @@ public protocol RecordProjection {
 }
 
 public struct Record: Format {
-    public typealias Path = String
-    
     public enum Field: FormatValue {
         case string(String)
         case reference
@@ -42,7 +40,7 @@ public struct Record: Format {
         }
     }
     
-    public func decode<T>(_ path: Path, _ decode: Field.Decoder<T>) -> Result<T, DecodeError<Record>> {
+    public func decode<T>(_ path: String, _ decode: Field.Decoder<T>) -> Result<T, DecodeError<Record>> {
         guard let value = self[path].flatMap({ decode($0).value }) else {
             fatalError()
         }
@@ -100,7 +98,7 @@ public func ~ <Model: RecordModel, Child: RecordModel>(
 
 public func ~ <Model: RecordModel, Value: RecordModel>(
     lhs: KeyPath<Model, Value>,
-    rhs: Record.Path
+    rhs: String
 ) -> Schema<Record, Model>.Property<Value> {
     return Schema<Record, Model>.Property<Value>(
         keyPath: lhs,
@@ -116,7 +114,7 @@ public func ~ <Model: RecordModel, Value: RecordModel>(
 
 public func ~ <Model: RecordModel, Value: RecordValue>(
     lhs: KeyPath<Model, Value>,
-    rhs: Record.Path
+    rhs: String
 ) -> Schema<Record, Model>.Property<Value> where Value.Encoded == String {
     return Schema<Record, Model>.Property<Value>(
         keyPath: lhs,
