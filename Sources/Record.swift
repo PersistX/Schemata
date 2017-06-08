@@ -1,9 +1,9 @@
 import Foundation
 import Result
 
-public protocol RecordValue: Equatable {
+public protocol ModelValue: Equatable {
     associatedtype Encoded
-    static var record: Value<Encoded, Self> { get }
+    static var value: Value<Encoded, Self> { get }
 }
 
 public protocol RecordModel {
@@ -112,7 +112,7 @@ public func ~ <Model: RecordModel, Value: RecordModel>(
     )
 }
 
-public func ~ <Model: RecordModel, Value: RecordValue>(
+public func ~ <Model: RecordModel, Value: ModelValue>(
     lhs: KeyPath<Model, Value>,
     rhs: String
 ) -> Schema<Record, Model>.Property<Value> where Value.Encoded == String {
@@ -121,17 +121,17 @@ public func ~ <Model: RecordModel, Value: RecordValue>(
         path: rhs,
         decode: { value in
             if case let .string(value) = value {
-                return Value.record.decode(value)
+                return Value.value.decode(value)
             } else {
                 fatalError()
             }
         },
         encoded: Value.Encoded.self,
-        encode: { Record.Value.string(Value.record.encode($0)) },
+        encode: { Record.Value.string(Value.value.encode($0)) },
         schema: nil
     )
 }
 
-extension String: RecordValue {
-    public static let record = Value<String, String>()
+extension String: ModelValue {
+    public static let value = Value<String, String>()
 }

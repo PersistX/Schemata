@@ -36,8 +36,8 @@ extension Book: Hashable {
     }
 }
 
-extension Book.ID: RecordValue {
-    static let record = String.record.bimap(
+extension Book.ID: ModelValue {
+    static let value = String.value.bimap(
         decode: Book.ID.init,
         encode: { $0.string }
     )
@@ -91,8 +91,8 @@ extension Author: Hashable {
     }
 }
 
-extension Author.ID: RecordValue {
-    static let record = String.record.bimap(
+extension Author.ID: ModelValue {
+    static let value = String.value.bimap(
         decode: Author.ID.init,
         encode: { $0.string }
     )
