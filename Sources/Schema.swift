@@ -12,7 +12,7 @@ private extension DecodeError {
 public struct Schema<Model> {
     public let properties: [String: AnyProperty]
     
-    public init(properties: [AnyProperty]) {
+    fileprivate init(_ properties: AnyProperty...) {
         self.properties = Dictionary(uniqueKeysWithValues: properties.map { ($0.path, $0) })
     }
     
@@ -51,9 +51,7 @@ extension Schema {
         _ a: Property<Model, A>,
         _ b: Property<Model, B>
     ) {
-        self.init(
-            properties: [AnyProperty(a), AnyProperty(b)]
-        )
+        self.init(AnyProperty(a), AnyProperty(b))
     }
     
     public init<A, B, C>(
@@ -62,9 +60,7 @@ extension Schema {
         _ b: Property<Model, B>,
         _ c: Property<Model, C>
     ) {
-        self.init(
-            properties: [AnyProperty(a), AnyProperty(b), AnyProperty(c)]
-        )
+        self.init(AnyProperty(a), AnyProperty(b), AnyProperty(c))
     }
 }
 
