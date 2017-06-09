@@ -1,29 +1,29 @@
 import Foundation
 import Result
 
-public struct Property<Model: Schemata.Model, Decoded> {
-    public typealias Decoder = (Any) -> Result<Decoded, ValueError>
-    public typealias Encoder = (Decoded) -> Any
+public struct Property<Model: Schemata.Model, Value> {
+    public typealias Decoder = (Any) -> Result<Value, ValueError>
+    public typealias Encoder = (Value) -> Any
     
-    public let keyPath: KeyPath<Model, Decoded>
+    public let keyPath: KeyPath<Model, Value>
     public let path: String
     public let decode: Decoder
     public let encoded: Any.Type
     public let encode: Encoder
     
     // Since schemas can by cyclical, this needs to be lazy.
-    fileprivate let makeSchema: (() -> Schema<Decoded>)?
-    public var schema: Schema<Decoded>? {
+    fileprivate let makeSchema: (() -> Schema<Value>)?
+    public var schema: Schema<Value>? {
         return makeSchema?()
     }
     
     public init(
-        keyPath: KeyPath<Model, Decoded>,
+        keyPath: KeyPath<Model, Value>,
         path: String,
         decode: @escaping Decoder,
         encoded: Any.Type,
         encode: @escaping Encoder,
-        schema: (() -> Schema<Decoded>)?
+        schema: (() -> Schema<Value>)?
     ) {
         self.keyPath = keyPath
         self.path = path
