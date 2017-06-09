@@ -1,36 +1,48 @@
 import Foundation
 import Result
 
-public struct Property<Model: Schemata.Model, Value> {
-    public typealias Decoder = (Any) -> Result<Value, ValueError>
-    public typealias Encoder = (Value) -> Any
-    
-    public let keyPath: KeyPath<Model, Value>
-    public let path: String
-    public let decode: Decoder
-    public let encoded: Any.Type
-    public let encode: Encoder
-    
-    // Since schemas can by cyclical, this needs to be lazy.
-    fileprivate let makeSchema: (() -> Schema<Value>)?
-    public var schema: Schema<Value>? {
-        return makeSchema?()
+public enum PropertyType {
+    case toMany(AnyModel.Type)
+    case toOne(AnyModel.Type)
+    case value(AnyModelValue.Type)
+}
+
+extension PropertyType: Hashable {
+    public var hashValue: Int {
+        switch self {
+        case let .toMany(anyModel), let .toOne(anyModel):
+            return ObjectIdentifier(anyModel).hashValue
+        case let .value(anyModelValue):
+            return ObjectIdentifier(anyModelValue).hashValue
+        }
     }
     
-    public init(
+    public static func ==(lhs: PropertyType, rhs: PropertyType) -> Bool {
+        switch (lhs, rhs) {
+        case let (.toMany(lhs), .toMany(rhs)),
+             let (.toOne(lhs), .toOne(rhs)):
+            return lhs == rhs
+        case let (.value(lhs), .value(rhs)):
+            return lhs == rhs
+        default:
+            return false
+        }
+    }
+}
+
+public struct Property<Model: Schemata.Model, Value> {
+    public let keyPath: KeyPath<Model, Value>
+    public let path: String
+    public let type: PropertyType
+    
+    internal init(
         keyPath: KeyPath<Model, Value>,
         path: String,
-        decode: @escaping Decoder,
-        encoded: Any.Type,
-        encode: @escaping Encoder,
-        schema: (() -> Schema<Value>)?
+        type: PropertyType
     ) {
         self.keyPath = keyPath
         self.path = path
-        self.decode = decode
-        self.encoded = encoded
-        self.encode = encode
-        self.makeSchema = schema
+        self.type = type
     }
 }
 
@@ -38,27 +50,13 @@ public struct AnyProperty {
     public let model: Any.Type
     public let keyPath: AnyKeyPath
     public let path: String
-    public let decoded: Any.Type
-    public let encoded: Any.Type
-    
-    // Since schemas can by cyclical, this needs to be lazy.
-    fileprivate let makeSchema: (() -> AnySchema)?
-    public var schema: AnySchema? {
-        return makeSchema?()
-    }
+    public let type: PropertyType
     
     public init<Model, Decoded>(_ property: Property<Model, Decoded>) {
         model = Model.self
         keyPath = property.keyPath as AnyKeyPath
         path = property.path
-        decoded = Decoded.self
-        encoded = property.encoded
-        
-        if let makeSchema = property.makeSchema {
-            self.makeSchema = { AnySchema(makeSchema()) }
-        } else {
-            self.makeSchema = nil
-        }
+        type = property.type
     }
 }
 
@@ -71,13 +69,19 @@ extension AnyProperty: Hashable {
         return lhs.model == rhs.model
             && lhs.keyPath == rhs.keyPath
             && lhs.path == rhs.path
-            && lhs.decoded == rhs.decoded
-            && lhs.encoded == rhs.encoded
+            && lhs.type == rhs.type
     }
 }
 
 extension AnyProperty: CustomDebugStringConvertible {
     public var debugDescription: String {
-        return "\(path): \(encoded) (\(decoded))"
+        switch type {
+        case let .toMany(type):
+            return "\(path): -->>\(type)"
+        case let .toOne(type):
+            return "\(path): --->\(type)"
+        case let .value(type):
+            return "\(path): \(type.anyValue.encoded) (\(type))"
+        }
     }
 }

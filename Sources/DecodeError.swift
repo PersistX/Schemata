@@ -1,6 +1,7 @@
 import Foundation
 
 public enum ValueError: Swift.Error {
+    case typeMismatch
 }
 
 extension ValueError: Hashable {

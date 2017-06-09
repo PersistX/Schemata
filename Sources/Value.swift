@@ -42,3 +42,31 @@ extension Value {
         )
     }
 }
+
+public struct AnyValue {
+    public typealias Decoder = (Primitive) -> Result<Any, ValueError>
+    public typealias Encoder = (Any) -> Primitive
+    
+    public let encoded: Any.Type
+    public let encode: Encoder
+    public let decoded: Any.Type
+    public let decode: Decoder
+    
+    public init<Encoded, Decoded>(_ value: Value<Encoded, Decoded>) {
+        encoded = Encoded.self
+        decoded = Decoded.self
+        
+        if Encoded.self == String.self {
+            encode = { .string(value.encode($0 as! Decoded) as! String) }
+            decode = { primitive in
+                if case let .string(string) = primitive {
+                    return value.decode(string as! Encoded).map { $0 as Any }
+                } else {
+                    return .failure(.typeMismatch)
+                }
+            }
+        } else {
+            fatalError("Can't construct AnyValue that encodes to \(Encoded.self)")
+        }
+    }
+}

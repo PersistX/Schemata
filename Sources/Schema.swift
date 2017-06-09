@@ -27,8 +27,8 @@ public struct Schema<Model> {
                 return next.properties
             }
             
-            if let schema = next.properties.last?.schema {
-                for property in schema.properties.values {
+            if case let .toOne(type)? = next.properties.last?.type {
+                for property in type.anySchema.properties.values {
                     queue.append((
                         keyPath: next.keyPath.appending(path: property.keyPath)!,
                         properties: next.properties + [property]

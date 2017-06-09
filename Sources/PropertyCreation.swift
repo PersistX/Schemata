@@ -15,10 +15,7 @@ public func ~ <Model, Child: Schemata.Model>(
     return Property<Model, Set<Child>>(
         keyPath: lhs,
         path: "(\(Child.self))",
-        decode: { _ in .success([]) },
-        encoded: Set<Child>.self,
-        encode: { _ in fatalError() },
-        schema: nil
+        type: .toMany(Child.self)
     )
 }
 
@@ -29,10 +26,7 @@ public func ~ <Model, Value: Schemata.Model>(
     return Property<Model, Value>(
         keyPath: lhs,
         path: rhs,
-        decode: { _ in fatalError()  },
-        encoded: Value.self,
-        encode: { _ in fatalError() },
-        schema: { Value.schema }
+        type: .toOne(Value.self)
     )
 }
 
@@ -43,9 +37,6 @@ public func ~ <Model, Value: ModelValue>(
     return Property<Model, Value>(
         keyPath: lhs,
         path: rhs,
-        decode: { Value.value.decode($0 as! String) },
-        encoded: Value.Encoded.self,
-        encode: { Value.value.encode($0) as Any },
-        schema: nil
+        type: .value(Value.self)
     )
 }

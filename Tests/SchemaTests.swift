@@ -7,8 +7,7 @@ class SchemaTests: XCTestCase {
         XCTAssert(title.model == Book.self)
         XCTAssertEqual(title.keyPath, \Book.title)
         XCTAssertEqual(title.path, "title")
-        XCTAssert(title.decoded == String.self)
-        XCTAssert(title.encoded == String.self)
+        XCTAssertEqual(title.type, .value(String.self))
     }
     
     func test_propertiesForKeyPath_string() {
