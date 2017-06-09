@@ -11,14 +11,14 @@ class SchemaTests: XCTestCase {
     
     func test_propertiesForKeyPath_string() {
         let properties = Book.schema.properties(for: \.title)
-        XCTAssertEqual(properties, [AnyProperty(Book.schema[\.title])])
+        XCTAssertEqual(properties, [Book.schema[\.title]])
     }
     
     func test_propertiesForKeyPath_toOne_string() {
         let properties = Book.schema.properties(for: \.author.name)
         XCTAssertEqual(properties, [
-            AnyProperty(Book.schema[\.author]),
-            AnyProperty(Author.schema[\.name]),
+            Book.schema[\.author],
+            Author.schema[\.name],
         ])
     }
 }

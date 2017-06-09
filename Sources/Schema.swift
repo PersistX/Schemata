@@ -55,6 +55,10 @@ extension Schema {
         )
     }
     
+    public subscript<Value>(_ keyPath: KeyPath<Model, Value>) -> AnyProperty {
+        return AnyProperty(self[keyPath as PartialKeyPath<Model>])
+    }
+    
     public subscript(_ keyPath: PartialKeyPath<Model>) -> PartialProperty<Model> {
         return properties[keyPath]!
     }
