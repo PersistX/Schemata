@@ -46,6 +46,21 @@ public struct Schema<Model: Schemata.Model> {
 }
 
 extension Schema {
+    public subscript<Value>(_ keyPath: KeyPath<Model, Value>) -> Property<Model, Value> {
+        let partial = self[keyPath as PartialKeyPath<Model>]
+        return Property<Model, Value>(
+            keyPath: partial.keyPath as! KeyPath<Model, Value>,
+            path: partial.path,
+            type: partial.type
+        )
+    }
+    
+    public subscript(_ keyPath: PartialKeyPath<Model>) -> PartialProperty<Model> {
+        return properties[keyPath]!
+    }
+}
+
+extension Schema {
     public init<A, B>(
         _ f: @escaping (A, B) -> Model,
         _ a: Property<Model, A>,
