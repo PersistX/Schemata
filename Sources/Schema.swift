@@ -9,16 +9,16 @@ private extension DecodeError {
     }
 }
 
-public struct Schema<Model> {
-    public let properties: [PartialKeyPath<Model>: AnyProperty]
+public struct Schema<Model: Schemata.Model> {
+    public let properties: [PartialKeyPath<Model>: PartialProperty<Model>]
     
-    fileprivate init(_ properties: AnyProperty...) {
-        self.properties = Dictionary(uniqueKeysWithValues: properties.map { ($0.keyPath as! PartialKeyPath<Model>, $0) })
+    fileprivate init(_ properties: PartialProperty<Model>...) {
+        self.properties = Dictionary(uniqueKeysWithValues: properties.map { ($0.keyPath, $0) })
     }
     
     public func properties(for keyPath: AnyKeyPath) -> [AnyProperty] {
         var queue: [(keyPath: AnyKeyPath, properties: [AnyProperty])]
-            = properties.values.map { ($0.keyPath, [$0]) }
+            = properties.values.map { ($0.keyPath, [AnyProperty($0)]) }
         
         while let next = queue.first {
             queue.removeFirst()
@@ -51,7 +51,7 @@ extension Schema {
         _ a: Property<Model, A>,
         _ b: Property<Model, B>
     ) {
-        self.init(AnyProperty(a), AnyProperty(b))
+        self.init(PartialProperty(a), PartialProperty(b))
     }
     
     public init<A, B, C>(
@@ -60,7 +60,7 @@ extension Schema {
         _ b: Property<Model, B>,
         _ c: Property<Model, C>
     ) {
-        self.init(AnyProperty(a), AnyProperty(b), AnyProperty(c))
+        self.init(PartialProperty(a), PartialProperty(b), PartialProperty(c))
     }
 }
 
@@ -76,6 +76,7 @@ public struct AnySchema {
     public let properties: [AnyKeyPath: AnyProperty]
     
     public init<Model>(_ schema: Schema<Model>) {
-        self.properties = Dictionary(uniqueKeysWithValues: schema.properties.map { ($0.key as AnyKeyPath, $0.value)})
+        let properties = schema.properties.map { ($0.key as AnyKeyPath, AnyProperty($0.value)) }
+        self.properties = Dictionary(uniqueKeysWithValues: properties)
     }
 }

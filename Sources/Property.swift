@@ -46,15 +46,52 @@ public struct Property<Model: Schemata.Model, Value> {
     }
 }
 
+public struct PartialProperty<Model: Schemata.Model> {
+    public let keyPath: PartialKeyPath<Model>
+    public let path: String
+    public let type: PropertyType
+    
+    public init<Decoded>(_ property: Property<Model, Decoded>) {
+        self.keyPath = property.keyPath
+        self.path = property.path
+        self.type = property.type
+    }
+}
+
+extension PartialProperty: Hashable {
+    public var hashValue: Int {
+        return keyPath.hashValue
+    }
+    
+    public static func ==(lhs: PartialProperty, rhs: PartialProperty) -> Bool {
+        return lhs.keyPath == rhs.keyPath
+            && lhs.path == rhs.path
+            && lhs.type == rhs.type
+    }
+}
+
+extension PartialProperty: CustomDebugStringConvertible {
+    public var debugDescription: String {
+        return AnyProperty(self).debugDescription
+    }
+}
+
 public struct AnyProperty {
     public let model: Any.Type
     public let keyPath: AnyKeyPath
     public let path: String
     public let type: PropertyType
     
+    public init<Model>(_ property: PartialProperty<Model>) {
+        model = Model.self
+        keyPath = property.keyPath
+        path = property.path
+        type = property.type
+    }
+    
     public init<Model, Decoded>(_ property: Property<Model, Decoded>) {
         model = Model.self
-        keyPath = property.keyPath as AnyKeyPath
+        keyPath = property.keyPath
         path = property.path
         type = property.type
     }
@@ -62,7 +99,7 @@ public struct AnyProperty {
 
 extension AnyProperty: Hashable {
     public var hashValue: Int {
-        return ObjectIdentifier(model).hashValue ^ keyPath.hashValue
+        return keyPath.hashValue
     }
     
     public static func ==(lhs: AnyProperty, rhs: AnyProperty) -> Bool {
