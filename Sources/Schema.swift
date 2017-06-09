@@ -10,10 +10,10 @@ private extension DecodeError {
 }
 
 public struct Schema<Model> {
-    public let properties: [String: AnyProperty]
+    public let properties: [PartialKeyPath<Model>: AnyProperty]
     
     fileprivate init(_ properties: AnyProperty...) {
-        self.properties = Dictionary(uniqueKeysWithValues: properties.map { ($0.path, $0) })
+        self.properties = Dictionary(uniqueKeysWithValues: properties.map { ($0.keyPath as! PartialKeyPath<Model>, $0) })
     }
     
     public func properties(for keyPath: AnyKeyPath) -> [AnyProperty] {
@@ -73,9 +73,9 @@ extension Schema: CustomDebugStringConvertible {
 }
 
 public struct AnySchema {
-    public let properties: [String: AnyProperty]
+    public let properties: [AnyKeyPath: AnyProperty]
     
     public init<Model>(_ schema: Schema<Model>) {
-        self.properties = schema.properties
+        self.properties = Dictionary(uniqueKeysWithValues: schema.properties.map { ($0.key as AnyKeyPath, $0.value)})
     }
 }
