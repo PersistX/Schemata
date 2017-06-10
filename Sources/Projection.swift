@@ -1,6 +1,6 @@
 import Foundation
 
-public struct Projection<Model, Value> {
+public struct Projection<Model: Schemata.Model, Value> {
     
 }
 
