@@ -65,8 +65,15 @@ extension Schema {
 }
 
 extension Schema {
+    public init<A>(
+        _ init: @escaping (A) -> Model,
+        _ a: Property<Model, A>
+    ) {
+        self.init(PartialProperty(a))
+    }
+    
     public init<A, B>(
-        _ f: @escaping (A, B) -> Model,
+        _ init: @escaping (A, B) -> Model,
         _ a: Property<Model, A>,
         _ b: Property<Model, B>
     ) {
@@ -74,12 +81,79 @@ extension Schema {
     }
     
     public init<A, B, C>(
-        _ f: @escaping (A, B, C) -> Model,
+        _ init: @escaping (A, B, C) -> Model,
         _ a: Property<Model, A>,
         _ b: Property<Model, B>,
         _ c: Property<Model, C>
     ) {
         self.init(PartialProperty(a), PartialProperty(b), PartialProperty(c))
+    }
+    
+    public init<A, B, C, D>(
+        _ init: @escaping (A, B, C, D) -> Model,
+        _ a: Property<Model, A>,
+        _ b: Property<Model, B>,
+        _ c: Property<Model, C>,
+        _ d: Property<Model, D>
+    ) {
+        self.init(PartialProperty(a), PartialProperty(b), PartialProperty(c), PartialProperty(d))
+    }
+    
+    public init<A, B, C, D, E>(
+        _ init: @escaping (A, B, C, D, E) -> Model,
+        _ a: Property<Model, A>,
+        _ b: Property<Model, B>,
+        _ c: Property<Model, C>,
+        _ d: Property<Model, D>,
+        _ e: Property<Model, E>
+    ) {
+        self.init(
+            PartialProperty(a),
+            PartialProperty(b),
+            PartialProperty(c),
+            PartialProperty(d),
+            PartialProperty(e)
+        )
+    }
+    
+    public init<A, B, C, D, E, F>(
+        _ init: @escaping (A, B, C, D, E, F) -> Model,
+        _ a: Property<Model, A>,
+        _ b: Property<Model, B>,
+        _ c: Property<Model, C>,
+        _ d: Property<Model, D>,
+        _ e: Property<Model, E>,
+        _ f: Property<Model, F>
+    ) {
+        self.init(
+            PartialProperty(a),
+            PartialProperty(b),
+            PartialProperty(c),
+            PartialProperty(d),
+            PartialProperty(e),
+            PartialProperty(f)
+        )
+    }
+    
+    public init<A, B, C, D, E, F, G>(
+        _ init: @escaping (A, B, C, D, E, F, G) -> Model,
+        _ a: Property<Model, A>,
+        _ b: Property<Model, B>,
+        _ c: Property<Model, C>,
+        _ d: Property<Model, D>,
+        _ e: Property<Model, E>,
+        _ f: Property<Model, F>,
+        _ g: Property<Model, G>
+    ) {
+        self.init(
+            PartialProperty(a),
+            PartialProperty(b),
+            PartialProperty(c),
+            PartialProperty(d),
+            PartialProperty(e),
+            PartialProperty(f),
+            PartialProperty(g)
+        )
     }
 }
 
