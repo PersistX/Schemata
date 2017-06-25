@@ -34,6 +34,10 @@ public protocol ModelProjection {
     static var projection: Projection<Model, Self> { get }
 }
 
+extension Int: ModelValue {
+    public static let value = Value<Int, Int>()
+}
+
 extension String: ModelValue {
     public static let value = Value<String, String>()
 }
