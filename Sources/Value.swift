@@ -56,7 +56,16 @@ public struct AnyValue {
         encoded = Encoded.self
         decoded = Decoded.self
         
-        if Encoded.self == String.self {
+        if Encoded.self == Int.self {
+            encode = { .int(value.encode($0 as! Decoded) as! Int) }
+            decode = { primitive in
+                if case let .int(int) = primitive {
+                    return value.decode(int as! Encoded).map { $0 as Any }
+                } else {
+                    return .failure(.typeMismatch)
+                }
+            }
+        } else if Encoded.self == String.self {
             encode = { .string(value.encode($0 as! Decoded) as! String) }
             decode = { primitive in
                 if case let .string(string) = primitive {
