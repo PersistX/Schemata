@@ -33,7 +33,7 @@ public func ~ <Model, Value: Schemata.Model>(
 public func ~ <Model, Value: ModelValue>(
     lhs: KeyPath<Model, Value>,
     rhs: String
-) -> Property<Model, Value> where Value.Encoded == String {
+) -> Property<Model, Value> {
     return Property<Model, Value>(
         keyPath: lhs,
         path: rhs,
