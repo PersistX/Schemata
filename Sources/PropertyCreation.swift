@@ -37,6 +37,17 @@ public func ~ <Model, Value: ModelValue>(
     return Property<Model, Value>(
         keyPath: lhs,
         path: rhs,
-        type: .value(Value.self)
+        type: .value(Value.self, nullable: false)
+    )
+}
+
+public func ~ <Model, Value: ModelValue>(
+    lhs: KeyPath<Model, Value?>,
+    rhs: String
+) -> Property<Model, Value?> {
+    return Property<Model, Value?>(
+        keyPath: lhs,
+        path: rhs,
+        type: .value(Value.self, nullable: true)
     )
 }

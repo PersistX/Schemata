@@ -4,7 +4,7 @@ import Result
 public enum PropertyType {
     case toMany(AnyModel.Type)
     case toOne(AnyModel.Type)
-    case value(AnyModelValue.Type)
+    case value(AnyModelValue.Type, nullable: Bool)
 }
 
 extension PropertyType: Hashable {
@@ -12,7 +12,7 @@ extension PropertyType: Hashable {
         switch self {
         case let .toMany(anyModel), let .toOne(anyModel):
             return ObjectIdentifier(anyModel).hashValue
-        case let .value(anyModelValue):
+        case let .value(anyModelValue, _):
             return ObjectIdentifier(anyModelValue).hashValue
         }
     }
@@ -22,8 +22,8 @@ extension PropertyType: Hashable {
         case let (.toMany(lhs), .toMany(rhs)),
              let (.toOne(lhs), .toOne(rhs)):
             return lhs == rhs
-        case let (.value(lhs), .value(rhs)):
-            return lhs == rhs
+        case let (.value(lhs, lhsNullable), .value(rhs, rhsNullable)):
+            return lhs == rhs && lhsNullable == rhsNullable
         default:
             return false
         }
@@ -117,8 +117,9 @@ extension AnyProperty: CustomDebugStringConvertible {
             return "\(path): -->>\(type)"
         case let .toOne(type):
             return "\(path): --->\(type)"
-        case let .value(type):
-            return "\(path): \(type.anyValue.encoded) (\(type))"
+        case let .value(type, nullable):
+            let encoded = "\(type.anyValue.encoded)" + (nullable ? "?" : "")
+            return "\(path): \(encoded) (\(type))"
         }
     }
 }

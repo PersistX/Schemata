@@ -8,7 +8,7 @@ class SchemaTests: XCTestCase {
         let title = Book.schema[\.title]
         XCTAssertEqual(title.keyPath, \Book.title)
         XCTAssertEqual(title.path, "title")
-        XCTAssertEqual(title.type, .value(String.self))
+        XCTAssertEqual(title.type, .value(String.self, nullable: false))
     }
     
     func test_subscript_toOne_string() {
