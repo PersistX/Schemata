@@ -56,7 +56,25 @@ public struct AnyValue {
         encoded = Encoded.self
         decoded = Decoded.self
         
-        if Encoded.self == Int.self {
+        if Encoded.self == Date.self {
+            encode = { .date(value.encode($0 as! Decoded) as! Date) }
+            decode = { primitive in
+                if case let .date(date) = primitive {
+                    return value.decode(date as! Encoded).map { $0 as Any }
+                } else {
+                    return .failure(.typeMismatch)
+                }
+            }
+        } else if Encoded.self == Float.self {
+            encode = { .float(value.encode($0 as! Decoded) as! Float) }
+            decode = { primitive in
+                if case let .float(float) = primitive {
+                    return value.decode(float as! Encoded).map { $0 as Any }
+                } else {
+                    return .failure(.typeMismatch)
+                }
+            }
+        } else if Encoded.self == Int.self {
             encode = { .int(value.encode($0 as! Decoded) as! Int) }
             decode = { primitive in
                 if case let .int(int) = primitive {
