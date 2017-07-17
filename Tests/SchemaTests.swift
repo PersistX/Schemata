@@ -5,21 +5,21 @@ class SchemaTests: XCTestCase {
     // MARK: subscript(_: KeyPath)
     
     func test_subscript_string() {
-        let title = Book.schema[\.title]
+        let title = Book.schema[\Book.title]
         XCTAssertEqual(title.keyPath, \Book.title)
         XCTAssertEqual(title.path, "title")
         XCTAssertEqual(title.type, .value(String.self, nullable: false))
     }
     
     func test_subscript_toOne_string() {
-        let author = Book.schema[\.author]
+        let author = Book.schema[\Book.author]
         XCTAssertEqual(author.keyPath, \Book.author)
         XCTAssertEqual(author.path, "author")
         XCTAssertEqual(author.type, .toOne(Author.self))
     }
     
     func test_subscript_toMany_string() {
-        let books = Author.schema[\.books]
+        let books = Author.schema[\Author.books]
         XCTAssertEqual(books.keyPath, \Author.books)
         XCTAssertEqual(books.path, "(Book)")
         XCTAssertEqual(books.type, .toMany(Book.self))
