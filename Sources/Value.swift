@@ -44,19 +44,26 @@ extension Value {
 }
 
 public struct AnyValue {
+    public enum Encoded {
+        case date
+        case float
+        case int
+        case string
+    }
+    
     public typealias Decoder = (Primitive) -> Result<Any, ValueError>
     public typealias Encoder = (Any) -> Primitive
     
-    public let encoded: Any.Type
+    public let encoded: Encoded
     public let encode: Encoder
     public let decoded: Any.Type
     public let decode: Decoder
     
     public init<Encoded, Decoded>(_ value: Value<Encoded, Decoded>) {
-        encoded = Encoded.self
         decoded = Decoded.self
         
         if Encoded.self == Date.self {
+            encoded = .date
             encode = { .date(value.encode($0 as! Decoded) as! Date) }
             decode = { primitive in
                 if case let .date(date) = primitive {
@@ -66,6 +73,7 @@ public struct AnyValue {
                 }
             }
         } else if Encoded.self == Float.self {
+            encoded = .float
             encode = { .float(value.encode($0 as! Decoded) as! Float) }
             decode = { primitive in
                 if case let .float(float) = primitive {
@@ -75,6 +83,7 @@ public struct AnyValue {
                 }
             }
         } else if Encoded.self == Int.self {
+            encoded = .int
             encode = { .int(value.encode($0 as! Decoded) as! Int) }
             decode = { primitive in
                 if case let .int(int) = primitive {
@@ -84,6 +93,7 @@ public struct AnyValue {
                 }
             }
         } else if Encoded.self == String.self {
+            encoded = .string
             encode = { .string(value.encode($0 as! Decoded) as! String) }
             decode = { primitive in
                 if case let .string(string) = primitive {
