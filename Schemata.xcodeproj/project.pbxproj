@@ -12,6 +12,7 @@
 		BE3C258F1EE92B2500FF64C3 /* Fixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3C258D1EE92B1A00FF64C3 /* Fixtures.swift */; };
 		BE3C25921EE9AB5F00FF64C3 /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3C25911EE9AB5F00FF64C3 /* Property.swift */; };
 		BE3C25941EE9BAD900FF64C3 /* PropertyCreation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3C25931EE9BAD900FF64C3 /* PropertyCreation.swift */; };
+		BE52A5A41F1D290A0017B369 /* ModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE52A5A31F1D29090017B369 /* ModelTests.swift */; };
 		BE64E7241EA3AF4D0047D035 /* Schemata.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE64E71A1EA3AF4D0047D035 /* Schemata.framework */; };
 		BE64E72B1EA3AF4D0047D035 /* Schemata.h in Headers */ = {isa = PBXBuildFile; fileRef = BE64E71D1EA3AF4D0047D035 /* Schemata.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BE64E7351EA3B23B0047D035 /* Schema.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE64E7341EA3B23B0047D035 /* Schema.swift */; };
@@ -39,6 +40,7 @@
 		BE3C258D1EE92B1A00FF64C3 /* Fixtures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fixtures.swift; sourceTree = "<group>"; };
 		BE3C25911EE9AB5F00FF64C3 /* Property.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Property.swift; sourceTree = "<group>"; };
 		BE3C25931EE9BAD900FF64C3 /* PropertyCreation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyCreation.swift; sourceTree = "<group>"; };
+		BE52A5A31F1D29090017B369 /* ModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelTests.swift; sourceTree = "<group>"; };
 		BE64E71A1EA3AF4D0047D035 /* Schemata.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Schemata.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE64E71D1EA3AF4D0047D035 /* Schemata.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Schemata.h; sourceTree = "<group>"; };
 		BE64E71E1EA3AF4D0047D035 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				BE3C258D1EE92B1A00FF64C3 /* Fixtures.swift */,
+				BE52A5A31F1D29090017B369 /* ModelTests.swift */,
 				BEFD30B71EDB51C0004FF8FB /* SchemaTests.swift */,
 				BE64E72A1EA3AF4D0047D035 /* Info.plist */,
 			);
@@ -257,6 +260,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE52A5A41F1D290A0017B369 /* ModelTests.swift in Sources */,
 				BEFD30B91EDB52CD004FF8FB /* SchemaTests.swift in Sources */,
 				BE3C258F1EE92B2500FF64C3 /* Fixtures.swift in Sources */,
 			);

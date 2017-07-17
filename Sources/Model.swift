@@ -1,4 +1,5 @@
 import Foundation
+import Result
 
 public protocol AnyModelValue {
     static var anyValue: AnyValue { get }
@@ -40,4 +41,14 @@ extension Int: ModelValue {
 
 extension String: ModelValue {
     public static let value = Value<String, String>()
+}
+
+extension UUID: ModelValue {
+    public static let value = String.value.bimap(
+        decode: { string in
+            return UUID(uuidString: string).map(Result.success)
+                ?? .failure(.typeMismatch)
+        },
+        encode: { $0.uuidString }
+    )
 }
