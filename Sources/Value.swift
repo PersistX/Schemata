@@ -46,7 +46,7 @@ extension Value {
 public struct AnyValue {
     public enum Encoded {
         case date
-        case float
+        case double
         case int
         case string
     }
@@ -72,12 +72,12 @@ public struct AnyValue {
                     return .failure(.typeMismatch)
                 }
             }
-        } else if Encoded.self == Float.self {
-            encoded = .float
-            encode = { .float(value.encode($0 as! Decoded) as! Float) }
+        } else if Encoded.self == Double.self {
+            encoded = .double
+            encode = { .double(value.encode($0 as! Decoded) as! Double) }
             decode = { primitive in
-                if case let .float(float) = primitive {
-                    return value.decode(float as! Encoded).map { $0 as Any }
+                if case let .double(double) = primitive {
+                    return value.decode(double as! Encoded).map { $0 as Any }
                 } else {
                     return .failure(.typeMismatch)
                 }

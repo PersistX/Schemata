@@ -39,8 +39,8 @@ extension Date: ModelValue {
     public static let value = Value<Date, Date>()
 }
 
-extension Float: ModelValue {
-    public static let value = Value<Float, Float>()
+extension Double: ModelValue {
+    public static let value = Value<Double, Double>()
 }
 
 extension Int: ModelValue {
