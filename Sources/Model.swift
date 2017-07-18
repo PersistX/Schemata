@@ -51,6 +51,16 @@ extension String: ModelValue {
     public static let value = Value<String, String>()
 }
 
+extension URL: ModelValue {
+    public static let value = String.value.bimap(
+        decode: { string in
+            return URL(string: string).map(Result.success)
+                ?? .failure(.typeMismatch)
+        },
+        encode: { $0.absoluteString }
+    )
+}
+
 extension UUID: ModelValue {
     public static let value = String.value.bimap(
         decode: { string in
