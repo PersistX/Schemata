@@ -1,5 +1,8 @@
 import Foundation
 
+/// A projection from some Model type to a Value type.
+///
+/// Given a dictionary of values used in the projection, this can be used to create a `Value`.
 public struct Projection<Model: Schemata.Model, Value> {
     /// The `KeyPath`s that are required to create a `Value`.
     public let keyPaths: Set<PartialKeyPath<Model>>
