@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BE101C6C1F535B5700FEB1A4 /* ProjectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE101C6A1F535B3500FEB1A4 /* ProjectionTests.swift */; };
 		BE1DC5FE1ED7B76B00A0671F /* Value.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DC5FD1ED7B76B00A0671F /* Value.swift */; };
 		BE1DC6021EDCFC9F00A0671F /* Projection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DC6011EDCFC9F00A0671F /* Projection.swift */; };
 		BE3C258F1EE92B2500FF64C3 /* Fixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3C258D1EE92B1A00FF64C3 /* Fixtures.swift */; };
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BE101C6A1F535B3500FEB1A4 /* ProjectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectionTests.swift; sourceTree = "<group>"; };
 		BE1DC5FD1ED7B76B00A0671F /* Value.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Value.swift; sourceTree = "<group>"; };
 		BE1DC6011EDCFC9F00A0671F /* Projection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Projection.swift; sourceTree = "<group>"; };
 		BE3C258D1EE92B1A00FF64C3 /* Fixtures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fixtures.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 			children = (
 				BE3C258D1EE92B1A00FF64C3 /* Fixtures.swift */,
 				BE52A5A31F1D29090017B369 /* ModelTests.swift */,
+				BE101C6A1F535B3500FEB1A4 /* ProjectionTests.swift */,
 				BEFD30B71EDB51C0004FF8FB /* SchemaTests.swift */,
 				BE64E72A1EA3AF4D0047D035 /* Info.plist */,
 			);
@@ -260,6 +263,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE101C6C1F535B5700FEB1A4 /* ProjectionTests.swift in Sources */,
 				BE52A5A41F1D290A0017B369 /* ModelTests.swift in Sources */,
 				BEFD30B91EDB52CD004FF8FB /* SchemaTests.swift in Sources */,
 				BE3C258F1EE92B2500FF64C3 /* Fixtures.swift in Sources */,
