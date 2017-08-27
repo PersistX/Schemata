@@ -112,6 +112,13 @@ struct BookViewModel {
     let authorName: String
 }
 
+extension BookViewModel: Equatable {
+    static func ==(lhs: BookViewModel, rhs: BookViewModel) -> Bool {
+        return lhs.title == rhs.title
+            && lhs.authorName == rhs.authorName
+    }
+}
+
 extension BookViewModel: ModelProjection {
     static let projection = Projection<Book, BookViewModel>(
         BookViewModel.init,
