@@ -23,6 +23,17 @@ public struct Projection<Model: Schemata.Model, Value> {
 }
 
 extension Projection {
+    public init<A>(
+        _ make: @escaping (A) -> Value,
+        _ a: KeyPath<Model, A>
+    ) {
+        self.init([a]) { values in
+            return make(
+                values[a] as! A
+            )
+        }
+    }
+    
     public init<A, B>(
         _ make: @escaping (A, B) -> Value,
         _ a: KeyPath<Model, A>,
