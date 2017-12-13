@@ -77,10 +77,10 @@ extension PartialProperty: CustomDebugStringConvertible {
 }
 
 public struct AnyProperty {
-    public let model: Any.Type
-    public let keyPath: AnyKeyPath
-    public let path: String
-    public let type: PropertyType
+    public var model: Any.Type
+    public var keyPath: AnyKeyPath
+    public var path: String
+    public var type: PropertyType
     
     public init<Model>(_ property: PartialProperty<Model>) {
         model = Model.self

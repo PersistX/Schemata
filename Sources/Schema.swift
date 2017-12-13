@@ -166,7 +166,7 @@ extension Schema: CustomDebugStringConvertible {
 }
 
 public struct AnySchema {
-    public let properties: [AnyKeyPath: AnyProperty]
+    public var properties: [AnyKeyPath: AnyProperty]
     
     public init<Model>(_ schema: Schema<Model>) {
         let properties = schema.properties.map { ($0.key as AnyKeyPath, AnyProperty($0.value)) }
