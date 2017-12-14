@@ -29,7 +29,7 @@ public struct Schema<Model: Schemata.Model> {
                 return next.properties
             }
             
-            if case let .toOne(type)? = next.properties.last?.type {
+            if case let .toOne(type, _)? = next.properties.last?.type {
                 for property in type.anySchema.properties.values {
                     queue.append((
                         keyPath: next.keyPath.appending(path: property.keyPath)!,

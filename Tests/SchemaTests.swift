@@ -15,7 +15,7 @@ class SchemaTests: XCTestCase {
         let author = Book.schema[\Book.author]
         XCTAssertEqual(author.keyPath, \Book.author)
         XCTAssertEqual(author.path, "author")
-        XCTAssertEqual(author.type, .toOne(Author.self))
+        XCTAssertEqual(author.type, .toOne(Author.self, nullable: false))
     }
     
     func test_subscript_toMany_string() {

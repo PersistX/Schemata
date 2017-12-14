@@ -26,7 +26,7 @@ public func ~ <Model, Value: Schemata.Model>(
     return Property<Model, Value>(
         keyPath: lhs,
         path: rhs,
-        type: .toOne(Value.self)
+        type: .toOne(Value.self, nullable: false)
     )
 }
 

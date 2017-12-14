@@ -3,14 +3,14 @@ import Result
 
 public enum PropertyType {
     case toMany(AnyModel.Type)
-    case toOne(AnyModel.Type)
+    case toOne(AnyModel.Type, nullable: Bool)
     case value(AnyModelValue.Type, nullable: Bool)
 }
 
 extension PropertyType: Hashable {
     public var hashValue: Int {
         switch self {
-        case let .toMany(anyModel), let .toOne(anyModel):
+        case let .toMany(anyModel), let .toOne(anyModel, _):
             return ObjectIdentifier(anyModel).hashValue
         case let .value(anyModelValue, _):
             return ObjectIdentifier(anyModelValue).hashValue
@@ -19,9 +19,10 @@ extension PropertyType: Hashable {
     
     public static func ==(lhs: PropertyType, rhs: PropertyType) -> Bool {
         switch (lhs, rhs) {
-        case let (.toMany(lhs), .toMany(rhs)),
-             let (.toOne(lhs), .toOne(rhs)):
+        case let (.toMany(lhs), .toMany(rhs)):
             return lhs == rhs
+        case let (.toOne(lhs, lhsNullable), .toOne(rhs, rhsNullable)):
+            return lhs == rhs && lhsNullable == rhsNullable
         case let (.value(lhs, lhsNullable), .value(rhs, rhsNullable)):
             return lhs == rhs && lhsNullable == rhsNullable
         default:
@@ -115,8 +116,8 @@ extension AnyProperty: CustomDebugStringConvertible {
         switch type {
         case let .toMany(type):
             return "\(path): -->>\(type)"
-        case let .toOne(type):
-            return "\(path): --->\(type)"
+        case let .toOne(type, nullable):
+            return "\(path): --->\(type)" + (nullable ? "?" : "")
         case let .value(type, nullable):
             let encoded = "\(type.anyValue.encoded)" + (nullable ? "?" : "")
             return "\(path): \(encoded) (\(type))"
