@@ -30,7 +30,7 @@ extension Model {
     }
 }
 
-public protocol ModelProjection {
+public protocol ModelProjection: Equatable {
     associatedtype Model: Schemata.Model
     static var projection: Projection<Model, Self> { get }
 }
