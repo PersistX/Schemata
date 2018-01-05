@@ -147,6 +147,19 @@ extension Schema: CustomDebugStringConvertible {
     }
 }
 
+extension Schema: Hashable {
+    public var hashValue: Int {
+        return name.hashValue
+            ^ properties
+                .map { $0.key.hashValue ^ $0.value.hashValue }
+                .reduce(0, ^)
+    }
+    
+    public static func == (lhs: Schema, rhs: Schema) -> Bool {
+        return lhs.name == rhs.name && lhs.properties == rhs.properties
+    }
+}
+
 public struct AnySchema {
     public var name: String
     public var properties: [AnyKeyPath: AnyProperty]
@@ -179,5 +192,18 @@ public struct AnySchema {
         }
         
         return []
+    }
+}
+
+extension AnySchema: Hashable {
+    public var hashValue: Int {
+        return name.hashValue
+            ^ properties
+                .map { $0.key.hashValue ^ $0.value.hashValue }
+                .reduce(0, ^)
+    }
+    
+    public static func == (lhs: AnySchema, rhs: AnySchema) -> Bool {
+        return lhs.name == rhs.name && lhs.properties == rhs.properties
     }
 }
