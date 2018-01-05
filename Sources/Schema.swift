@@ -19,27 +19,7 @@ public struct Schema<Model: Schemata.Model> {
     }
     
     public func properties(for keyPath: AnyKeyPath) -> [AnyProperty] {
-        var queue: [(keyPath: AnyKeyPath, properties: [AnyProperty])]
-            = properties.values.map { ($0.keyPath, [AnyProperty($0)]) }
-        
-        while let next = queue.first {
-            queue.removeFirst()
-            
-            if next.keyPath == keyPath {
-                return next.properties
-            }
-            
-            if case let .toOne(type, _)? = next.properties.last?.type {
-                for property in type.anySchema.properties.values {
-                    queue.append((
-                        keyPath: next.keyPath.appending(path: property.keyPath)!,
-                        properties: next.properties + [property]
-                    ))
-                }
-            }
-        }
-        
-        return []
+        return AnySchema(self).properties(for: keyPath)
     }
     
     public func properties<Value>(for keyPath: KeyPath<Model, Value>) -> [AnyProperty] {
@@ -175,5 +155,29 @@ public struct AnySchema {
         let properties = schema.properties.map { ($0.key as AnyKeyPath, AnyProperty($0.value)) }
         self.name = schema.name
         self.properties = Dictionary(uniqueKeysWithValues: properties)
+    }
+    
+    public func properties(for keyPath: AnyKeyPath) -> [AnyProperty] {
+        var queue: [(keyPath: AnyKeyPath, properties: [AnyProperty])]
+            = properties.values.map { ($0.keyPath, [$0]) }
+        
+        while let next = queue.first {
+            queue.removeFirst()
+            
+            if next.keyPath == keyPath {
+                return next.properties
+            }
+            
+            if case let .toOne(type, _)? = next.properties.last?.type {
+                for property in type.anySchema.properties.values {
+                    queue.append((
+                        keyPath: next.keyPath.appending(path: property.keyPath)!,
+                        properties: next.properties + [property]
+                    ))
+                }
+            }
+        }
+        
+        return []
     }
 }
