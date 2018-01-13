@@ -16,8 +16,8 @@ public struct Value<Encoded, Decoded> {
 
 extension Value where Encoded == Decoded {
     internal init() {
-        self.decode = { .success($0) }
-        self.encode = { $0 }
+        decode = { .success($0) }
+        encode = { $0 }
     }
 }
 

@@ -14,7 +14,7 @@ public struct Schema<Model: Schemata.Model> {
     public let properties: [PartialKeyPath<Model>: PartialProperty<Model>]
 
     fileprivate init(_ properties: PartialProperty<Model>...) {
-        self.name = String(describing: Model.self)
+        name = String(describing: Model.self)
         self.properties = Dictionary(uniqueKeysWithValues: properties.map { ($0.keyPath, $0) })
     }
 
@@ -48,14 +48,14 @@ extension Schema {
 
 extension Schema {
     public init<A>(
-        _ init: @escaping (A) -> Model,
+        _: @escaping (A) -> Model,
         _ a: Property<Model, A>
     ) {
         self.init(PartialProperty(a))
     }
 
     public init<A, B>(
-        _ init: @escaping (A, B) -> Model,
+        _: @escaping (A, B) -> Model,
         _ a: Property<Model, A>,
         _ b: Property<Model, B>
     ) {
@@ -63,7 +63,7 @@ extension Schema {
     }
 
     public init<A, B, C>(
-        _ init: @escaping (A, B, C) -> Model,
+        _: @escaping (A, B, C) -> Model,
         _ a: Property<Model, A>,
         _ b: Property<Model, B>,
         _ c: Property<Model, C>
@@ -72,7 +72,7 @@ extension Schema {
     }
 
     public init<A, B, C, D>(
-        _ init: @escaping (A, B, C, D) -> Model,
+        _: @escaping (A, B, C, D) -> Model,
         _ a: Property<Model, A>,
         _ b: Property<Model, B>,
         _ c: Property<Model, C>,
@@ -82,7 +82,7 @@ extension Schema {
     }
 
     public init<A, B, C, D, E>(
-        _ init: @escaping (A, B, C, D, E) -> Model,
+        _: @escaping (A, B, C, D, E) -> Model,
         _ a: Property<Model, A>,
         _ b: Property<Model, B>,
         _ c: Property<Model, C>,
@@ -99,7 +99,7 @@ extension Schema {
     }
 
     public init<A, B, C, D, E, F>(
-        _ init: @escaping (A, B, C, D, E, F) -> Model,
+        _: @escaping (A, B, C, D, E, F) -> Model,
         _ a: Property<Model, A>,
         _ b: Property<Model, B>,
         _ c: Property<Model, C>,
@@ -118,7 +118,7 @@ extension Schema {
     }
 
     public init<A, B, C, D, E, F, G>(
-        _ init: @escaping (A, B, C, D, E, F, G) -> Model,
+        _: @escaping (A, B, C, D, E, F, G) -> Model,
         _ a: Property<Model, A>,
         _ b: Property<Model, B>,
         _ c: Property<Model, C>,
@@ -151,8 +151,8 @@ extension Schema: Hashable {
     public var hashValue: Int {
         return name.hashValue
             ^ properties
-                .map { $0.key.hashValue ^ $0.value.hashValue }
-                .reduce(0, ^)
+            .map { $0.key.hashValue ^ $0.value.hashValue }
+            .reduce(0, ^)
     }
 
     public static func == (lhs: Schema, rhs: Schema) -> Bool {
@@ -166,7 +166,7 @@ public struct AnySchema {
 
     public init<Model>(_ schema: Schema<Model>) {
         let properties = schema.properties.map { ($0.key as AnyKeyPath, AnyProperty($0.value)) }
-        self.name = schema.name
+        name = schema.name
         self.properties = Dictionary(uniqueKeysWithValues: properties)
     }
 
@@ -199,8 +199,8 @@ extension AnySchema: Hashable {
     public var hashValue: Int {
         return name.hashValue
             ^ properties
-                .map { $0.key.hashValue ^ $0.value.hashValue }
-                .reduce(0, ^)
+            .map { $0.key.hashValue ^ $0.value.hashValue }
+            .reduce(0, ^)
     }
 
     public static func == (lhs: AnySchema, rhs: AnySchema) -> Bool {

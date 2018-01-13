@@ -9,7 +9,7 @@ extension ValueError: Hashable {
         return 0
     }
 
-    public static func ==(lhs: ValueError, rhs: ValueError) -> Bool {
+    public static func == (_: ValueError, _: ValueError) -> Bool {
         return false
     }
 }

@@ -6,11 +6,11 @@ precedencegroup SchemataPropertyCreationPrecedence {
     lowerThan: NilCoalescingPrecedence
 }
 
-infix operator ~ : SchemataPropertyCreationPrecedence
+infix operator ~: SchemataPropertyCreationPrecedence
 
 public func ~ <Model, Child: Schemata.Model>(
     lhs: KeyPath<Model, Set<Child>>,
-    rhs: KeyPath<Child, Model>
+    _: KeyPath<Child, Model>
 ) -> Property<Model, Set<Child>> {
     return Property<Model, Set<Child>>(
         keyPath: lhs,

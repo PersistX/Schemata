@@ -54,7 +54,7 @@ extension String: ModelValue {
 extension URL: ModelValue {
     public static let value = String.value.bimap(
         decode: { string in
-            return URL(string: string).map(Result.success)
+            URL(string: string).map(Result.success)
                 ?? .failure(.typeMismatch)
         },
         encode: { $0.absoluteString }
@@ -64,7 +64,7 @@ extension URL: ModelValue {
 extension UUID: ModelValue {
     public static let value = String.value.bimap(
         decode: { string in
-            return UUID(uuidString: string).map(Result.success)
+            UUID(uuidString: string).map(Result.success)
                 ?? .failure(.typeMismatch)
         },
         encode: { $0.uuidString }

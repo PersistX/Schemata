@@ -28,7 +28,7 @@ extension Projection {
         _ a: KeyPath<Model, A>
     ) {
         self.init([a]) { values in
-            return make(
+            make(
                 values[a] as! A
             )
         }
@@ -40,7 +40,7 @@ extension Projection {
         _ b: KeyPath<Model, B>
     ) {
         self.init([a, b]) { values in
-            return make(
+            make(
                 values[a] as! A,
                 values[b] as! B
             )
@@ -54,7 +54,7 @@ extension Projection {
         _ c: KeyPath<Model, C>
     ) {
         self.init([a, b, c]) { values in
-            return make(
+            make(
                 values[a] as! A,
                 values[b] as! B,
                 values[c] as! C
@@ -70,7 +70,7 @@ extension Projection {
         _ d: KeyPath<Model, D>
     ) {
         self.init([a, b, c, d]) { values in
-            return make(
+            make(
                 values[a] as! A,
                 values[b] as! B,
                 values[c] as! C,
@@ -88,7 +88,7 @@ extension Projection {
         _ e: KeyPath<Model, E>
     ) {
         self.init([a, b, c, d, e]) { values in
-            return make(
+            make(
                 values[a] as! A,
                 values[b] as! B,
                 values[c] as! C,
@@ -108,7 +108,7 @@ extension Projection {
         _ f: KeyPath<Model, F>
     ) {
         self.init([a, b, c, d, e, f]) { values in
-            return make(
+            make(
                 values[a] as! A,
                 values[b] as! B,
                 values[c] as! C,
@@ -130,7 +130,7 @@ extension Projection {
         _ g: KeyPath<Model, G>
     ) {
         self.init([a, b, c, d, e, f, g]) { values in
-            return make(
+            make(
                 values[a] as! A,
                 values[b] as! B,
                 values[c] as! C,
@@ -154,7 +154,7 @@ extension Projection {
         _ h: KeyPath<Model, H>
     ) {
         self.init([a, b, c, d, e, f, g, h]) { values in
-            return make(
+            make(
                 values[a] as! A,
                 values[b] as! B,
                 values[c] as! C,
@@ -180,7 +180,7 @@ extension Projection {
         _ i: KeyPath<Model, I>
     ) {
         self.init([a, b, c, d, e, f, g, h, i]) { values in
-            return make(
+            make(
                 values[a] as! A,
                 values[b] as! B,
                 values[c] as! C,
@@ -208,7 +208,7 @@ extension Projection {
         _ j: KeyPath<Model, J>
     ) {
         self.init([a, b, c, d, e, f, g, h, i, j]) { values in
-            return make(
+            make(
                 values[a] as! A,
                 values[b] as! B,
                 values[c] as! C,
