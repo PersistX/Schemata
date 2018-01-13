@@ -154,6 +154,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BE64E72E1EA3AF4D0047D035 /* Build configuration list for PBXNativeTarget "Schemata" */;
 			buildPhases = (
+				BEBC36BF200A284F000E3AAB /* Run Standards */,
 				BE64E7151EA3AF4D0047D035 /* Sources */,
 				BE64E7161EA3AF4D0047D035 /* Frameworks */,
 				BE64E7171EA3AF4D0047D035 /* Headers */,
@@ -172,6 +173,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BE64E7311EA3AF4D0047D035 /* Build configuration list for PBXNativeTarget "SchemataTests" */;
 			buildPhases = (
+				BEBC36C0200A2886000E3AAB /* Run Standards */,
 				BE64E71F1EA3AF4D0047D035 /* Sources */,
 				BE64E7201EA3AF4D0047D035 /* Frameworks */,
 				BE64E7211EA3AF4D0047D035 /* Resources */,
@@ -242,6 +244,37 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		BEBC36BF200A284F000E3AAB /* Run Standards */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Standards";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ -x \"${SRCROOT}/Carthage/Checkouts/Standards\" ]\nthen\n  \"${SRCROOT}/Carthage/Checkouts/Standards/build\" \"${SRCROOT}/Sources\"\nfi";
+		};
+		BEBC36C0200A2886000E3AAB /* Run Standards */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Standards";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ -x \"${SRCROOT}/Carthage/Checkouts/Standards\" ]\nthen\n  \"${SRCROOT}/Carthage/Checkouts/Standards/build\" \"${SRCROOT}/Tests\"\nfi";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		BE64E7151EA3AF4D0047D035 /* Sources */ = {

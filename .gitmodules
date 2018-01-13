@@ -1,3 +1,6 @@
 [submodule "Carthage/Checkouts/Result"]
 	path = Carthage/Checkouts/Result
 	url = https://github.com/antitypical/Result.git
+[submodule "Carthage/Checkouts/Standards"]
+	path = Carthage/Checkouts/Standards
+	url = https://github.com/PersistX/Standards.git
