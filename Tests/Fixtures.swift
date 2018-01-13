@@ -5,12 +5,12 @@ import Schemata
 struct Book {
     struct ID {
         let string: String
-        
+
         init(_ string: String) {
             self.string = string
         }
     }
-    
+
     let id: ID
     let title: String
     let author: Author
@@ -20,7 +20,7 @@ extension Book.ID: Hashable {
     var hashValue: Int {
         return string.hashValue
     }
-    
+
     static func == (lhs: Book.ID, rhs: Book.ID) -> Bool {
         return lhs.string == rhs.string
     }
@@ -30,7 +30,7 @@ extension Book: Hashable {
     var hashValue: Int {
         return id.hashValue ^ title.hashValue ^ author.hashValue
     }
-    
+
     static func == (lhs: Book, rhs: Book) -> Bool {
         return lhs.id == rhs.id && lhs.title == rhs.title && lhs.author == rhs.author
     }
@@ -58,12 +58,12 @@ extension Book: Model {
 struct Author {
     struct ID {
         let string: String
-        
+
         init(_ string: String) {
             self.string = string
         }
     }
-    
+
     let id: ID
     let name: String
     let books: Set<Book>
@@ -73,7 +73,7 @@ extension Author.ID: Hashable {
     var hashValue: Int {
         return string.hashValue
     }
-    
+
     static func == (lhs: Author.ID, rhs: Author.ID) -> Bool {
         return lhs.string == rhs.string
     }
@@ -83,7 +83,7 @@ extension Author: Hashable {
     var hashValue: Int {
         return id.hashValue ^ name.hashValue ^ books.hashValue
     }
-    
+
     static func == (lhs: Author, rhs: Author) -> Bool {
         return lhs.id == rhs.id
             && lhs.name == rhs.name

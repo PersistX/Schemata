@@ -9,7 +9,7 @@ class ProjectionTests: XCTestCase {
             \Book.author.name,
         ])
     }
-    
+
     func test_makeValue() {
         let viewModel = BookViewModel(
             title: "The Martian Chronicles",
