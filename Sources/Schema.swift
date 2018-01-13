@@ -31,7 +31,7 @@ extension Schema {
     public subscript<Value>(_ keyPath: KeyPath<Model, Value>) -> Property<Model, Value> {
         let partial = self[keyPath as PartialKeyPath<Model>]
         return Property<Model, Value>(
-            keyPath: partial.keyPath as! KeyPath<Model, Value>,
+            keyPath: partial.keyPath as! KeyPath<Model, Value>, // swiftlint:disable:this force_cast
             path: partial.path,
             type: partial.type
         )

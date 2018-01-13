@@ -62,6 +62,7 @@ public struct AnyValue {
     public init<Encoded, Decoded>(_ value: Value<Encoded, Decoded>) {
         decoded = Decoded.self
 
+        // swiftlint:disable force_cast
         if Encoded.self == Date.self {
             encoded = .date
             encode = { .date(value.encode($0 as! Decoded) as! Date) }
@@ -105,5 +106,6 @@ public struct AnyValue {
         } else {
             fatalError("Can't construct AnyValue that encodes to \(Encoded.self)")
         }
+        // swiftlint:enable force_cast
     }
 }

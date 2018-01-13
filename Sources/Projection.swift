@@ -22,6 +22,7 @@ public struct Projection<Model: Schemata.Model, Value> {
     }
 }
 
+// swiftlint:disable force_cast
 extension Projection {
     public init<A>(
         _ make: @escaping (A) -> Value,
@@ -223,3 +224,5 @@ extension Projection {
         }
     }
 }
+
+// swiftlint:enable force_cast
