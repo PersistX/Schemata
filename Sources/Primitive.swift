@@ -23,7 +23,7 @@ extension Primitive: Hashable {
             return string.hashValue
         }
     }
-    
+
     public static func ==(lhs: Primitive, rhs: Primitive) -> Bool {
         switch (lhs, rhs) {
         case let (.date(lhs), .date(rhs)):

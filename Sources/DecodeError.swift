@@ -8,7 +8,7 @@ extension ValueError: Hashable {
     public var hashValue: Int {
         return 0
     }
-    
+
     public static func ==(lhs: ValueError, rhs: ValueError) -> Bool {
         return false
     }
@@ -16,7 +16,7 @@ extension ValueError: Hashable {
 
 public struct DecodeError: Error {
     public var errors: [String: ValueError]
-    
+
     public init(_ errors: [String: ValueError]) {
         self.errors = errors
     }
@@ -28,7 +28,7 @@ extension DecodeError: Hashable {
             .map { $0.key.hashValue ^ $0.value.hashValue }
             .reduce(0, ^)
     }
-    
+
     public static func == (lhs: DecodeError, rhs: DecodeError) -> Bool {
         return lhs.errors == rhs.errors
     }

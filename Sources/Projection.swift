@@ -6,9 +6,9 @@ import Foundation
 public struct Projection<Model: Schemata.Model, Value> {
     /// The `KeyPath`s that are required to create a `Value`.
     public let keyPaths: Set<PartialKeyPath<Model>>
-    
+
     fileprivate let make: ([PartialKeyPath<Model>: Any]) -> Value
-    
+
     fileprivate init(
         _ keyPaths: Set<PartialKeyPath<Model>>,
         make: @escaping ([PartialKeyPath<Model>: Any]) -> Value
@@ -16,7 +16,7 @@ public struct Projection<Model: Schemata.Model, Value> {
         self.keyPaths = keyPaths
         self.make = make
     }
-    
+
     public func makeValue(_ values: [PartialKeyPath<Model>: Any]) -> Value {
         return make(values)
     }
@@ -33,7 +33,7 @@ extension Projection {
             )
         }
     }
-    
+
     public init<A, B>(
         _ make: @escaping (A, B) -> Value,
         _ a: KeyPath<Model, A>,
@@ -46,7 +46,7 @@ extension Projection {
             )
         }
     }
-    
+
     public init<A, B, C>(
         _ make: @escaping (A, B, C) -> Value,
         _ a: KeyPath<Model, A>,
@@ -61,7 +61,7 @@ extension Projection {
             )
         }
     }
-    
+
     public init<A, B, C, D>(
         _ make: @escaping (A, B, C, D) -> Value,
         _ a: KeyPath<Model, A>,
@@ -78,7 +78,7 @@ extension Projection {
             )
         }
     }
-    
+
     public init<A, B, C, D, E>(
         _ make: @escaping (A, B, C, D, E) -> Value,
         _ a: KeyPath<Model, A>,
@@ -97,7 +97,7 @@ extension Projection {
             )
         }
     }
-    
+
     public init<A, B, C, D, E, F>(
         _ make: @escaping (A, B, C, D, E, F) -> Value,
         _ a: KeyPath<Model, A>,
@@ -118,7 +118,7 @@ extension Projection {
             )
         }
     }
-    
+
     public init<A, B, C, D, E, F, G>(
         _ make: @escaping (A, B, C, D, E, F, G) -> Value,
         _ a: KeyPath<Model, A>,
@@ -141,7 +141,7 @@ extension Projection {
             )
         }
     }
-    
+
     public init<A, B, C, D, E, F, G, H>(
         _ make: @escaping (A, B, C, D, E, F, G, H) -> Value,
         _ a: KeyPath<Model, A>,
@@ -166,7 +166,7 @@ extension Projection {
             )
         }
     }
-    
+
     public init<A, B, C, D, E, F, G, H, I>(
         _ make: @escaping (A, B, C, D, E, F, G, H, I) -> Value,
         _ a: KeyPath<Model, A>,
@@ -193,7 +193,7 @@ extension Projection {
             )
         }
     }
-    
+
     public init<A, B, C, D, E, F, G, H, I, J>(
         _ make: @escaping (A, B, C, D, E, F, G, H, I, J) -> Value,
         _ a: KeyPath<Model, A>,

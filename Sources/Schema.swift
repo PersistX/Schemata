@@ -12,16 +12,16 @@ private extension DecodeError {
 public struct Schema<Model: Schemata.Model> {
     public let name: String
     public let properties: [PartialKeyPath<Model>: PartialProperty<Model>]
-    
+
     fileprivate init(_ properties: PartialProperty<Model>...) {
         self.name = String(describing: Model.self)
         self.properties = Dictionary(uniqueKeysWithValues: properties.map { ($0.keyPath, $0) })
     }
-    
+
     public func properties(for keyPath: AnyKeyPath) -> [AnyProperty] {
         return AnySchema(self).properties(for: keyPath)
     }
-    
+
     public func properties<Value>(for keyPath: KeyPath<Model, Value>) -> [AnyProperty] {
         return properties(for: keyPath as AnyKeyPath)
     }
@@ -36,11 +36,11 @@ extension Schema {
             type: partial.type
         )
     }
-    
+
     public subscript<Value>(_ keyPath: KeyPath<Model, Value>) -> AnyProperty {
         return AnyProperty(self[keyPath as PartialKeyPath<Model>])
     }
-    
+
     public subscript(_ keyPath: PartialKeyPath<Model>) -> PartialProperty<Model> {
         return properties[keyPath]!
     }
@@ -53,7 +53,7 @@ extension Schema {
     ) {
         self.init(PartialProperty(a))
     }
-    
+
     public init<A, B>(
         _ init: @escaping (A, B) -> Model,
         _ a: Property<Model, A>,
@@ -61,7 +61,7 @@ extension Schema {
     ) {
         self.init(PartialProperty(a), PartialProperty(b))
     }
-    
+
     public init<A, B, C>(
         _ init: @escaping (A, B, C) -> Model,
         _ a: Property<Model, A>,
@@ -70,7 +70,7 @@ extension Schema {
     ) {
         self.init(PartialProperty(a), PartialProperty(b), PartialProperty(c))
     }
-    
+
     public init<A, B, C, D>(
         _ init: @escaping (A, B, C, D) -> Model,
         _ a: Property<Model, A>,
@@ -80,7 +80,7 @@ extension Schema {
     ) {
         self.init(PartialProperty(a), PartialProperty(b), PartialProperty(c), PartialProperty(d))
     }
-    
+
     public init<A, B, C, D, E>(
         _ init: @escaping (A, B, C, D, E) -> Model,
         _ a: Property<Model, A>,
@@ -97,7 +97,7 @@ extension Schema {
             PartialProperty(e)
         )
     }
-    
+
     public init<A, B, C, D, E, F>(
         _ init: @escaping (A, B, C, D, E, F) -> Model,
         _ a: Property<Model, A>,
@@ -116,7 +116,7 @@ extension Schema {
             PartialProperty(f)
         )
     }
-    
+
     public init<A, B, C, D, E, F, G>(
         _ init: @escaping (A, B, C, D, E, F, G) -> Model,
         _ a: Property<Model, A>,
@@ -154,7 +154,7 @@ extension Schema: Hashable {
                 .map { $0.key.hashValue ^ $0.value.hashValue }
                 .reduce(0, ^)
     }
-    
+
     public static func == (lhs: Schema, rhs: Schema) -> Bool {
         return lhs.name == rhs.name && lhs.properties == rhs.properties
     }
@@ -163,24 +163,24 @@ extension Schema: Hashable {
 public struct AnySchema {
     public var name: String
     public var properties: [AnyKeyPath: AnyProperty]
-    
+
     public init<Model>(_ schema: Schema<Model>) {
         let properties = schema.properties.map { ($0.key as AnyKeyPath, AnyProperty($0.value)) }
         self.name = schema.name
         self.properties = Dictionary(uniqueKeysWithValues: properties)
     }
-    
+
     public func properties(for keyPath: AnyKeyPath) -> [AnyProperty] {
         var queue: [(keyPath: AnyKeyPath, properties: [AnyProperty])]
             = properties.values.map { ($0.keyPath, [$0]) }
-        
+
         while let next = queue.first {
             queue.removeFirst()
-            
+
             if next.keyPath == keyPath {
                 return next.properties
             }
-            
+
             if case let .toOne(type, _)? = next.properties.last?.type {
                 for property in type.anySchema.properties.values {
                     queue.append((
@@ -190,7 +190,7 @@ public struct AnySchema {
                 }
             }
         }
-        
+
         return []
     }
 }
@@ -202,7 +202,7 @@ extension AnySchema: Hashable {
                 .map { $0.key.hashValue ^ $0.value.hashValue }
                 .reduce(0, ^)
     }
-    
+
     public static func == (lhs: AnySchema, rhs: AnySchema) -> Bool {
         return lhs.name == rhs.name && lhs.properties == rhs.properties
     }
