@@ -1,6 +1,6 @@
-import XCTest
-@testable import Schemata
 import Curry
+@testable import Schemata
+import XCTest
 
 class SchemataTests: XCTestCase {
     func testExample() {

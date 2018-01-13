@@ -52,7 +52,6 @@ extension Book: Model {
     )
 }
 
-
 // MARK: - Author
 
 struct Author {
@@ -113,7 +112,7 @@ struct BookViewModel {
 }
 
 extension BookViewModel: Equatable {
-    static func ==(lhs: BookViewModel, rhs: BookViewModel) -> Bool {
+    static func == (lhs: BookViewModel, rhs: BookViewModel) -> Bool {
         return lhs.title == rhs.title
             && lhs.authorName == rhs.authorName
     }

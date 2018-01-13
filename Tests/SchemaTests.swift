@@ -2,6 +2,7 @@ import Schemata
 import XCTest
 
 class SchemaTests: XCTestCase {
+
     // MARK: subscript(_: KeyPath)
 
     func test_subscript_string() {
