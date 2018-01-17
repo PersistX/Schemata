@@ -19,6 +19,7 @@
 		BE64E7351EA3B23B0047D035 /* Schema.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE64E7341EA3B23B0047D035 /* Schema.swift */; };
 		BE64E7501EA3B4660047D035 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE64E74F1EA3B4660047D035 /* Result.framework */; };
 		BE64E7781EA3F3110047D035 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE64E7761EA3F3110047D035 /* Result.framework */; };
+		BEBC36D2200F9606000E3AAB /* None.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBC36D1200F9606000E3AAB /* None.swift */; };
 		BECF338F1EE9BCAC00F9FC88 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECF338E1EE9BCAC00F9FC88 /* Model.swift */; };
 		BECF33911EEA2EE400F9FC88 /* Primitive.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECF33901EEA2EE400F9FC88 /* Primitive.swift */; };
 		BEE9FD751EC282D20081AD1E /* DecodeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE9FD741EC282D20081AD1E /* DecodeError.swift */; };
@@ -51,6 +52,7 @@
 		BE64E7341EA3B23B0047D035 /* Schema.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Schema.swift; sourceTree = "<group>"; };
 		BE64E74F1EA3B4660047D035 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Checkouts/Result/build/Debug/Result.framework; sourceTree = "<group>"; };
 		BE64E7761EA3F3110047D035 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = "../../../Library/Developer/Xcode/DerivedData/Schemata-fleiyfwzrgbgvscfywvtqflpyevd/Build/Products/Debug/Result.framework"; sourceTree = "<group>"; };
+		BEBC36D1200F9606000E3AAB /* None.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = None.swift; sourceTree = "<group>"; };
 		BECF338E1EE9BCAC00F9FC88 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		BECF33901EEA2EE400F9FC88 /* Primitive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Primitive.swift; sourceTree = "<group>"; };
 		BEE9FD741EC282D20081AD1E /* DecodeError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecodeError.swift; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 			children = (
 				BEE9FD741EC282D20081AD1E /* DecodeError.swift */,
 				BECF338E1EE9BCAC00F9FC88 /* Model.swift */,
+				BEBC36D1200F9606000E3AAB /* None.swift */,
 				BECF33901EEA2EE400F9FC88 /* Primitive.swift */,
 				BE1DC6011EDCFC9F00A0671F /* Projection.swift */,
 				BE3C25911EE9AB5F00FF64C3 /* Property.swift */,
@@ -286,6 +289,7 @@
 				BEE9FD751EC282D20081AD1E /* DecodeError.swift in Sources */,
 				BECF33911EEA2EE400F9FC88 /* Primitive.swift in Sources */,
 				BE3C25941EE9BAD900FF64C3 /* PropertyCreation.swift in Sources */,
+				BEBC36D2200F9606000E3AAB /* None.swift in Sources */,
 				BE64E7351EA3B23B0047D035 /* Schema.swift in Sources */,
 				BE1DC6021EDCFC9F00A0671F /* Projection.swift in Sources */,
 				BE1DC5FE1ED7B76B00A0671F /* Value.swift in Sources */,

@@ -34,6 +34,12 @@ extension ModelValue where Encoded == String {
     }
 }
 
+extension ModelValue where Encoded == None {
+    public static var anyValue: AnyValue {
+        return AnyValue(value)
+    }
+}
+
 public protocol AnyModel {
     static var anySchema: AnySchema { get }
 }

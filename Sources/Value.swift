@@ -49,6 +49,7 @@ public struct AnyValue {
         case double
         case int
         case string
+        case unit
     }
 
     public typealias Decoder = (Primitive) -> Result<Any, ValueError>
@@ -107,6 +108,19 @@ extension AnyValue {
         decode = { primitive in
             if case let .string(string) = primitive {
                 return value.decode(string).map { $0 as Any }
+            } else {
+                return .failure(.typeMismatch)
+            }
+        }
+    }
+
+    public init<Decoded>(_ value: Value<None, Decoded>) {
+        decoded = Decoded.self
+        encoded = .unit
+        encode = { _ in .null }
+        decode = { primitive in
+            if case .null = primitive {
+                return value.decode(.none).map { $0 as Any }
             } else {
                 return .failure(.typeMismatch)
             }
