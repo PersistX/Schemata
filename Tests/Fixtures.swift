@@ -111,7 +111,11 @@ struct BookViewModel {
     let authorName: String
 }
 
-extension BookViewModel: Equatable {
+extension BookViewModel: Hashable {
+    var hashValue: Int {
+        return title.hashValue
+    }
+
     static func == (lhs: BookViewModel, rhs: BookViewModel) -> Bool {
         return lhs.title == rhs.title
             && lhs.authorName == rhs.authorName
