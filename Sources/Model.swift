@@ -10,7 +10,25 @@ public protocol ModelValue: AnyModelValue, Hashable {
     static var value: Value<Encoded, Self> { get }
 }
 
-extension ModelValue {
+extension ModelValue where Encoded == Date {
+    public static var anyValue: AnyValue {
+        return AnyValue(value)
+    }
+}
+
+extension ModelValue where Encoded == Double {
+    public static var anyValue: AnyValue {
+        return AnyValue(value)
+    }
+}
+
+extension ModelValue where Encoded == Int {
+    public static var anyValue: AnyValue {
+        return AnyValue(value)
+    }
+}
+
+extension ModelValue where Encoded == String {
     public static var anyValue: AnyValue {
         return AnyValue(value)
     }

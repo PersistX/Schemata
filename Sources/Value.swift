@@ -58,54 +58,58 @@ public struct AnyValue {
     public let encode: Encoder
     public let decoded: Any.Type
     public let decode: Decoder
+}
 
-    public init<Encoded, Decoded>(_ value: Value<Encoded, Decoded>) {
+extension AnyValue {
+    public init<Decoded>(_ value: Value<Date, Decoded>) {
         decoded = Decoded.self
-
-        // swiftlint:disable force_cast
-        if Encoded.self == Date.self {
-            encoded = .date
-            encode = { .date(value.encode($0 as! Decoded) as! Date) }
-            decode = { primitive in
-                if case let .date(date) = primitive {
-                    return value.decode(date as! Encoded).map { $0 as Any }
-                } else {
-                    return .failure(.typeMismatch)
-                }
+        encoded = .date
+        encode = { .date(value.encode($0 as! Decoded)) } // swiftlint:disable:this force_cast
+        decode = { primitive in
+            if case let .date(date) = primitive {
+                return value.decode(date).map { $0 as Any }
+            } else {
+                return .failure(.typeMismatch)
             }
-        } else if Encoded.self == Double.self {
-            encoded = .double
-            encode = { .double(value.encode($0 as! Decoded) as! Double) }
-            decode = { primitive in
-                if case let .double(double) = primitive {
-                    return value.decode(double as! Encoded).map { $0 as Any }
-                } else {
-                    return .failure(.typeMismatch)
-                }
-            }
-        } else if Encoded.self == Int.self {
-            encoded = .int
-            encode = { .int(value.encode($0 as! Decoded) as! Int) }
-            decode = { primitive in
-                if case let .int(int) = primitive {
-                    return value.decode(int as! Encoded).map { $0 as Any }
-                } else {
-                    return .failure(.typeMismatch)
-                }
-            }
-        } else if Encoded.self == String.self {
-            encoded = .string
-            encode = { .string(value.encode($0 as! Decoded) as! String) }
-            decode = { primitive in
-                if case let .string(string) = primitive {
-                    return value.decode(string as! Encoded).map { $0 as Any }
-                } else {
-                    return .failure(.typeMismatch)
-                }
-            }
-        } else {
-            fatalError("Can't construct AnyValue that encodes to \(Encoded.self)")
         }
-        // swiftlint:enable force_cast
+    }
+
+    public init<Decoded>(_ value: Value<Double, Decoded>) {
+        decoded = Decoded.self
+        encoded = .double
+        encode = { .double(value.encode($0 as! Decoded)) } // swiftlint:disable:this force_cast
+        decode = { primitive in
+            if case let .double(double) = primitive {
+                return value.decode(double).map { $0 as Any }
+            } else {
+                return .failure(.typeMismatch)
+            }
+        }
+    }
+
+    public init<Decoded>(_ value: Value<Int, Decoded>) {
+        decoded = Decoded.self
+        encoded = .int
+        encode = { .int(value.encode($0 as! Decoded)) } // swiftlint:disable:this force_cast
+        decode = { primitive in
+            if case let .int(int) = primitive {
+                return value.decode(int).map { $0 as Any }
+            } else {
+                return .failure(.typeMismatch)
+            }
+        }
+    }
+
+    public init<Decoded>(_ value: Value<String, Decoded>) {
+        decoded = Decoded.self
+        encoded = .string
+        encode = { .string(value.encode($0 as! Decoded)) } // swiftlint:disable:this force_cast
+        decode = { primitive in
+            if case let .string(string) = primitive {
+                return value.decode(string).map { $0 as Any }
+            } else {
+                return .failure(.typeMismatch)
+            }
+        }
     }
 }
