@@ -5,7 +5,7 @@ public protocol AnyModelValue {
     static var anyValue: AnyValue { get }
 }
 
-public protocol ModelValue: AnyModelValue, Equatable {
+public protocol ModelValue: AnyModelValue, Hashable {
     associatedtype Encoded
     static var value: Value<Encoded, Self> { get }
 }
