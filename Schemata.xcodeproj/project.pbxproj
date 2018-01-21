@@ -153,9 +153,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		BE64E7191EA3AF4D0047D035 /* Schemata */ = {
+		BE64E7191EA3AF4D0047D035 /* Schemata (macOS) */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BE64E72E1EA3AF4D0047D035 /* Build configuration list for PBXNativeTarget "Schemata" */;
+			buildConfigurationList = BE64E72E1EA3AF4D0047D035 /* Build configuration list for PBXNativeTarget "Schemata (macOS)" */;
 			buildPhases = (
 				BEBC36BF200A284F000E3AAB /* Run Standards */,
 				BE64E7151EA3AF4D0047D035 /* Sources */,
@@ -167,14 +167,14 @@
 			);
 			dependencies = (
 			);
-			name = Schemata;
+			name = "Schemata (macOS)";
 			productName = Schemata;
 			productReference = BE64E71A1EA3AF4D0047D035 /* Schemata.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		BE64E7221EA3AF4D0047D035 /* SchemataTests */ = {
+		BE64E7221EA3AF4D0047D035 /* SchemataTests (macOS) */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BE64E7311EA3AF4D0047D035 /* Build configuration list for PBXNativeTarget "SchemataTests" */;
+			buildConfigurationList = BE64E7311EA3AF4D0047D035 /* Build configuration list for PBXNativeTarget "SchemataTests (macOS)" */;
 			buildPhases = (
 				BEBC36C0200A2886000E3AAB /* Run Standards */,
 				BE64E71F1EA3AF4D0047D035 /* Sources */,
@@ -186,7 +186,7 @@
 			dependencies = (
 				BE64E7261EA3AF4D0047D035 /* PBXTargetDependency */,
 			);
-			name = SchemataTests;
+			name = "SchemataTests (macOS)";
 			productName = SchemataTests;
 			productReference = BE64E7231EA3AF4D0047D035 /* SchemataTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -225,8 +225,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				BE64E7191EA3AF4D0047D035 /* Schemata */,
-				BE64E7221EA3AF4D0047D035 /* SchemataTests */,
+				BE64E7191EA3AF4D0047D035 /* Schemata (macOS) */,
+				BE64E7221EA3AF4D0047D035 /* SchemataTests (macOS) */,
 			);
 		};
 /* End PBXProject section */
@@ -312,7 +312,7 @@
 /* Begin PBXTargetDependency section */
 		BE64E7261EA3AF4D0047D035 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = BE64E7191EA3AF4D0047D035 /* Schemata */;
+			target = BE64E7191EA3AF4D0047D035 /* Schemata (macOS) */;
 			targetProxy = BE64E7251EA3AF4D0047D035 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -443,7 +443,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.diephouse.matt.Schemata;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Schemata;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
@@ -465,7 +465,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.diephouse.matt.Schemata;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Schemata;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
 			};
@@ -479,7 +479,7 @@
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.diephouse.matt.SchemataTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = SchemataTests;
 				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
@@ -492,7 +492,7 @@
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.diephouse.matt.SchemataTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = SchemataTests;
 				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
@@ -509,7 +509,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BE64E72E1EA3AF4D0047D035 /* Build configuration list for PBXNativeTarget "Schemata" */ = {
+		BE64E72E1EA3AF4D0047D035 /* Build configuration list for PBXNativeTarget "Schemata (macOS)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BE64E72F1EA3AF4D0047D035 /* Debug */,
@@ -518,7 +518,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BE64E7311EA3AF4D0047D035 /* Build configuration list for PBXNativeTarget "SchemataTests" */ = {
+		BE64E7311EA3AF4D0047D035 /* Build configuration list for PBXNativeTarget "SchemataTests (macOS)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BE64E7321EA3AF4D0047D035 /* Debug */,

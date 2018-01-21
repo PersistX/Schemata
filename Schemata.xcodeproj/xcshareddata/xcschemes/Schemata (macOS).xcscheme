@@ -16,7 +16,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "BE64E7191EA3AF4D0047D035"
                BuildableName = "Schemata.framework"
-               BlueprintName = "Schemata"
+               BlueprintName = "Schemata (macOS)"
                ReferencedContainer = "container:Schemata.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -35,7 +35,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "BE64E7221EA3AF4D0047D035"
                BuildableName = "SchemataTests.xctest"
-               BlueprintName = "SchemataTests"
+               BlueprintName = "SchemataTests (macOS)"
                ReferencedContainer = "container:Schemata.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -45,7 +45,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "BE64E7191EA3AF4D0047D035"
             BuildableName = "Schemata.framework"
-            BlueprintName = "Schemata"
+            BlueprintName = "Schemata (macOS)"
             ReferencedContainer = "container:Schemata.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -68,7 +68,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "BE64E7191EA3AF4D0047D035"
             BuildableName = "Schemata.framework"
-            BlueprintName = "Schemata"
+            BlueprintName = "Schemata (macOS)"
             ReferencedContainer = "container:Schemata.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -86,7 +86,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "BE64E7191EA3AF4D0047D035"
             BuildableName = "Schemata.framework"
-            BlueprintName = "Schemata"
+            BlueprintName = "Schemata (macOS)"
             ReferencedContainer = "container:Schemata.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
