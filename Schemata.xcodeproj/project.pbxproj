@@ -22,6 +22,23 @@
 		BEBC36D2200F9606000E3AAB /* None.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBC36D1200F9606000E3AAB /* None.swift */; };
 		BECF338F1EE9BCAC00F9FC88 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECF338E1EE9BCAC00F9FC88 /* Model.swift */; };
 		BECF33911EEA2EE400F9FC88 /* Primitive.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECF33901EEA2EE400F9FC88 /* Primitive.swift */; };
+		BEDE9049201507E2004656FC /* Schemata.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEDE9040201507E1004656FC /* Schemata.framework */; };
+		BEDE90572015084E004656FC /* DecodeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE9FD741EC282D20081AD1E /* DecodeError.swift */; };
+		BEDE90582015084E004656FC /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECF338E1EE9BCAC00F9FC88 /* Model.swift */; };
+		BEDE90592015084E004656FC /* None.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBC36D1200F9606000E3AAB /* None.swift */; };
+		BEDE905A2015084E004656FC /* Primitive.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECF33901EEA2EE400F9FC88 /* Primitive.swift */; };
+		BEDE905B2015084E004656FC /* Projection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DC6011EDCFC9F00A0671F /* Projection.swift */; };
+		BEDE905C2015084E004656FC /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3C25911EE9AB5F00FF64C3 /* Property.swift */; };
+		BEDE905D2015084E004656FC /* PropertyCreation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3C25931EE9BAD900FF64C3 /* PropertyCreation.swift */; };
+		BEDE905E2015084E004656FC /* Schema.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE64E7341EA3B23B0047D035 /* Schema.swift */; };
+		BEDE905F2015084E004656FC /* Schemata.h in Headers */ = {isa = PBXBuildFile; fileRef = BE64E71D1EA3AF4D0047D035 /* Schemata.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BEDE90602015084E004656FC /* Value.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DC5FD1ED7B76B00A0671F /* Value.swift */; };
+		BEDE906120150856004656FC /* Fixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3C258D1EE92B1A00FF64C3 /* Fixtures.swift */; };
+		BEDE906220150856004656FC /* ModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE52A5A31F1D29090017B369 /* ModelTests.swift */; };
+		BEDE906320150856004656FC /* ProjectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE101C6A1F535B3500FEB1A4 /* ProjectionTests.swift */; };
+		BEDE906420150856004656FC /* SchemaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFD30B71EDB51C0004FF8FB /* SchemaTests.swift */; };
+		BEDE90652015086E004656FC /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEDE90662015086E004656FC /* Result.framework */; };
+		BEDE9069201508B9004656FC /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEDE906A201508B9004656FC /* Result.framework */; };
 		BEE9FD751EC282D20081AD1E /* DecodeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE9FD741EC282D20081AD1E /* DecodeError.swift */; };
 		BEFD30B91EDB52CD004FF8FB /* SchemaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFD30B71EDB51C0004FF8FB /* SchemaTests.swift */; };
 /* End PBXBuildFile section */
@@ -32,6 +49,13 @@
 			containerPortal = BE64E7111EA3AF4D0047D035 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = BE64E7191EA3AF4D0047D035;
+			remoteInfo = Schemata;
+		};
+		BEDE904A201507E2004656FC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BE64E7111EA3AF4D0047D035 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BEDE903F201507E1004656FC;
 			remoteInfo = Schemata;
 		};
 /* End PBXContainerItemProxy section */
@@ -55,6 +79,10 @@
 		BEBC36D1200F9606000E3AAB /* None.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = None.swift; sourceTree = "<group>"; };
 		BECF338E1EE9BCAC00F9FC88 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		BECF33901EEA2EE400F9FC88 /* Primitive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Primitive.swift; sourceTree = "<group>"; };
+		BEDE9040201507E1004656FC /* Schemata.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Schemata.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BEDE9048201507E2004656FC /* SchemataTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SchemataTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BEDE90662015086E004656FC /* Result.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Result.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BEDE906A201508B9004656FC /* Result.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Result.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEE9FD741EC282D20081AD1E /* DecodeError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecodeError.swift; sourceTree = "<group>"; };
 		BEFD30B71EDB51C0004FF8FB /* SchemaTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchemaTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -77,6 +105,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BEDE903C201507E1004656FC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BEDE90652015086E004656FC /* Result.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BEDE9045201507E1004656FC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BEDE9069201508B9004656FC /* Result.framework in Frameworks */,
+				BEDE9049201507E2004656FC /* Schemata.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -96,6 +141,8 @@
 			children = (
 				BE64E71A1EA3AF4D0047D035 /* Schemata.framework */,
 				BE64E7231EA3AF4D0047D035 /* SchemataTests.xctest */,
+				BEDE9040201507E1004656FC /* Schemata.framework */,
+				BEDE9048201507E2004656FC /* SchemataTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -133,6 +180,8 @@
 		BE64E74E1EA3B4660047D035 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BEDE906A201508B9004656FC /* Result.framework */,
+				BEDE90662015086E004656FC /* Result.framework */,
 				BE64E7761EA3F3110047D035 /* Result.framework */,
 				BE64E74F1EA3B4660047D035 /* Result.framework */,
 			);
@@ -147,6 +196,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE64E72B1EA3AF4D0047D035 /* Schemata.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BEDE903D201507E1004656FC /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BEDE905F2015084E004656FC /* Schemata.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -191,13 +248,51 @@
 			productReference = BE64E7231EA3AF4D0047D035 /* SchemataTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		BEDE903F201507E1004656FC /* Schemata (iOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BEDE9051201507E2004656FC /* Build configuration list for PBXNativeTarget "Schemata (iOS)" */;
+			buildPhases = (
+				BEDE906720150875004656FC /* Run Standards */,
+				BEDE903B201507E1004656FC /* Sources */,
+				BEDE903C201507E1004656FC /* Frameworks */,
+				BEDE903D201507E1004656FC /* Headers */,
+				BEDE903E201507E1004656FC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Schemata (iOS)";
+			productName = Schemata;
+			productReference = BEDE9040201507E1004656FC /* Schemata.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		BEDE9047201507E1004656FC /* SchemataTests (iOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BEDE9054201507E2004656FC /* Build configuration list for PBXNativeTarget "SchemataTests (iOS)" */;
+			buildPhases = (
+				BEDE906820150895004656FC /* Run Standards */,
+				BEDE9044201507E1004656FC /* Sources */,
+				BEDE9045201507E1004656FC /* Frameworks */,
+				BEDE9046201507E1004656FC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BEDE904B201507E2004656FC /* PBXTargetDependency */,
+			);
+			name = "SchemataTests (iOS)";
+			productName = SchemataTests;
+			productReference = BEDE9048201507E2004656FC /* SchemataTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		BE64E7111EA3AF4D0047D035 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0830;
+				LastSwiftUpdateCheck = 0920;
 				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = PersistX;
 				TargetAttributes = {
@@ -209,6 +304,14 @@
 					BE64E7221EA3AF4D0047D035 = {
 						CreatedOnToolsVersion = 8.3;
 						LastSwiftMigration = 0900;
+						ProvisioningStyle = Automatic;
+					};
+					BEDE903F201507E1004656FC = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
+					BEDE9047201507E1004656FC = {
+						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -227,6 +330,8 @@
 			targets = (
 				BE64E7191EA3AF4D0047D035 /* Schemata (macOS) */,
 				BE64E7221EA3AF4D0047D035 /* SchemataTests (macOS) */,
+				BEDE903F201507E1004656FC /* Schemata (iOS) */,
+				BEDE9047201507E1004656FC /* SchemataTests (iOS) */,
 			);
 		};
 /* End PBXProject section */
@@ -240,6 +345,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		BE64E7211EA3AF4D0047D035 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BEDE903E201507E1004656FC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BEDE9046201507E1004656FC /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -277,6 +396,34 @@
 			shellPath = /bin/sh;
 			shellScript = "if [ -x \"${SRCROOT}/Carthage/Checkouts/Standards\" ]\nthen\n  \"${SRCROOT}/Carthage/Checkouts/Standards/build\" \"${SRCROOT}/Tests\"\nfi";
 		};
+		BEDE906720150875004656FC /* Run Standards */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Standards";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ -x \"${SRCROOT}/Carthage/Checkouts/Standards\" ]\nthen\n\"${SRCROOT}/Carthage/Checkouts/Standards/build\" \"${SRCROOT}/Sources\"\nfi";
+		};
+		BEDE906820150895004656FC /* Run Standards */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Standards";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ -x \"${SRCROOT}/Carthage/Checkouts/Standards\" ]\nthen\n\"${SRCROOT}/Carthage/Checkouts/Standards/build\" \"${SRCROOT}/Tests\"\nfi";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -307,6 +454,33 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BEDE903B201507E1004656FC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BEDE905E2015084E004656FC /* Schema.swift in Sources */,
+				BEDE905C2015084E004656FC /* Property.swift in Sources */,
+				BEDE90572015084E004656FC /* DecodeError.swift in Sources */,
+				BEDE90582015084E004656FC /* Model.swift in Sources */,
+				BEDE905D2015084E004656FC /* PropertyCreation.swift in Sources */,
+				BEDE90602015084E004656FC /* Value.swift in Sources */,
+				BEDE905B2015084E004656FC /* Projection.swift in Sources */,
+				BEDE90592015084E004656FC /* None.swift in Sources */,
+				BEDE905A2015084E004656FC /* Primitive.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BEDE9044201507E1004656FC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BEDE906420150856004656FC /* SchemaTests.swift in Sources */,
+				BEDE906120150856004656FC /* Fixtures.swift in Sources */,
+				BEDE906320150856004656FC /* ProjectionTests.swift in Sources */,
+				BEDE906220150856004656FC /* ModelTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -314,6 +488,11 @@
 			isa = PBXTargetDependency;
 			target = BE64E7191EA3AF4D0047D035 /* Schemata (macOS) */;
 			targetProxy = BE64E7251EA3AF4D0047D035 /* PBXContainerItemProxy */;
+		};
+		BEDE904B201507E2004656FC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BEDE903F201507E1004656FC /* Schemata (iOS) */;
+			targetProxy = BEDE904A201507E2004656FC /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -497,6 +676,98 @@
 			};
 			name = Release;
 		};
+		BEDE9052201507E2004656FC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = Sources/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.persistx.Schemata;
+				PRODUCT_NAME = Schemata;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		BEDE9053201507E2004656FC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = Sources/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.persistx.Schemata;
+				PRODUCT_NAME = Schemata;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		BEDE9055201507E2004656FC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = Tests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.persistx.SchemataTests;
+				PRODUCT_NAME = SchemataTests;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		BEDE9056201507E2004656FC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = Tests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.persistx.SchemataTests;
+				PRODUCT_NAME = SchemataTests;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -523,6 +794,24 @@
 			buildConfigurations = (
 				BE64E7321EA3AF4D0047D035 /* Debug */,
 				BE64E7331EA3AF4D0047D035 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BEDE9051201507E2004656FC /* Build configuration list for PBXNativeTarget "Schemata (iOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BEDE9052201507E2004656FC /* Debug */,
+				BEDE9053201507E2004656FC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BEDE9054201507E2004656FC /* Build configuration list for PBXNativeTarget "SchemataTests (iOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BEDE9055201507E2004656FC /* Debug */,
+				BEDE9056201507E2004656FC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

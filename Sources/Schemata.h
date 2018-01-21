@@ -1,4 +1,4 @@
-#import <Cocoa/Cocoa.h>
+@import Foundation;
 
 //! Project version number for Schemata.
 FOUNDATION_EXPORT double SchemataVersionNumber;
