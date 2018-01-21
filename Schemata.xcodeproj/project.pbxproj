@@ -442,7 +442,7 @@
 				INFOPLIST_FILE = Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.diephouse.matt.Schemata;
+				PRODUCT_BUNDLE_IDENTIFIER = org.persistx.Schemata;
 				PRODUCT_NAME = Schemata;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -464,7 +464,7 @@
 				INFOPLIST_FILE = Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.diephouse.matt.Schemata;
+				PRODUCT_BUNDLE_IDENTIFIER = org.persistx.Schemata;
 				PRODUCT_NAME = Schemata;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
@@ -478,7 +478,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.diephouse.matt.SchemataTests;
+				PRODUCT_BUNDLE_IDENTIFIER = org.persistx.SchemataTests;
 				PRODUCT_NAME = SchemataTests;
 				SWIFT_VERSION = 4.0;
 			};
@@ -491,7 +491,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.diephouse.matt.SchemataTests;
+				PRODUCT_BUNDLE_IDENTIFIER = org.persistx.SchemataTests;
 				PRODUCT_NAME = SchemataTests;
 				SWIFT_VERSION = 4.0;
 			};
