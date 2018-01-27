@@ -2,15 +2,6 @@
   "object": {
     "pins": [
       {
-        "package": "Curry",
-        "repositoryURL": "https://github.com/thoughtbot/Curry.git",
-        "state": {
-          "branch": null,
-          "revision": "ab3fa14ec2ca2246831acf62d5d6051bf19e2a28",
-          "version": "4.0.0"
-        }
-      },
-      {
         "package": "Result",
         "repositoryURL": "https://github.com/antitypical/Result.git",
         "state": {

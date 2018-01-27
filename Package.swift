@@ -12,7 +12,6 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/antitypical/Result.git", from: "3.2.1"),
-        .package(url: "https://github.com/thoughtbot/Curry.git", "3.0.0" ..< "5.0.0"),
     ],
     targets: [
         .target(
@@ -26,7 +25,6 @@ let package = Package(
             name: "SchemataTests",
             dependencies: [
                 "Schemata",
-                "Curry",
             ],
             path: "Tests"
         ),
