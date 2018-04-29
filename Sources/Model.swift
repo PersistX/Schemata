@@ -72,7 +72,7 @@ extension Int: ModelValue {
 }
 
 #if swift(>=4.1)
-    extension Optional: ModelValue where Wrapped: ModelValue {
+    extension Optional: AnyModelValue, ModelValue where Wrapped: ModelValue {
         public typealias Encoded = Wrapped.Encoded?
 
         public static var value: Value<Wrapped.Encoded?, Wrapped?> {
