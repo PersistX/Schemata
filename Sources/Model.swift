@@ -71,7 +71,7 @@ extension Int: ModelValue {
     public static let value = Value<Int, Int>()
 }
 
-extension Optional: AnyModelValue, ModelValue where Wrapped: ModelValue {
+extension Optional: Hashable, AnyModelValue, ModelValue where Wrapped: ModelValue {
     public typealias Encoded = Wrapped.Encoded?
 
     public static var value: Value<Wrapped.Encoded?, Wrapped?> {
