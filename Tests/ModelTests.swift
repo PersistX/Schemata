@@ -32,50 +32,48 @@ class UUIDModelValueTests: XCTestCase {
     }
 }
 
-#if swift(>=4.1)
-    class OptionalModalValueTests: XCTestCase {
-        func testDecodeNil() {
-            XCTAssertNil(UUID?.value.decode(nil).value!)
-        }
-
-        func testDecodeWrapped() {
-            XCTAssertEqual(UUID?.value.decode(uuid.uuidString).value, uuid)
-        }
-
-        func testDecodeFailure() {
-            XCTAssertNotNil(UUID?.value.decode("junk").error)
-        }
-
-        func testEncodeNil() {
-            XCTAssertNil(UUID?.value.encode(nil))
-        }
-
-        func testEncodeWrapped() {
-            XCTAssertEqual(UUID?.value.encode(uuid), uuid.uuidString)
-        }
+class OptionalModalValueTests: XCTestCase {
+    func testDecodeNil() {
+        XCTAssertNil(UUID?.value.decode(nil).value!)
     }
 
-    class OptionalModalAnyValueTests: XCTestCase {
-        func testDecodeNil() {
-            let result = UUID?.anyValue.decode(.null)
-            XCTAssertEqual(result.value! as? UUID, nil)
-        }
-
-        func testDecodeWrapped() {
-            XCTAssertEqual(UUID?.anyValue.decode(.string(uuid.uuidString)).value as? UUID, uuid)
-        }
-
-        func testDecodeFailure() {
-            XCTAssertNotNil(UUID?.anyValue.decode(.string("junk")).error)
-        }
-
-        func testEncodeNil() {
-            let anyValue = UUID?.anyValue
-            XCTAssertEqual(anyValue.encode(UUID?.none as Any), .null)
-        }
-
-        func testEncodeWrapped() {
-            XCTAssertEqual(UUID?.anyValue.encode(uuid), .string(uuid.uuidString))
-        }
+    func testDecodeWrapped() {
+        XCTAssertEqual(UUID?.value.decode(uuid.uuidString).value, uuid)
     }
-#endif
+
+    func testDecodeFailure() {
+        XCTAssertNotNil(UUID?.value.decode("junk").error)
+    }
+
+    func testEncodeNil() {
+        XCTAssertNil(UUID?.value.encode(nil))
+    }
+
+    func testEncodeWrapped() {
+        XCTAssertEqual(UUID?.value.encode(uuid), uuid.uuidString)
+    }
+}
+
+class OptionalModalAnyValueTests: XCTestCase {
+    func testDecodeNil() {
+        let result = UUID?.anyValue.decode(.null)
+        XCTAssertEqual(result.value! as? UUID, nil)
+    }
+
+    func testDecodeWrapped() {
+        XCTAssertEqual(UUID?.anyValue.decode(.string(uuid.uuidString)).value as? UUID, uuid)
+    }
+
+    func testDecodeFailure() {
+        XCTAssertNotNil(UUID?.anyValue.decode(.string("junk")).error)
+    }
+
+    func testEncodeNil() {
+        let anyValue = UUID?.anyValue
+        XCTAssertEqual(anyValue.encode(UUID?.none as Any), .null)
+    }
+
+    func testEncodeWrapped() {
+        XCTAssertEqual(UUID?.anyValue.encode(uuid), .string(uuid.uuidString))
+    }
+}
