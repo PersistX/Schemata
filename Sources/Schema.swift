@@ -4,7 +4,7 @@ import Result
 private extension DecodeError {
     init(_ errors: DecodeError?...) {
         self = errors
-            .flatMap { $0 }
+            .compactMap { $0 }
             .reduce(DecodeError([:]), +)
     }
 }
