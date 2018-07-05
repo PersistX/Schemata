@@ -12,5 +12,13 @@ matrix:
     - xcode_scheme: Schemata (iOS)
       env: XCODE_ACTION="build-for-testing test-without-building"
     - script: swift test
+    - osx_image: xcode9.3beta
+      xcode_scheme: Schemata (macOS)
+      env: XCODE_ACTION="build-for-testing test-without-building"
+    - osx_image: xcode9.3beta
+      xcode_scheme: Schemata (iOS)
+      env: XCODE_ACTION="build-for-testing test-without-building"
+    - osx_image: xcode9.3beta
+      script: swift test
 notifications:
   email: false
