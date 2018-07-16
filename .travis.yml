@@ -5,6 +5,9 @@ branches:
     - master
 script: script/cibuild "$TRAVIS_XCODE_WORKSPACE" "$TRAVIS_XCODE_SCHEME" "$XCODE_ACTION"
 xcode_workspace: Schemata.xcworkspace
+before_install:
+  - brew install swiftformat
+  - brew install swiftlint
 matrix:
   include:
     - xcode_scheme: Schemata (macOS)
