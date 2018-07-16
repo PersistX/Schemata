@@ -12,5 +12,6 @@ matrix:
     - xcode_scheme: Schemata (iOS)
       env: XCODE_ACTION="build-for-testing test-without-building"
     - script: swift test
+    - script: ./Carthage/Checkouts/Standards/test
 notifications:
   email: false
