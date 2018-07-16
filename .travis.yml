@@ -1,10 +1,13 @@
 language: objective-c
-osx_image: xcode9.3
+osx_image: xcode9.4
 branches:
   only:
     - master
 script: script/cibuild "$TRAVIS_XCODE_WORKSPACE" "$TRAVIS_XCODE_SCHEME" "$XCODE_ACTION"
 xcode_workspace: Schemata.xcworkspace
+before_install:
+  - brew install swiftformat
+  - brew install swiftlint
 matrix:
   include:
     - xcode_scheme: Schemata (macOS)
@@ -12,5 +15,6 @@ matrix:
     - xcode_scheme: Schemata (iOS)
       env: XCODE_ACTION="build-for-testing test-without-building"
     - script: swift test
+    - script: ./Carthage/Checkouts/Standards/test
 notifications:
   email: false
