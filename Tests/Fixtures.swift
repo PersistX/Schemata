@@ -45,7 +45,7 @@ extension Book.ID: ModelValue {
 
 extension Book: Model {
     static let schema = Schema<Book>(
-        Book.init,
+        Book.init ~ "books",
         \.id ~ "id",
         \.title ~ "title",
         \.author ~ "author"

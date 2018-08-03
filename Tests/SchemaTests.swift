@@ -3,6 +3,13 @@ import XCTest
 
 class SchemaTests: XCTestCase {
 
+    // MARK: name
+
+    func test_name() {
+        XCTAssertEqual(Book.schema.name, "books")
+        XCTAssertEqual(Author.schema.name, "Author")
+    }
+
     // MARK: subscript(_: KeyPath)
 
     func test_subscript_string() {

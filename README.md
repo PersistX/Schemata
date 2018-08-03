@@ -45,7 +45,7 @@ extension Book: Model {
 
 extension Author: Model {
     static let schema = Schema<Author>(
-        Author.init,
+        Author.init ~ "Authors", // You can choose to name for the schema
         \.id ~ "id",
         \.name ~ "name",
         \.books ~ \Book.author
