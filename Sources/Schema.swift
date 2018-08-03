@@ -1,6 +1,8 @@
 import Foundation
 import Result
 
+// swiftlint:disable large_tuple
+
 private extension DecodeError {
     init(_ errors: DecodeError?...) {
         self = errors
@@ -13,8 +15,11 @@ public struct Schema<Model: Schemata.Model> {
     public let name: String
     public let properties: [PartialKeyPath<Model>: PartialProperty<Model>]
 
-    fileprivate init(_ properties: PartialProperty<Model>...) {
-        name = String(describing: Model.self)
+    fileprivate init(
+        name: String = String(describing: Model.self),
+        _ properties: PartialProperty<Model>...
+    ) {
+        self.name = name
         self.properties = Dictionary(uniqueKeysWithValues: properties.map { ($0.keyPath, $0) })
     }
 
@@ -54,12 +59,31 @@ extension Schema {
         self.init(PartialProperty(a))
     }
 
+    public init<A>(
+        _ initializer: Initializer<Model, A>,
+        _ a: Property<Model, A>
+    ) {
+        self.init(name: initializer.name, PartialProperty(a))
+    }
+
     public init<A, B>(
         _: @escaping (A, B) -> Model,
         _ a: Property<Model, A>,
         _ b: Property<Model, B>
     ) {
         self.init(PartialProperty(a), PartialProperty(b))
+    }
+
+    public init<A, B>(
+        _ initializer: Initializer<Model, ((A, B))>,
+        _ a: Property<Model, A>,
+        _ b: Property<Model, B>
+    ) {
+        self.init(
+            name: initializer.name,
+            PartialProperty(a),
+            PartialProperty(b)
+        )
     }
 
     public init<A, B, C>(
@@ -69,6 +93,20 @@ extension Schema {
         _ c: Property<Model, C>
     ) {
         self.init(PartialProperty(a), PartialProperty(b), PartialProperty(c))
+    }
+
+    public init<A, B, C>(
+        _ initializer: Initializer<Model, ((A, B, C))>,
+        _ a: Property<Model, A>,
+        _ b: Property<Model, B>,
+        _ c: Property<Model, C>
+    ) {
+        self.init(
+            name: initializer.name,
+            PartialProperty(a),
+            PartialProperty(b),
+            PartialProperty(c)
+        )
     }
 
     public init<A, B, C, D>(
@@ -81,6 +119,22 @@ extension Schema {
         self.init(PartialProperty(a), PartialProperty(b), PartialProperty(c), PartialProperty(d))
     }
 
+    public init<A, B, C, D>(
+        _ initializer: Initializer<Model, ((A, B, C, D))>,
+        _ a: Property<Model, A>,
+        _ b: Property<Model, B>,
+        _ c: Property<Model, C>,
+        _ d: Property<Model, D>
+    ) {
+        self.init(
+            name: initializer.name,
+            PartialProperty(a),
+            PartialProperty(b),
+            PartialProperty(c),
+            PartialProperty(d)
+        )
+    }
+
     public init<A, B, C, D, E>(
         _: @escaping (A, B, C, D, E) -> Model,
         _ a: Property<Model, A>,
@@ -90,6 +144,24 @@ extension Schema {
         _ e: Property<Model, E>
     ) {
         self.init(
+            PartialProperty(a),
+            PartialProperty(b),
+            PartialProperty(c),
+            PartialProperty(d),
+            PartialProperty(e)
+        )
+    }
+
+    public init<A, B, C, D, E>(
+        _ initializer: Initializer<Model, ((A, B, C, D, E))>,
+        _ a: Property<Model, A>,
+        _ b: Property<Model, B>,
+        _ c: Property<Model, C>,
+        _ d: Property<Model, D>,
+        _ e: Property<Model, E>
+    ) {
+        self.init(
+            name: initializer.name,
             PartialProperty(a),
             PartialProperty(b),
             PartialProperty(c),
@@ -117,6 +189,26 @@ extension Schema {
         )
     }
 
+    public init<A, B, C, D, E, F>(
+        _ initializer: Initializer<Model, ((A, B, C, D, E, F))>,
+        _ a: Property<Model, A>,
+        _ b: Property<Model, B>,
+        _ c: Property<Model, C>,
+        _ d: Property<Model, D>,
+        _ e: Property<Model, E>,
+        _ f: Property<Model, F>
+    ) {
+        self.init(
+            name: initializer.name,
+            PartialProperty(a),
+            PartialProperty(b),
+            PartialProperty(c),
+            PartialProperty(d),
+            PartialProperty(e),
+            PartialProperty(f)
+        )
+    }
+
     public init<A, B, C, D, E, F, G>(
         _: @escaping (A, B, C, D, E, F, G) -> Model,
         _ a: Property<Model, A>,
@@ -128,6 +220,28 @@ extension Schema {
         _ g: Property<Model, G>
     ) {
         self.init(
+            PartialProperty(a),
+            PartialProperty(b),
+            PartialProperty(c),
+            PartialProperty(d),
+            PartialProperty(e),
+            PartialProperty(f),
+            PartialProperty(g)
+        )
+    }
+
+    public init<A, B, C, D, E, F, G>(
+        _ initializer: Initializer<Model, ((A, B, C, D, E, F, G))>,
+        _ a: Property<Model, A>,
+        _ b: Property<Model, B>,
+        _ c: Property<Model, C>,
+        _ d: Property<Model, D>,
+        _ e: Property<Model, E>,
+        _ f: Property<Model, F>,
+        _ g: Property<Model, G>
+    ) {
+        self.init(
+            name: initializer.name,
             PartialProperty(a),
             PartialProperty(b),
             PartialProperty(c),
