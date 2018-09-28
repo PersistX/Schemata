@@ -27,7 +27,8 @@ matrix:
       <<: *macOS
     - <<: *xcode10
       <<: *iOS
-    - script: swift test
+    - <<: *xcode10
+      script: swift test
     - <<: *xcode10
       script: ./Carthage/Checkouts/Standards/test
 
