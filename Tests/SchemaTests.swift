@@ -2,7 +2,6 @@ import Schemata
 import XCTest
 
 class SchemaTests: XCTestCase {
-
     // MARK: name
 
     func test_name() {
