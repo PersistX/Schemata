@@ -71,19 +71,6 @@ extension Int: ModelValue {
     public static let value = Value<Int, Int>()
 }
 
-#if !swift(>=4.2)
-    extension Optional: Hashable where Wrapped: ModelValue {
-        public var hashValue: Int {
-            switch self {
-            case .none:
-                return 0
-            case let .some(value):
-                return value.hashValue
-            }
-        }
-    }
-#endif
-
 extension Optional: AnyModelValue, ModelValue where Wrapped: ModelValue {
     public typealias Encoded = Wrapped.Encoded?
 
