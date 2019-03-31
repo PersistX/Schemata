@@ -269,7 +269,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 0930;
+				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = PersistX;
 				TargetAttributes = {
 					BE64E7191EA3AF4D0047D035 = {
@@ -294,10 +294,9 @@
 			};
 			buildConfigurationList = BE64E7141EA3AF4D0047D035 /* Build configuration list for PBXProject "Schemata" */;
 			compatibilityVersion = "Xcode 8.0";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 			);
 			mainGroup = BE64E7101EA3AF4D0047D035;
