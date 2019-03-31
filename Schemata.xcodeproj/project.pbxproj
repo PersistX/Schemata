@@ -17,8 +17,6 @@
 		BE64E7241EA3AF4D0047D035 /* Schemata.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE64E71A1EA3AF4D0047D035 /* Schemata.framework */; };
 		BE64E72B1EA3AF4D0047D035 /* Schemata.h in Headers */ = {isa = PBXBuildFile; fileRef = BE64E71D1EA3AF4D0047D035 /* Schemata.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BE64E7351EA3B23B0047D035 /* Schema.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE64E7341EA3B23B0047D035 /* Schema.swift */; };
-		BE64E7501EA3B4660047D035 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE64E74F1EA3B4660047D035 /* Result.framework */; };
-		BE64E7781EA3F3110047D035 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE64E7761EA3F3110047D035 /* Result.framework */; };
 		BE80D7142113D8C700822B6C /* Initializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE80D7132113D8C700822B6C /* Initializer.swift */; };
 		BE80D71521140DF400822B6C /* Initializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE80D7132113D8C700822B6C /* Initializer.swift */; };
 		BEBC36D2200F9606000E3AAB /* None.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBC36D1200F9606000E3AAB /* None.swift */; };
@@ -39,8 +37,6 @@
 		BEDE906220150856004656FC /* ModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE52A5A31F1D29090017B369 /* ModelTests.swift */; };
 		BEDE906320150856004656FC /* ProjectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE101C6A1F535B3500FEB1A4 /* ProjectionTests.swift */; };
 		BEDE906420150856004656FC /* SchemaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFD30B71EDB51C0004FF8FB /* SchemaTests.swift */; };
-		BEDE90652015086E004656FC /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEDE90662015086E004656FC /* Result.framework */; };
-		BEDE9069201508B9004656FC /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEDE906A201508B9004656FC /* Result.framework */; };
 		BEE9FD751EC282D20081AD1E /* DecodeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE9FD741EC282D20081AD1E /* DecodeError.swift */; };
 		BEFD30B91EDB52CD004FF8FB /* SchemaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFD30B71EDB51C0004FF8FB /* SchemaTests.swift */; };
 /* End PBXBuildFile section */
@@ -76,16 +72,12 @@
 		BE64E7231EA3AF4D0047D035 /* SchemataTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SchemataTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE64E72A1EA3AF4D0047D035 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BE64E7341EA3B23B0047D035 /* Schema.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Schema.swift; sourceTree = "<group>"; };
-		BE64E74F1EA3B4660047D035 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Checkouts/Result/build/Debug/Result.framework; sourceTree = "<group>"; };
-		BE64E7761EA3F3110047D035 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = "../../../Library/Developer/Xcode/DerivedData/Schemata-fleiyfwzrgbgvscfywvtqflpyevd/Build/Products/Debug/Result.framework"; sourceTree = "<group>"; };
 		BE80D7132113D8C700822B6C /* Initializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Initializer.swift; sourceTree = "<group>"; };
 		BEBC36D1200F9606000E3AAB /* None.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = None.swift; sourceTree = "<group>"; };
 		BECF338E1EE9BCAC00F9FC88 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		BECF33901EEA2EE400F9FC88 /* Primitive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Primitive.swift; sourceTree = "<group>"; };
 		BEDE9040201507E1004656FC /* Schemata.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Schemata.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEDE9048201507E2004656FC /* SchemataTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SchemataTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		BEDE90662015086E004656FC /* Result.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Result.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BEDE906A201508B9004656FC /* Result.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Result.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEE9FD741EC282D20081AD1E /* DecodeError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecodeError.swift; sourceTree = "<group>"; };
 		BEFD30B71EDB51C0004FF8FB /* SchemaTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchemaTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -95,7 +87,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BE64E7501EA3B4660047D035 /* Result.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,7 +94,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BE64E7781EA3F3110047D035 /* Result.framework in Frameworks */,
 				BE64E7241EA3AF4D0047D035 /* Schemata.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -112,7 +102,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BEDE90652015086E004656FC /* Result.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -120,7 +109,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BEDE9069201508B9004656FC /* Result.framework in Frameworks */,
 				BEDE9049201507E2004656FC /* Schemata.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -134,7 +122,6 @@
 				BE64E71C1EA3AF4D0047D035 /* Sources */,
 				BE64E7271EA3AF4D0047D035 /* Tests */,
 				BE64E71B1EA3AF4D0047D035 /* Products */,
-				BE64E74E1EA3B4660047D035 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 			usesTabs = 0;
@@ -179,17 +166,6 @@
 				BE64E72A1EA3AF4D0047D035 /* Info.plist */,
 			);
 			path = Tests;
-			sourceTree = "<group>";
-		};
-		BE64E74E1EA3B4660047D035 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				BEDE906A201508B9004656FC /* Result.framework */,
-				BEDE90662015086E004656FC /* Result.framework */,
-				BE64E7761EA3F3110047D035 /* Result.framework */,
-				BE64E74F1EA3B4660047D035 /* Result.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -321,6 +297,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = BE64E7101EA3AF4D0047D035;
@@ -496,6 +473,7 @@
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -549,6 +527,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -572,7 +551,6 @@
 				PRODUCT_NAME = Schemata;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -593,7 +571,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.persistx.Schemata;
 				PRODUCT_NAME = Schemata;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -606,7 +583,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.persistx.SchemataTests;
 				PRODUCT_NAME = SchemataTests;
-				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -619,7 +595,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.persistx.SchemataTests;
 				PRODUCT_NAME = SchemataTests;
-				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -643,7 +618,6 @@
 				PRODUCT_NAME = Schemata;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -668,7 +642,6 @@
 				PRODUCT_NAME = Schemata;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -689,7 +662,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.persistx.SchemataTests;
 				PRODUCT_NAME = SchemataTests;
 				SDKROOT = iphoneos;
-				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -709,7 +681,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.persistx.SchemataTests;
 				PRODUCT_NAME = SchemataTests;
 				SDKROOT = iphoneos;
-				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};

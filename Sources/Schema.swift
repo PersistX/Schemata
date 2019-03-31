@@ -1,5 +1,4 @@
 import Foundation
-import Result
 
 // swiftlint:disable large_tuple
 
@@ -11,7 +10,7 @@ private extension DecodeError {
     }
 }
 
-public struct Schema<Model: Schemata.Model> {
+public struct Schema<Model: Schemata.Model>: Hashable {
     public let name: String
     public let properties: [PartialKeyPath<Model>: PartialProperty<Model>]
 
@@ -261,20 +260,7 @@ extension Schema: CustomDebugStringConvertible {
     }
 }
 
-extension Schema: Hashable {
-    public var hashValue: Int {
-        return name.hashValue
-            ^ properties
-            .map { $0.key.hashValue ^ $0.value.hashValue }
-            .reduce(0, ^)
-    }
-
-    public static func == (lhs: Schema, rhs: Schema) -> Bool {
-        return lhs.name == rhs.name && lhs.properties == rhs.properties
-    }
-}
-
-public struct AnySchema {
+public struct AnySchema: Hashable {
     public var name: String
     public var properties: [AnyKeyPath: AnyProperty]
 
@@ -297,27 +283,16 @@ public struct AnySchema {
 
             if case let .toOne(type, _)? = next.properties.last?.type {
                 for property in type.anySchema.properties.values {
-                    queue.append((
-                        keyPath: next.keyPath.appending(path: property.keyPath)!,
-                        properties: next.properties + [property]
-                    ))
+                    queue.append(
+                        (
+                            keyPath: next.keyPath.appending(path: property.keyPath)!,
+                            properties: next.properties + [property]
+                        )
+                    )
                 }
             }
         }
 
         return []
-    }
-}
-
-extension AnySchema: Hashable {
-    public var hashValue: Int {
-        return name.hashValue
-            ^ properties
-            .map { $0.key.hashValue ^ $0.value.hashValue }
-            .reduce(0, ^)
-    }
-
-    public static func == (lhs: AnySchema, rhs: AnySchema) -> Bool {
-        return lhs.name == rhs.name && lhs.properties == rhs.properties
     }
 }

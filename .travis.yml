@@ -1,11 +1,11 @@
 aliases:
   - &xcode
     language: objective-c
-    script: script/cibuild "$TRAVIS_XCODE_WORKSPACE" "$TRAVIS_XCODE_SCHEME" "build-for-testing test-without-building"
-    xcode_workspace: Schemata.xcworkspace
-  - &xcode10
+    script: script/cibuild "$TRAVIS_XCODE_PROJECT" "$TRAVIS_XCODE_SCHEME" "build-for-testing test-without-building"
+    xcode_project: Schemata.xcodeproj
+  - &xcode10.2
     <<: *xcode
-    osx_image: xcode10
+    osx_image: xcode10.2
   - &macOS
     xcode_scheme: Schemata (macOS)
   - &iOS
@@ -23,13 +23,13 @@ branches:
 
 matrix:
   include:
-    - <<: *xcode10
+    - <<: *xcode10.2
       <<: *macOS
-    - <<: *xcode10
+    - <<: *xcode10.2
       <<: *iOS
-    - <<: *xcode10
+    - <<: *xcode10.2
       script: swift test
-    - <<: *xcode10
+    - <<: *xcode10.2
       script: ./Carthage/Checkouts/Standards/test
 
 notifications:
