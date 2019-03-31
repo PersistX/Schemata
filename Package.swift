@@ -1,4 +1,4 @@
-// swift-tools-version:4.0
+// swift-tools-version:5.0
 
 import PackageDescription
 
@@ -11,13 +11,11 @@ let package = Package(
         ),
     ],
     dependencies: [
-        .package(url: "https://github.com/antitypical/Result.git", from: "4.0.0"),
     ],
     targets: [
         .target(
             name: "Schemata",
             dependencies: [
-                "Result",
             ],
             path: "Sources"
         ),

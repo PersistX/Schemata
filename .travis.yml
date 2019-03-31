@@ -1,18 +1,18 @@
 aliases:
   - &xcode
     language: objective-c
-    script: script/cibuild "$TRAVIS_XCODE_WORKSPACE" "$TRAVIS_XCODE_SCHEME" "build-for-testing test-without-building"
-    xcode_workspace: Schemata.xcworkspace
-  - &xcode10
+    script: script/cibuild "$TRAVIS_XCODE_PROJECT" "$TRAVIS_XCODE_SCHEME" "build-for-testing test-without-building"
+    xcode_project: Schemata.xcodeproj
+  - &xcode10_2
     <<: *xcode
-    osx_image: xcode10
+    osx_image: xcode10.2
   - &macOS
     xcode_scheme: Schemata (macOS)
   - &iOS
     xcode_scheme: Schemata (iOS)
 
 os: osx
-      
+
 before_install:
   - brew install swiftformat
   - brew install swiftlint
@@ -23,13 +23,17 @@ branches:
 
 matrix:
   include:
-    - <<: *xcode10
+    - <<: *xcode10_2
       <<: *macOS
-    - <<: *xcode10
+      name: macOS
+    - <<: *xcode10_2
       <<: *iOS
-    - <<: *xcode10
+      name: iOS
+    - <<: *xcode10_2
+      name: SwiftPM
       script: swift test
-    - <<: *xcode10
+    - <<: *xcode10_2
+      name: Standards
       script: ./Carthage/Checkouts/Standards/test
 
 notifications:

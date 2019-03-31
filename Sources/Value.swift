@@ -1,5 +1,4 @@
 import Foundation
-import Result
 
 public struct Value<Encoded, Decoded> {
     public typealias Decoder = (Encoded) -> Result<Decoded, ValueError>

@@ -1,5 +1,4 @@
 import Foundation
-import Result
 
 public enum PropertyType {
     case toMany(AnyModel.Type)
@@ -8,12 +7,13 @@ public enum PropertyType {
 }
 
 extension PropertyType: Hashable {
-    public var hashValue: Int {
+    public func hash(into hasher: inout Hasher) {
         switch self {
         case let .toMany(anyModel), let .toOne(anyModel, _):
-            return ObjectIdentifier(anyModel).hashValue
+            ObjectIdentifier(anyModel).hash(into: &hasher)
+
         case let .value(anyModelValue, _):
-            return ObjectIdentifier(anyModelValue).hashValue
+            ObjectIdentifier(anyModelValue).hash(into: &hasher)
         }
     }
 
@@ -60,8 +60,8 @@ public struct PartialProperty<Model: Schemata.Model> {
 }
 
 extension PartialProperty: Hashable {
-    public var hashValue: Int {
-        return keyPath.hashValue
+    public func hash(into hasher: inout Hasher) {
+        keyPath.hash(into: &hasher)
     }
 
     public static func == (lhs: PartialProperty, rhs: PartialProperty) -> Bool {
@@ -99,8 +99,8 @@ public struct AnyProperty {
 }
 
 extension AnyProperty: Hashable {
-    public var hashValue: Int {
-        return keyPath.hashValue
+    public func hash(into hasher: inout Hasher) {
+        keyPath.hash(into: &hasher)
     }
 
     public static func == (lhs: AnyProperty, rhs: AnyProperty) -> Bool {
