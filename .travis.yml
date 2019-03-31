@@ -5,7 +5,7 @@ aliases:
     xcode_project: Schemata.xcodeproj
   - &xcode10_2
     <<: *xcode
-    osx_image: xcode10_2
+    osx_image: xcode10.2
   - &macOS
     xcode_scheme: Schemata (macOS)
   - &iOS
@@ -25,11 +25,15 @@ matrix:
   include:
     - <<: *xcode10_2
       <<: *macOS
+      name: macOS
     - <<: *xcode10_2
       <<: *iOS
+      name: iOS
     - <<: *xcode10_2
+      name: SwiftPM
       script: swift test
     - <<: *xcode10_2
+      name: Standards
       script: ./Carthage/Checkouts/Standards/test
 
 notifications:
